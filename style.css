@@ -1,0 +1,492 @@
+/* ------------------------------------
+   PALETA DE CORES E VARIÁVEIS MODERNAS
+--------------------------------------- */
+:root {
+    --verde-escuro: #1C3332;   
+    --verde-sutil: #2d4f4e;
+    --dourado-bronze: #C49E7A; 
+    --dourado-hover: #b38d69;
+    --fundo-claro: #F4F6F6;    
+    --branco: #FFFFFF;
+    --texto-escuro: #2C3E50;
+    --texto-mutado: #7F8C8D;
+    --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --sombra-hover: 0 15px 35px rgba(28, 51, 50, 0.12);
+    --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --borda-raio: 12px;
+}
+
+/* ------------------------------------
+   RESET E ESTILOS GERAIS
+--------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--fundo-claro);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+/* ------------------------------------
+   CABEÇALHO (NAVBAR MODERNA)
+--------------------------------------- */
+.cabecalho {
+    background-color: var(--verde-escuro); /* Mantém a cor sólida oficial */
+    padding: 1.2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.container-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Distribui o logo na esquerda e menu na direita */
+    align-items: center; /* Alinha tudo perfeitamente na mesma linha vertical */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+}
+
+.logo-img {
+    height: 45px; /* Altura ideal e padronizada */
+    width: auto;  
+    object-fit: contain; 
+    border-radius: 4px;
+    background-color:  rgb(245, 241, 241);
+}
+
+.logo-titulo {
+    color: var(--branco);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.logo-titulo span {
+    color: var(--dourado-bronze);
+}
+
+.menu-navegacao {
+    display: flex;
+    gap: 1rem;
+}
+
+.menu-navegacao a {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+}
+
+.menu-navegacao a:hover {
+    color: var(--branco);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ------------------------------------
+   CARROSSEL TOTALMENTE VISÍVEL E CLARO
+--------------------------------------- */
+.carrossel-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background-color: #FFFFFF !important; 
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* 
+       IMPORTANTE: Se o seu JavaScript usa a classe '.ativo' para mudar a opacidade, 
+       garantimos que o slide padrão comece invisível, mas sem aplicar filtros escuros.
+     Milford */
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+    padding: 0 2rem;
+    
+    /* Força a imagem a ignorar qualquer efeito de fusão ou sombra */
+    mix-blend-mode: normal !important;
+    background-blend-mode: normal !important;
+    filter: none !important;
+}
+
+.slide.ativo {
+    opacity: 1 !important;
+    z-index: 2;
+    filter: brightness(100%) contrast(100%) !important;
+}
+
+.slide-conteudo {
+    position: relative;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.96); /* Fundo branco bem visível */
+    padding: 2.5rem 3.5rem;
+    border-radius: 14px;
+    max-width: 680px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.slide-conteudo h1, .slide-conteudo h2 {
+    color: var(--verde-escuro) !important;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.5px;
+    text-shadow: none !important; /* Remove sombras pretas antigas do texto */
+}
+
+.slide-conteudo h1 span {
+    color: var(--dourado-bronze);
+}
+
+.slide-conteudo p {
+    color: #4A5568 !important; 
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-shadow: none !important;
+}
+/* ------------------------------------
+   CONTEÚDO E SEÇÕES DO PAINEL
+--------------------------------------- */
+.conteudo-principal {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.secao {
+    margin-bottom: 5rem;
+}
+
+.titulo-secao {
+    color: var(--verde-escuro);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: -0.5px;
+}
+
+.titulo-secao::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--dourado-bronze), rgba(196, 158, 122, 0.1));
+}
+
+/* GRID DE CARDS */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background-color: var(--branco);
+    padding: 2.5rem 2rem;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transicao);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background-color: var(--verde-escuro);
+    transition: var(--transicao);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra-hover);
+}
+
+.card:hover::before {
+    background-color: var(--dourado-bronze);
+    height: 6px;
+}
+
+.card h3 {
+    color: var(--verde-escuro);
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.card p {
+    color: var(--texto-mutado);
+    font-size: 0.98rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+/* Tamanho e enquadramento perfeito para as imagens dos cards */
+.card-imagem-topo {
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+}
+
+.card-imagem-topo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transicao);
+}
+
+.card:hover .card-imagem-topo img {
+    transform: scale(1.05);
+}
+
+.badge-categoria {
+    align-self: flex-start;
+    background-color: rgba(28, 51, 50, 0.08);
+    color: var(--verde-escuro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.data-publicacao {
+    font-size: 0.85rem;
+    color: var(--texto-mutado);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ------------------------------------
+   BOTÕES E AÇÕES ULTRA VISUAIS
+--------------------------------------- */
+.btn-acao {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
+    border: 1px solid transparent;
+}
+
+.btn-acao:hover {
+    background-color: var(--dourado-bronze);
+    color: var(--branco);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(196, 158, 122, 0.2);
+}
+
+.card-documento .btn-acao {
+    background-color: transparent;
+    color: var(--verde-escuro);
+    border: 2px solid var(--verde-escuro);
+    box-shadow: none;
+}
+
+.card-documento .btn-acao:hover {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+}
+
+/* ------------------------------------
+   RODAPÉ (FOOTER INTEGRADO)
+--------------------------------------- */
+.rodape {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 5rem 2rem 2rem 2rem;
+    margin-top: 6rem;
+}
+
+.container-rodape {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 3rem;
+}
+
+.bloco-rodape h3 {
+    color: var(--dourado-bronze);
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bloco-rodape p {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+.bloco-rodape ul {
+    list-style: none;
+}
+
+.bloco-rodape ul li {
+    margin-bottom: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    flex-direction: column;
+}
+
+.bloco-rodape ul li strong {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--dourado-bronze);
+}
+
+.direitos-autorais {
+    text-align: center;
+    padding-top: 2.5rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+}
+
+/* ------------------------------------
+   RESPONSIVIDADE
+--------------------------------------- */
+/* 1. Regras para Telas Grandes (PC) - Esconde os elementos do Mobile por padrão */
+.burger-menu {
+    display: none; 
+}
+
+#mobile-nav {
+    display: none; /* Sem !important aqui para permitir que o celular o exiba */
+}
+
+
+@media (max-width: 768px) {
+    /* CORREÇÃO PRINCIPAL: Força o cabeçalho a ficar no topo absoluto de tudo */
+    .cabecalho {
+        position: sticky;
+        top: 0;
+        z-index: 1010 !important; /* Valor maior que o menu lateral */
+    }
+
+    .menu-navegacao {
+        display: none !important;
+    }
+
+    .burger-menu {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .burger-menu .bar {
+        width: 100%;
+        height: 3px;
+        background-color: #f0ecec;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    /* AJUSTE: Menu lateral agora respeita o cabeçalho fixo */
+    #mobile-nav {
+        display: block;
+        position: fixed;
+        top: 0; /* Começa do topo da tela */
+        right: 0;
+        height: 100vh;
+        width: 280px; 
+        background-color: var(--verde-escuro);
+        /* Aumentamos o padding superior para empurrar os links para baixo da barra do topo */
+        padding: 95px 2rem 2rem 2rem; 
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+        z-index: 1005; /* Fica abaixo do z-index do cabeçalho */
+    }
+
+    #mobile-nav.hidden {
+        display: none !important;
+    }
+
+    #mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #mobile-nav li a {
+        display: block;
+        padding: 12px 0;
+        text-decoration: none;
+        color: #f3f1f1;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Opcional: Ajustes automáticos se a tela for muito pequena (ex: iPhone SE) */
+    .cabecalho.menu-aberto .logo-img {
+        height: 38px;
+        transition: all 0.3s ease;
+    }
+
+    .cabecalho.menu-aberto .logo-titulo {
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+}

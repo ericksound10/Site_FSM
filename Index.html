@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condomínio Forte São Mateus</title>
+    <!-- Importação de Fontes Modernas e Ícones Visuais -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ------------------------------------
+       CABEÇALHO (NAVBAR)
+    --------------------------------------- -->
+    <header class="cabecalho">
+        <div class="container-header">
+            <div class="logo-container">
+                <!-- Certifique-se de salvar sua logo nesta pasta ou ajuste o caminho -->
+                <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img">
+                <div class="logo-titulo"> <span>Condomínio Forte São Mateus</span></div>
+            </div>
+
+            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            </button>
+
+            <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
+            <nav id="mobile-nav" class="hidden">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#kit">Kit Boas-Vindas</a></li>
+                <li><a href="#atas">Atas e Documentos</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            </nav>
+
+            <nav class="menu-navegacao">
+                <a href="#inicio"><i class="fa-solid fa-house"></i> Início</a>
+                <a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a>
+                <a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a>
+                <a href="#noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a>
+                <a href="#contato"><i class="fa-solid fa-phone"></i> Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ------------------------------------
+       CARROSSEL / HERO PRINCIPAL
+    --------------------------------------- -->
+ <section class="carrossel-container" id="inicio">
+        <!-- Slide 1 -->
+        <div class="slide ativo" style="background-image: url('imagens/forte-sao-mateus.png');">
+            <div class="slide-conteudo">
+                <h1>Bem-vindo ao Condomínio Forte São Mateus</h1>
+                <p>Seu espaço de paz, segurança e convivência em harmonia.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('https://crel.com.br/wp-content/uploads/2021/09/crel-administracao-de-condominio-meio-1.jpg');">
+            <div class="slide-conteudo">
+                <h2>Próxima Assembleia Geral</h2>
+                <p>Confira a pauta e participe das decisões do nosso condomínio.</p> 
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=600&q=80');">
+            <div class="slide-conteudo">
+                <h2>Manutenção da Área de Lazer</h2>
+                <p>Parquinho e Salão de Festas passam por revitalização esta semana.</p>
+            </div>
+        </div>
+    </section>
+
+     <!-- PROGRAMAÇÃO JAVASCRIPT PARA FAZER OS SLIDES PASSAREM SOZINHOS -->
+    <script>
+        let slides = document.querySelectorAll('.slide');
+        let slideAtual = 0;
+
+        setInterval(() => {
+            slides[slideAtual].classList.remove('ativo');
+            slideAtual = (slideAtual + 1) % slides.length;
+            slides[slideAtual].classList.add('ativo');
+        }, 4000); // Muda de slide a cada 4 segundos
+    </script>
+
+    <!-- ------------------------------------
+       CONTEÚDO PRINCIPAL DO PORTAL
+    --------------------------------------- -->
+    <main class="conteudo-principal">
+
+        <!-- SEÇÃO: KIT DE BOAS-VINDAS (CARDS COM IMAGEM DE TOPO) -->
+        <section id="boas-vindas" class="secao">
+            <h2 class="titulo-secao">Kit de Boas-Vindas</h2>
+            <div class="grid-cards">
+                
+                <!-- Card 1: Convenção -->
+                <div class="card card-foto-destaque">
+                    <div class="card-imagem-topo">
+                        <img src="imagens/convenção_FSM.jpg" alt="Regimento">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>Convenção e Regimento</h3>
+                        <p>Conheça as regras de convivência, horários de silêncio e normas de uso das áreas comuns do nosso condomínio.</p>
+                        <a href="documentos/regimento-interno.pdf" class="btn-acao" download><i class="fa-solid fa-file-pdf"></i> Baixar Regimento</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Mudanças -->
+                <div class="card card-foto-destaque">
+                    <div class="card-imagem-topo">
+                        <img src="imagens/reforma-FSM.jpg" alt="Reformas">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>Mudanças e Reformas</h3>
+                        <p>Formulários de agendamento de mudanças, ARTs de reforma e orientações completas para prestadores de serviços.</p>
+                        <a href="#" class="btn-acao"><i class="fa-solid fa-calendar-days"></i> Ver Instruções</a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Contatos Úteis -->
+                <div class="card card-foto-destaque">
+                    <div class="card-imagem-topo">
+                        <img src="imagens/Contatos-uteis.jpg" alt="Contatos">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>Contatos Úteis</h3>
+                        <p>Telefones diretos da portaria, administração, manutenção, contatos da síndica e principais serviços de emergência.</p>
+                        <a href="#contato" class="btn-acao"><i class="fa-solid fa-address-book"></i> Acessar Lista</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO: ATAS E DOCUMENTOS (ESTILO ARQUIVO DIGITAL) -->
+        <section id="atas" class="secao">
+            <h2 class="titulo-secao">Atas de Assembleias e Documentos</h2>
+            <div class="grid-cards">
+                
+                <!-- Ata Ordinária -->
+                <div class="card card-documento">
+                    <div class="card-conteudo-simples">
+                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 15/01/2026</span>
+                        <h3>Ata da Assembleia Ordinária</h3>
+                        <p class="tag-documento"><i class="fa-solid fa-money-bill-wave"></i> Previsão Orçamentária</p>
+                        <p>Acesse o histórico e os tópicos debatidos na última reunião ordinária realizada com os condôminos.</p>
+                        <a href="documentos/ata-ordinaria-jan-2026.pdf" class="btn-acao" download><i class="fa-solid fa-download"></i> Baixar PDF</a>
+                    </div>
+                </div>
+
+                <!-- Ata Extraordinária -->
+                <div class="card card-documento">
+                    <div class="card-conteudo-simples">
+                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 10/11/2025</span>
+                        <h3>Ata da Assembleia Extraordinária</h3>
+                        <p class="tag-documento"><i class="fa-solid fa-paint-roller"></i> Reformas da Fachada</p>
+                        <p>Decisões tomadas em conjunto a respeito do cronograma de revitalização e melhorias estruturais da nossa fachada.</p>
+                        <a href="documentos/ata-extraordinaria-nov-2025.pdf" class="btn-acao" download><i class="fa-solid fa-download"></i> Baixar PDF</a>
+                    </div>
+                </div>
+
+                <!-- Prestação de Contas -->
+                <div class="card card-documento">
+                    <div class="card-conteudo-simples">
+                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Publicado em 05/01/2026</span>
+                        <h3>Prestação de Contas</h3>
+                        <p class="tag-documento"><i class="fa-solid fa-chart-line"></i> Dezembro / 2025</p>
+                        <p>Relatório de transparência financeira detalhado sobre o balanço de receitas e despesas operacionais do mês de Dezembro.</p>
+                        <a href="documentos/prestacao-contas-dez-2025.pdf" class="btn-acao" download><i class="fa-solid fa-download"></i> Baixar PDF</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO: NOTÍCIAS (COM CRONOGRAMA E BADGES DE IDENTIFICAÇÃO) -->
+        <section id="noticias" class="secao">
+            <h2 class="titulo-secao">Notícias e Comunicados</h2>
+            <div class="grid-cards">
+                
+                <!-- Notícia 1 -->
+                <div class="card card-noticia">
+                    <div class="card-conteudo-simples">
+                        <span class="badge-categoria categoria-manutencao">Manutenção</span>
+                        <h3>Manutenção preventiva dos elevadores</h3>
+                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Postado em 14 de Outubro, 2026</span>
+                        <p>Informamos que na próxima terça-feira, das 09h às 13h, os elevadores da torre A passarão por inspeção técnica obrigatória de segurança.</p>
+                    </div>
+                </div>
+
+                <!-- Notícia 2 -->
+                <div class="card card-noticia">
+                    <div class="card-conteudo-simples">
+                        <span class="badge-categoria categoria-assembleia">Assembleia</span>
+                        <h3>Convocação para Assembleia Geral</h3>
+                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Postado em 10 de Outubro, 2026</span>
+                        <p>A convocação oficial com a pauta completa e o link de acesso para o modelo híbrido de reunião já foi enviada por e-mail a todos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ------------------------------------
+       RODAPÉ (FOOTER INFORMATIVO)
+    --------------------------------------- -->
+    <footer id="contato" class="rodape">
+        <div class="container-rodape">
+            
+             <div class="bloco-rodape">
+                <h3>Contatos Úteis</h3>
+                <ul>
+                    <li><strong>Portaria:</strong> (11) 98438-2216</li>
+                    <li><strong>Administradora:</strong> contato@condominiofortesaomateus.com.br </li>
+                    <li><strong>Síndica:</strong> (11) 99197-5036</li>
+                </ul>
+            </div>
+            <div class="bloco-rodape">
+                <h3>Endereço</h3>
+                <p>Rua Forte da Ribeira, 250 <br> Bairro: Parque São Lourenço <br>Cidade: São Paulo / SP, CEP 08340-145</p>
+            </div>
+        </div>
+        <div class="direitos-autorais">
+            &copy; 2026 Condomínio Forte São Mateus. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
