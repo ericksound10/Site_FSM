@@ -227,6 +227,7 @@ a {
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.03);
+    height: 100%;
 }
 
 .card::before {
@@ -293,6 +294,24 @@ a {
     letter-spacing: 0.5px;
 }
 
+.badge-contatos-uteis {
+    align-self: flex-start;
+    background-color: rgba(28, 51, 50, 0.08);
+    color: var(--verde-escuro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.card-contato-uteis {
+    max-width: 400px; /* Impede o card de esticar */
+    margin: 0 auto;    /* Centraliza o card na tela */
+}
+
 .data-publicacao {
     font-size: 0.85rem;
     color: var(--texto-mutado);
@@ -300,6 +319,11 @@ a {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.card-boleto-unico {
+    max-width: 400px; /* Impede o card de esticar */
+    margin: 0 auto;    /* Centraliza o card na tela */
 }
 
 /* ------------------------------------
@@ -317,6 +341,7 @@ a {
     width: 100%;
     box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
     border: 1px solid transparent;
+    margin-top: auto;
 }
 
 .btn-acao:hover {
