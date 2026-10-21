@@ -281,6 +281,19 @@ a {
     transform: scale(1.05);
 }
 
+.tag-financeiro {
+    align-self: flex-start;
+    background-color: rgba(28, 51, 50, 0.08);
+    color: var(--verde-escuro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
 .badge-categoria {
     align-self: flex-start;
     background-color: rgba(28, 51, 50, 0.08);
@@ -310,6 +323,25 @@ a {
 .card-contato-uteis {
     max-width: 400px; /* Impede o card de esticar */
     margin: 0 auto;    /* Centraliza o card na tela */
+}
+
+.bloco-telefones {
+    display: flex;
+    align-items: flex-start; /* Alinha o topo do "Telefones:" com o primeiro número */
+    gap: 6px;               /* Espaçamento entre a palavra "Telefones:" e os números */
+    margin-bottom: 1rem;    /* Mantém o espaçamento inferior padrão */
+}
+
+.lista-numeros {
+    display: flex;
+    flex-direction: column;  /* Empilha os números verticalmente */
+    gap: 4px;               /* Espaçamento vertical entre um número e outro */
+}
+
+/* Opcional: Garante um bom espaçamento para o parágrafo do e-mail abaixo */
+.email-contato {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
 }
 
 .data-publicacao {
@@ -513,5 +545,12 @@ a {
     .cabecalho.menu-aberto .logo-titulo {
         font-size: 1.1rem;
         transition: all 0.3s ease;
+    }
+
+        .card {
+        width: 100%;
+        max-width: 400px; /* Alinha com a largura máxima estipulada em .card-contato-uteis */
+        margin: 0 auto 1.5rem auto; /* Centraliza horizontalmente e cria espaçamento para o card de baixo */
+        height: auto; /* Permite que o card se adapte de forma fluida à altura do conteúdo interno */
     }
 }
