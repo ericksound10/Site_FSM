@@ -18,11 +18,13 @@
     --------------------------------------- -->
     <header class="cabecalho">
         <div class="container-header">
-            <div class="logo-container">
-                <!-- Certifique-se de salvar sua logo nesta pasta ou ajuste o caminho -->
-                <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img">
-                <div class="logo-titulo"> <span>Condomínio Forte São Mateus</span></div>
-            </div>
+            <a href="#inicio" class="logo-link">
+                <div class="logo-container">
+                    <!-- Certifique-se de salvar sua logo nesta pasta ou ajuste o caminho -->
+                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img" href="#inicio">
+                    <div class="logo-titulo"> <span>Condomínio Forte São Mateus</span></div>
+                </div>
+            </a>
 
             <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
             <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
@@ -33,23 +35,23 @@
 
             <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
             <nav id="mobile-nav" class="hidden"> 
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#kit">Kit Boas-Vindas</a></li>
-                <li><a href="#atas">Atas e Documentos</a></li>
-                <li><a href="#noticias">Notícias</a></li>
-                <li><a href="#contatos-uteis">Contato úteis</a></li>
-                <li><a href="#financeiro">Financeiro</a></li>
-            </ul>
+                <ul>
+                    <li><a href="#inicio"><i class="fa-solid fa-house"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa-solid fa-phone"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="#contatos-uteis"><i class="fa-solid fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a></li>                
+                </ul>
             </nav>
 
             <nav class="menu-navegacao">
                 <a href="#inicio"><i class="fa-solid fa-house"></i> Início</a>
-                <a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a>
-                <a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a>
-                <a href="#noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a>
-                <a href="#contatos-uteis"><i class="fa-solid fa-phone"></i> Contato úteis</a>
                 <a href="#financeiro"><i class="fa-solid fa-phone"></i> Financeiro</a>
+                <a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a>
+                <a href="#contatos-uteis"><i class="fa-solid fa-phone"></i> Contato úteis</a>
+                <a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a>
+                <a href="noticias.html#mural-noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a>
             </nav>
         </div>
     </header>
@@ -57,31 +59,63 @@
     <!-- ------------------------------------
        CARROSSEL / HERO PRINCIPAL
     --------------------------------------- -->
- <section class="carrossel-container" id="inicio">
-        <!-- Slide 1 -->
-        <div class="slide ativo" style="background-image: url('imagens/forte-sao-mateus.png');">
-            <div class="slide-conteudo">
-                <h1>Bem-vindo ao Condomínio Forte São Mateus</h1>
-                <p>Seu espaço de paz, segurança e convivência em harmonia.</p>
-            </div>
-        </div>
+        <section class="carrossel-container" id="inicio">
+            <div class="carrossel-container">                
 
-        <!-- Slide 2 -->
-        <div class="slide" style="background-image: url('https://crel.com.br/wp-content/uploads/2021/09/crel-administracao-de-condominio-meio-1.jpg');">
-            <div class="slide-conteudo">
-                <h2>Próxima Assembleia Geral</h2>
-                <p>Confira a pauta e participe das decisões do nosso condomínio.</p> 
-            </div>
-        </div>
+                <!-- SLIDE 1 (Ativo por padrão) -->
+                <div class="slide ativo" >
+                    <picture class="slide-background">
+                        <source media="(max-width: 768px)" srcset="imagens/Forte-Sao-Mateus-Mobile.png">
+                        <img src="imagens/Forte-Sao-Mateus-Desktop.png" alt="Forte São Mateus">
+                    </picture>
+                    <!-- <div class="slide ativo" style="background-image: url('imagens/forte-sao-mateus.png');"> -->
+                    <div class="slide-conteudo">
+                            <h1>Bem-vindo ao Condomínio Forte São Mateus</span></h1>
+                            <p>Seu espaço de paz, segurança e convivência em harmonia.</p>
+                            <a href="#boas-vindas" class="btn-slide-noticia">Acesse o Kit de Boas-vindas <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
 
-        <!-- Slide 3 -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1574362848149-11496d93a7c7?auto=format&fit=crop&w=600&q=80');">
-            <div class="slide-conteudo">
-                <h2>Manutenção da Área de Lazer</h2>
-                <p>Parquinho e Salão de Festas passam por revitalização esta semana.</p>
+                    <!-- SLIDE 2 -->
+                    <div class="slide" >
+                        <picture class="slide-background">
+                            <source media="(max-width: 768px)" srcset="imagens/Elevadores-condominio-Mobile.jpg">
+                            <img src="imagens/Elevadores-condominio-Desktop.jpg" alt="Elevadores">
+                        </picture>
+                        <div class="slide-conteudo">
+                            <h1>Manutenção Preventiva <span>dos Elevadores</span></h1>
+                            <p>Bloco 1 passará por inspeção técnica nesta terça-feira. Clique para saber os horários.</p>
+                            <a href="noticias.html#noticia-manutencao-out2026" class="btn-slide-noticia">Leia a matéria completa <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- SLIDE 3 -->
+                    <div class="slide" >
+                        <picture class="slide-background">
+                            <source media="(max-width: 768px)" srcset="imagens/Assembleia-condominio-Mobile.jpg">
+                            <img src="imagens/Assembleia-condominio-Desktop.jpg" alt="Assembleia">
+                        </picture>
+                        <div class="slide-conteudo">
+                            <h1>Convocação para <span>Assembleia Geral</span></h1>
+                            <p>A pauta completa e o link de acesso para o modelo híbrido já estão disponíveis.</p>
+                            <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">Leia a matéria completa <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- BARRA DE PROGRESSO DO SLIDE -->
+                <div class="carrossel-progresso">
+                    <div class="barra-progresso"></div>
+                </div>
+
+                <!-- INDICADORES DE NAVEGAÇÃO (BOLINHAS) -->
+                <div class="carrossel-indicadores">
+                    <span class="indicador ativo" data-slide="0"></span>
+                    <span class="indicador" data-slide="1"></span>
+                    <span class="indicador" data-slide="2"></span>
+                </div>
+
             </div>
-        </div>
-    </section>
+        </section>
 
      <!-- PROGRAMAÇÃO JAVASCRIPT PARA FAZER OS SLIDES PASSAREM SOZINHOS -->
     <script>
@@ -106,32 +140,39 @@
             <div class="grid-cards">
                 
                 <!-- Card 1: Boleto Administradora -->
-                <div class="card card-financeiro">
+                <div class="card revelar-ao-scroll">
                     <span class="tag-financeiro">FINANCEIRO</span>
                     <div class="card-financeiro">                        
                         <h3>Emissão de Boleto</h3>
                         <p>Emita a 2ª via do Boleto no site da administradora.</p>
-                        <a href="https://www.condominiolight.com.br/consulta/?cpf" class="btn-acao" download><i class="fa-solid fa-file-pdf"></i> 2ª via Boleto</a>
+                        <a href="https://www.condominiolight.com.br/consulta/?cpf" class="btn-acao" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-file-pdf"></i> 2ª via Boleto
+                        </a>
                     </div>
                 </div>
 
                 <!-- Card 2: Central do Cliente Administradora -->
-                <div class="card card-financeiro">
+                <div class="card revelar-ao-scroll">
                     <span class="tag-financeiro">FINANCEIRO</span>
                     <div class="card-financeiro">
                         <h3>Central do Cliente</h3>
                         <p>Acesse sua conta e gerencie suas informações financeiras.</p>
-                        <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" download><i class="fa-solid fa-user"></i> Acessar Central</a>
+                        <!-- <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" download><i class="fa-solid fa-user"></i> Acessar Central</a> -->
+                        <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-file-pdf"></i> Acessar Central
+                        </a>
                     </div>
                 </div>
                 
                  <!-- Card 3: Prestação de Contas Mensal -->
-                <div class="card card-financeiro">
+                <div class="card revelar-ao-scroll">
                     <span class="tag-financeiro">FINANCEIRO</span>
                     <div class="card-financeiro">
                         <h3>Prestação de Contas Mensal</h3>
                         <p>Seu espaço para os relatórios de receitas e despesas, balancetes e o demonstrativo financeiro.</p>
-                        <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" download><i class="fa-solid fa-user"></i> Acessar Central</a>
+                        <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-file-pdf"></i> Acessar Central
+                        </a>
                     </div>
                 </div>
 
@@ -144,7 +185,7 @@
             <div class="grid-cards">
                 
                 <!-- Card 1: Convenção -->
-                <div class="card card-foto-destaque">
+                <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/convenção_FSM.jpg" alt="Regimento">
                     </div>
@@ -156,7 +197,7 @@
                 </div>
 
                 <!-- Card 2: Mudanças -->
-                <div class="card card-foto-destaque">
+                <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/reforma-FSM.jpg" alt="Reformas">
                     </div>
@@ -168,14 +209,14 @@
                 </div>
 
                 <!-- Card 3: Contatos Úteis -->
-                <div class="card card-foto-destaque">
+                <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Contatos-uteis.jpg" alt="Contatos">
                     </div>
                     <div class="card-conteudo">
                         <h3>Contatos Úteis</h3>
                         <p>Telefones diretos da portaria, administração, manutenção, contatos da síndica e principais serviços de emergência.</p>
-                        <a href="#contato" class="btn-acao"><i class="fa-solid fa-address-book"></i> Acessar Lista</a>
+                        <a href="#contatos-uteis" class="btn-acao"><i class="fa-solid fa-address-book"></i> Acessar Lista </a>
                     </div>
                 </div>
 
@@ -188,10 +229,11 @@
             <div class="grid-cards">
 
                 <!-- Card 1: Contato Portaria -->
-                <div class="card card-contato-uteis">
+                <div class="card revelar-ao-scroll">
                     <span class="badge-contatos-uteis">PORTARIA</span>
                     <div class="card-contato-uteis">                        
                         <h3>Contato Portaria</h3>
+                        <p> Precisa falar com a portaria? Chame no WhatsApp </p>
                         <div class="bloco-telefones">
                             <strong>Telefones:</strong>
                             <div class="lista-numeros">
@@ -210,10 +252,11 @@
                 </div>
                 
                 <!-- Card 1: Contato Administradora -->
-                <div class="card card-contato-uteis">
+                <div class="card revelar-ao-scroll">
                     <span class="badge-contatos-uteis">ADMINISTRADORA</span>
                     <div class="card-contato-uteis">                        
                         <h3>Contato Administradora</h3>
+                        <p> Precisa falar com a administradora? Ligue no telefone abaixo </p>
                         <div class="bloco-telefones">
                             <strong>Telefones:</strong>
                             <div class="lista-numeros">
@@ -222,15 +265,19 @@
                         </div>
                         <!-- <p><strong>Telefone:</strong> (11) 3901-1104</p> -->
                         <p class="email-contato"> <strong>Email:</strong> faleconosco@condominiolight.com.br</p>
-                        <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" download><i class="fa-solid fa-file-pdf"></i> Fale Conosco</a>
+                        <!-- <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" download><i class="fa-solid fa-file-pdf"></i> Fale Conosco</a> -->
+                        <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-file-pdf"></i> Fale Conosco
+                        </a>
                     </div>
                 </div>
 
                 <!-- Card 1: Contato Elevadores -->
-                <div class="card card-contato-uteis">
+                <div class="card revelar-ao-scroll">
                     <span class="badge-contatos-uteis">MANUTENÇÃO DE ELEVADORES</span>
                     <div class="card-contato-uteis">                        
                         <h3>Contato MIHL elevadores</h3>
+                        <p> Precisa falar com a manutenção de elevadores?</p>
                         <!-- <p><strong>Telefones:</strong> (11) 99981-8103 <br> (11) 27442233 <br> (11) 27742232</p> -->
                          <div class="bloco-telefones">
                             <strong>Telefones:</strong>
@@ -251,7 +298,7 @@
                 </div>
 
                  <!-- Card 1: Contato Elevadores -->
-                <div class="card card-contato-uteis">
+                <div class="card revelar-ao-scroll">
                     <span class="badge-contatos-uteis">JURÍDICO</span> 
                     <div class="card-contato-uteis">                        
                         <h3>Contato do Jurídico</h3>
@@ -274,7 +321,7 @@
                 </div>
 
                 <!-- Card 1: CONTRATO - DOMUS MARKET - MERCADO -->
-                <div class="card card-contato-uteis">
+                <div class="card revelar-ao-scroll">
                     <span class="badge-contatos-uteis">MERCADINHO</span> 
                     <div class="card-contato-uteis">                        
                         <h3>DOMUS MARKET</h3>
@@ -306,7 +353,7 @@
             <div class="grid-cards">
                 
                 <!-- Ata Ordinária -->
-                <div class="card card-documento">
+                <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
                         <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 15/01/2026</span>
                         <h3>Ata da Assembleia Ordinária</h3>
@@ -317,7 +364,7 @@
                 </div>
 
                 <!-- Ata Extraordinária -->
-                <div class="card card-documento">
+                <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
                         <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 10/11/2025</span>
                         <h3>Ata da Assembleia Extraordinária</h3>
@@ -328,7 +375,7 @@
                 </div>
 
                 <!-- Prestação de Contas -->
-                <div class="card card-documento">
+                <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
                         <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Publicado em 05/01/2026</span>
                         <h3>Prestação de Contas</h3>
@@ -347,7 +394,7 @@
             <div class="grid-cards">
                 
                 <!-- Notícia 1 -->
-                <div class="card card-noticia">
+                <div class="card revelar-ao-scroll" id="noticia-elevadores">
                     <div class="card-conteudo-simples">
                         <span class="badge-categoria categoria-manutencao">Manutenção</span>
                         <h3>Manutenção preventiva dos elevadores</h3>
@@ -357,7 +404,7 @@
                 </div>
 
                 <!-- Notícia 2 -->
-                <div class="card card-noticia">
+                <div class="card revelar-ao-scroll" id="noticia-assembleia">
                     <div class="card-conteudo-simples">
                         <span class="badge-categoria categoria-assembleia">Assembleia</span>
                         <h3>Convocação para Assembleia Geral</h3>
