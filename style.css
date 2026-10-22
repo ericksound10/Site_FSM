@@ -157,9 +157,6 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -167,7 +164,7 @@ a {
     opacity: 0;
     transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 1;
-    padding: 0;
+    padding: 0 2rem;
 }
 
 .slide.ativo {
@@ -827,9 +824,10 @@ a {
 } /* <--- CHAVE CORRIGIDA AQUI! Ela fecha as regras de celular no lugar certo */
 
 
-/* ----------------------------------------------------
-   ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE)
-------------------------------------------------------- */
+/* --------------------------------------------------------
+    ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE) 
+----------------------------------------------------------- */
+
 .grid-cards-noticias {
     display: flex;
     flex-direction: column;
@@ -886,11 +884,7 @@ a {
     margin-bottom: 0;
 }
 
- .botao-fechar-modal {
-        top: 15px;
-        right: 25px;
-        font-size: 35px;
-    }
-    .imagem-noticia {
-        cursor: zoom-in; /* Avisa visualmente ao usuário que a imagem é clicável */
-    }
+/* Indicador visual de clique na imagem */
+.imagem-noticia {
+    cursor: zoom-in; 
+}
