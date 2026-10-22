@@ -670,13 +670,15 @@ a {
         position: sticky;
         top: 0;
         z-index: 1010 !important;
+        padding: 1rem 1.2rem; /* Compacta o cabeçalho no celular */
     }
 
-    .carrossel-container {
-        height: 500px; /* Ajusta a altura no celular para o texto não sobrecarregar a imagem */
+    .logo-titulo {
+        font-size: 1.05rem; /* Evita que o título quebre em duas linhas */
     }
-    .slide {
-        background-size: cover; /* No celular, o cover funciona melhor pela proporção da tela */
+
+    .logo-img {
+        height: 38px;
     }
 
     .menu-navegacao {
@@ -701,6 +703,56 @@ a {
         background-color: #f0ecec;
         border-radius: 2px;
         transition: 0.3s;
+    }
+
+    /* --- AJUSTE CIRÚRGICO DO BANNER NO CELULAR --- */
+    .carrossel-container {
+        height: 480px; /* Reduz a altura rígida para não esticar */
+    }
+
+    .slide {
+        background-size: cover;
+        padding: 0 1rem;
+    }
+
+    .slide-conteudo {
+        padding: 1.5rem; /* Diminui o espaçamento interno pro balão respirar */
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .slide-conteudo h1, .slide-conteudo h2 {
+        font-size: 1.4rem !important; /* Diminui o título para não esticar a caixa */
+        margin-bottom: 0.5rem;
+    }
+
+    .slide-conteudo p {
+        font-size: 0.9rem !important; /* Texto menor e legível */
+        line-height: 1.4;
+    }
+
+    .btn-slide-noticia {
+        margin-top: 0.8rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        width: 100%; /* Botão ocupa toda a largura no celular */
+        justify-content: center;
+    }
+
+    /* --- CORREÇÃO DOS CARDS DESLOCADOS --- */
+    .grid-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    /* Força TODOS os cards a centralizarem perfeitamente na tela sem vazar para a direita */
+    .card {
+        width: 100% !important;
+        max-width: 100% !important; 
+        margin: 0 0 1rem 0 !important; /* Zera margens laterais que jogavam o card pra direita */
+        padding: 2rem 1.5rem;
     }
 
     #mobile-nav {
@@ -785,23 +837,6 @@ a {
     #mobile-nav:not(.hidden) li:nth-child(5) a::after { transition-delay: 0.48s; }
     #mobile-nav:not(.hidden) li:nth-child(6) a::after { transition-delay: 0.55s; }
 
-    .cabecalho.menu-aberto .logo-img {
-        height: 38px;
-        transition: all 0.3s ease;
-    }
-
-    .cabecalho.menu-aberto .logo-titulo {
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto 1.5rem auto;
-        height: auto;
-    }
-
     .menu-retorno {
         display: flex !important;
     }
@@ -814,14 +849,13 @@ a {
         border-radius: 6px;
     }
 
-    /* Redução dos espaçamentos internos das notícias apenas no Celular */
     .card-noticia-longa {
         padding: 2rem 1.5rem;
     }
     .card-noticia-longa h3 {
         font-size: 1.3rem;
     }
-} /* <--- CHAVE CORRIGIDA AQUI! Ela fecha as regras de celular no lugar certo */
+}
 
 
 /* --------------------------------------------------------
