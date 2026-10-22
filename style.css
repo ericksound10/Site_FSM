@@ -1,3 +1,24 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.revelar-ao-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: transform, opacity;
+}
+
+.revelar-ao-scroll.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+.grid-cards .card:nth-child(1) { transition-delay: 0.1s; }
+.grid-cards .card:nth-child(2) { transition-delay: 0.25s; }
+.grid-cards .card:nth-child(3) { transition-delay: 0.4s; }
+.grid-cards .card:nth-child(4) { transition-delay: 0.55s; }
+
 /* ------------------------------------
    PALETA DE CORES E VARIÁVEIS MODERNAS
 --------------------------------------- */
@@ -42,7 +63,7 @@ a {
    CABEÇALHO (NAVBAR MODERNA)
 --------------------------------------- */
 .cabecalho {
-    background-color: var(--verde-escuro); /* Mantém a cor sólida oficial */
+    background-color: var(--verde-escuro);
     padding: 1.2rem 2rem;
     position: sticky;
     top: 0;
@@ -54,8 +75,8 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* Distribui o logo na esquerda e menu na direita */
-    align-items: center; /* Alinha tudo perfeitamente na mesma linha vertical */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo-container {
@@ -65,7 +86,7 @@ a {
 }
 
 .logo-img {
-    height: 45px; /* Altura ideal e padronizada */
+    height: 45px;
     width: auto;  
     object-fit: contain; 
     border-radius: 4px;
@@ -90,6 +111,7 @@ a {
 
 .menu-navegacao a {
     color: rgba(255, 255, 255, 0.85);
+    position: relative;
     font-size: 0.95rem;
     font-weight: 500;
     padding: 0.6rem 1rem;
@@ -98,7 +120,23 @@ a {
 
 .menu-navegacao a:hover {
     color: var(--branco);
-    background-color: rgba(255, 255, 255, 0.1);
+     background-color: transparent;
+}
+
+.menu-navegacao a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--dourado-bronze);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.menu-navegacao a:hover::after {
+    width: 80%;
 }
 
 /* ------------------------------------
@@ -109,7 +147,8 @@ a {
     width: 100%;
     height: 600px;
     overflow: hidden;
-    background-color: #FFFFFF !important; 
+    /* background-color: #FFFFFF !important;  */
+    background-color: var(--verde-escuro) !important; 
 }
 
 .slide {
@@ -118,44 +157,47 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
-    /* 
-       IMPORTANTE: Se o seu JavaScript usa a classe '.ativo' para mudar a opacidade, 
-       garantimos que o slide padrão comece invisível, mas sem aplicar filtros escuros.
-     Milford */
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 1;
-    padding: 0 2rem;
-    
-    /* Força a imagem a ignorar qualquer efeito de fusão ou sombra */
-    mix-blend-mode: normal !important;
-    background-blend-mode: normal !important;
-    filter: none !important;
+    padding: 0;
 }
 
 .slide.ativo {
     opacity: 1 !important;
     z-index: 2;
-    filter: brightness(100%) contrast(100%) !important;
+}
+
+.slide-background img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz o preenchimento perfeito e pesado */
+    z-index: -1; /* Joga a imagem para trás do texto */
 }
 
 .slide-conteudo {
     position: relative;
     z-index: 3;
-    background-color: rgba(255, 255, 255, 0.96); /* Fundo branco bem visível */
+    background-color: rgba(255, 255, 255, 0.96);
     padding: 2.5rem 3.5rem;
     border-radius: 14px;
     max-width: 680px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide-conteudo h1, .slide-conteudo h2 {
@@ -164,7 +206,7 @@ a {
     font-weight: 700;
     margin-bottom: 0.8rem;
     letter-spacing: -0.5px;
-    text-shadow: none !important; /* Remove sombras pretas antigas do texto */
+    text-shadow: none !important;
 }
 
 .slide-conteudo h1 span {
@@ -177,6 +219,159 @@ a {
     font-weight: 500;
     text-shadow: none !important;
 }
+
+.slide.ativo .slide-conteudo {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.btn-slide-noticia {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1.2rem;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transicao);
+}
+
+.btn-slide-noticia:hover {
+    background-color: var(--dourado-bronze);
+    color: var(--branco);
+    transform: translateX(4px); /* Dá um leve empurrãozinho para a direita ao passar o mouse */
+}
+
+/* --- ESTILO DAS IMAGENS DENTRO DOS COMUNICADOS --- */
+.imagem-noticia {
+    display: block;
+    max-width: 100%;       /* Impede a imagem de ficar maior que o card */
+    height: auto;          /* Mantém a proporção original da foto sem distorcer */
+    margin: 1.5rem auto;   /* Espaçamento em cima/baixo e centraliza horizontalmente */
+    border-radius: 8px;    /* Arredonda os cantos para combinar com o layout do site */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave para dar profundidade */
+}
+
+/* --- ESTILOS DO POP-UP DE IMAGEM (MODAL) --- */
+.modal-noticia-preview {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000; /* Fica acima de absolutamente tudo, inclusive do menu */
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(28, 51, 50, 0.95); /* Fundo verde-escuro oficial com opacidade */
+    backdrop-filter: blur(8px); /* Desfoca o fundo do site para destacar a imagem */
+}
+
+.modal-conteudo-wrapper {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+    height: 80vh;
+}
+
+.modal-imagem-expandida {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    animation: zoomEfeitoIn 0.3s ease;
+    
+    /* Ativa suporte a zoom por toque nativo no navegador do celular */
+    touch-action: pinch-zoom; 
+}
+
+/* Legenda do documento abaixo da foto */
+#modal-legenda {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: var(--dourado-bronze);
+    padding: 15px 0;
+    font-weight: 600;
+}
+
+/* Botão Fechar (X) */
+.botao-fechar-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.botao-fechar-modal:hover,
+.botao-fechar-modal:focus {
+    color: var(--dourado-bronze);
+}
+
+/* Animação suave de abertura */
+@keyframes zoomEfeitoIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* --- BARRA DE PROGRESSO TEMPORAL --- */
+.carrossel-progresso {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 10;
+}
+
+.barra-progresso {
+    width: 0%;
+    height: 100%;
+    background-color: var(--dourado-bronze);
+    transition: width 5s linear; /* Controla o tempo de preenchimento (5 segundos) */
+}
+
+/* --- INDICADORES (BOLINHAS DE NAVEGAÇÃO) --- */
+.carrossel-indicadores {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicador {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: var(--transicao);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.indicador.ativo {
+    background-color: var(--dourado-bronze);
+    transform: scale(1.2);
+    width: 24px; /* Transforma a bolinha ativa em um traço moderno */
+    border-radius: 6px;
+}
+
 /* ------------------------------------
    CONTEÚDO E SEÇÕES DO PAINEL
 --------------------------------------- */
@@ -223,11 +418,13 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: var(--transicao);
+    /* transition: var(--transicao); */
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.03);
     height: 100%;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card::before {
@@ -239,8 +436,8 @@ a {
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--sombra-hover);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(28, 51, 50, 0.08); 
 }
 
 .card:hover::before {
@@ -263,7 +460,6 @@ a {
     flex-grow: 1;
 }
 
-/* Tamanho e enquadramento perfeito para as imagens dos cards */
 .card-imagem-topo {
     width: 100%;
     height:auto;
@@ -321,24 +517,23 @@ a {
 }
 
 .card-contato-uteis {
-    max-width: 400px; /* Impede o card de esticar */
-    margin: 0 auto;    /* Centraliza o card na tela */
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .bloco-telefones {
     display: flex;
-    align-items: flex-start; /* Alinha o topo do "Telefones:" com o primeiro número */
-    gap: 6px;               /* Espaçamento entre a palavra "Telefones:" e os números */
-    margin-bottom: 1rem;    /* Mantém o espaçamento inferior padrão */
+    align-items: flex-start; 
+    gap: 6px;               
+    margin-bottom: 1rem;    
 }
 
 .lista-numeros {
     display: flex;
-    flex-direction: column;  /* Empilha os números verticalmente */
-    gap: 4px;               /* Espaçamento vertical entre um número e outro */
+    flex-direction: column;  
+    gap: 4px;               
 }
 
-/* Opcional: Garante um bom espaçamento para o parágrafo do e-mail abaixo */
 .email-contato {
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -354,8 +549,8 @@ a {
 }
 
 .card-boleto-unico {
-    max-width: 400px; /* Impede o card de esticar */
-    margin: 0 auto;    /* Centraliza o card na tela */
+    max-width: 400px; 
+    margin: 0 auto;    
 }
 
 /* ------------------------------------
@@ -453,25 +648,38 @@ a {
     color: rgba(255,255,255,0.4);
 }
 
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 /* ------------------------------------
    RESPONSIVIDADE
 --------------------------------------- */
-/* 1. Regras para Telas Grandes (PC) - Esconde os elementos do Mobile por padrão */
 .burger-menu {
     display: none; 
 }
 
 #mobile-nav {
-    display: none; /* Sem !important aqui para permitir que o celular o exiba */
+    display: none;
 }
 
-
+/* ------------------------------------
+   RESPONSIVIDADE (MOBILE)
+--------------------------------------- */
 @media (max-width: 768px) {
-    /* CORREÇÃO PRINCIPAL: Força o cabeçalho a ficar no topo absoluto de tudo */
     .cabecalho {
         position: sticky;
         top: 0;
-        z-index: 1010 !important; /* Valor maior que o menu lateral */
+        z-index: 1010 !important;
+    }
+
+    .carrossel-container {
+        height: 500px; /* Ajusta a altura no celular para o texto não sobrecarregar a imagem */
+    }
+    .slide {
+        background-size: cover; /* No celular, o cover funciona melhor pela proporção da tela */
     }
 
     .menu-navegacao {
@@ -498,23 +706,28 @@ a {
         transition: 0.3s;
     }
 
-    /* AJUSTE: Menu lateral agora respeita o cabeçalho fixo */
     #mobile-nav {
         display: block;
         position: fixed;
-        top: 0; /* Começa do topo da tela */
+        top: 0;
         right: 0;
         height: 100vh;
         width: 280px; 
         background-color: var(--verde-escuro);
-        /* Aumentamos o padding superior para empurrar os links para baixo da barra do topo */
         padding: 95px 2rem 2rem 2rem; 
         box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
-        z-index: 1005; /* Fica abaixo do z-index do cabeçalho */
+        z-index: 1005;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
     }
 
     #mobile-nav.hidden {
-        display: none !important;
+        display: block !important; 
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none; 
     }
 
     #mobile-nav ul {
@@ -527,16 +740,54 @@ a {
     }
 
     #mobile-nav li a {
-        display: block;
-        padding: 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0;
         text-decoration: none;
         color: #f3f1f1;
         font-weight: 500;
         font-size: 1.1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;        
+        opacity: 0;
+        transform: translateX(30px);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    color 0.2s ease,
+                    padding 0.2s ease;
     }
 
-    /* Opcional: Ajustes automáticos se a tela for muito pequena (ex: iPhone SE) */
+    #mobile-nav li a:hover, 
+    #mobile-nav li a:active {
+        color: var(--dourado-bronze);
+        padding-left: 8px; 
+    }
+
+    #mobile-nav:not(.hidden) li a {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    #mobile-nav li a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0; 
+        height: 2px;
+        background-color: var(--dourado-bronze);
+        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+    }
+
+    #mobile-nav:not(.hidden) li a::after { width: 40%; }
+    #mobile-nav:not(.hidden) li:nth-child(1) a::after { transition-delay: 0.20s; }
+    #mobile-nav:not(.hidden) li:nth-child(2) a::after { transition-delay: 0.27s; }
+    #mobile-nav:not(.hidden) li:nth-child(3) a::after { transition-delay: 0.34s; }
+    #mobile-nav:not(.hidden) li:nth-child(4) a::after { transition-delay: 0.41s; }
+    #mobile-nav:not(.hidden) li:nth-child(5) a::after { transition-delay: 0.48s; }
+    #mobile-nav:not(.hidden) li:nth-child(6) a::after { transition-delay: 0.55s; }
+
     .cabecalho.menu-aberto .logo-img {
         height: 38px;
         transition: all 0.3s ease;
@@ -547,10 +798,99 @@ a {
         transition: all 0.3s ease;
     }
 
-        .card {
+    .card {
         width: 100%;
-        max-width: 400px; /* Alinha com a largura máxima estipulada em .card-contato-uteis */
-        margin: 0 auto 1.5rem auto; /* Centraliza horizontalmente e cria espaçamento para o card de baixo */
-        height: auto; /* Permite que o card se adapte de forma fluida à altura do conteúdo interno */
+        max-width: 400px;
+        margin: 0 auto 1.5rem auto;
+        height: auto;
     }
+
+    .menu-retorno {
+        display: flex !important;
+    }
+    
+    .menu-retorno a {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+        color: var(--branco);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+    }
+
+    /* Redução dos espaçamentos internos das notícias apenas no Celular */
+    .card-noticia-longa {
+        padding: 2rem 1.5rem;
+    }
+    .card-noticia-longa h3 {
+        font-size: 1.3rem;
+    }
+} /* <--- CHAVE CORRIGIDA AQUI! Ela fecha as regras de celular no lugar certo */
+
+
+/* ----------------------------------------------------
+   ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE)
+------------------------------------------------------- */
+.grid-cards-noticias {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
+
+.card-noticia-longa {
+    background-color: var(--branco);
+    padding: 3rem 2.5rem;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    border: 1px solid rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.card-noticia-longa::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 6px; 
+    height: 100%;
+    background-color: var(--dourado-bronze);
+    border-radius: var(--borda-raio) 0 0 var(--borda-raio);
+}
+
+.meta-noticia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card-noticia-longa h3 {
+    color: var(--verde-escuro);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+}
+
+.texto-completo p {
+    color: var(--texto-escuro);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+}
+
+.texto-completo p:last-child {
+    margin-bottom: 0;
+}
+
+ .botao-fechar-modal {
+        top: 15px;
+        right: 25px;
+        font-size: 35px;
+    }
+    .imagem-noticia {
+        cursor: zoom-in; /* Avisa visualmente ao usuário que a imagem é clicável */
+    }
