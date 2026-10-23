@@ -1,58 +1,5 @@
-// document.addEventListener('DOMContentLoaded', () => {
-  
-//   /* ----------------------------------------------------
-//      1. SEU MENU HAMBÚRGUER ORIGINAL (MANTIDO E PROTEGIDO)
-//      ---------------------------------------------------- */
-//   const burgerBtn = document.getElementById('burger-btn');
-//   const mobileNav = document.getElementById('mobile-nav');
-
-//   if (burgerBtn && mobileNav) {
-//     burgerBtn.addEventListener('click', (event) => {
-//       event.stopPropagation();
-//       mobileNav.classList.toggle('hidden');
-//     });
-
-//     const mobileLinks = mobileNav.querySelectorAll('a');
-//     mobileLinks.forEach(link => {
-//       link.addEventListener('click', () => {
-//         mobileNav.classList.add('hidden');
-//       });
-//     });
-
-//     // Fecha se clicar estritamente fora da barra lateral e do botão hambúrguer
-//     document.addEventListener('click', (event) => {
-//       if (!mobileNav.contains(event.target) && !burgerBtn.contains(event.target)) {
-//         mobileNav.classList.add('hidden');
-//       }
-//     });
-//   }
-
-//   const opcoesEfeito = {
-//     root: null,
-//     threshold: 0.12, // Dispara o efeito ligeiramente mais cedo para parecer mais fluido
-//     rootMargin: "0px 0px -50px 0px" // Cria uma margem de conforto na parte inferior da tela
-//   };
-
-//   const observadorDeScroll = new IntersectionObserver((entradas, observador) => {
-//     entradas.forEach(entrada => {
-//       if (entrada.isIntersecting) {
-//         entrada.target.classList.add('visivel');
-//         observador.unobserve(entrada.target); // Deixa o elemento visível permanentemente
-//       }
-//     });
-//   }, opcoesEfeito);
-
-//   // Seleciona todos os elementos com a classe de animação
-//   const elementosParaRevelar = document.querySelectorAll('.revelar-ao-scroll');
-  
-//   elementosParaRevelar.forEach(elemento => {
-//     observadorDeScroll.observe(elemento);
-//   });
-
-// });
-
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   /* 1. SEU MENU HAMBÚRGUER ORIGINAL */
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
@@ -110,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Remove transições para resetar a barra instantaneamente para 0%
     barraProgresso.style.transition = 'none';
     barraProgresso.style.width = '0%';
-    
+
     // Força o navegador a computar o reset antes de iniciar a nova animação
     setTimeout(() => {
       barraProgresso.style.transition = 'width 5s linear';
@@ -129,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Inicializa o progresso do primeiro slide
-  if(slides.length > 0) {
+  if (slides.length > 0) {
     reiniciarBarraProgresso();
   }
 
@@ -192,5 +139,48 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  /* ----------------------------------------------------
+     5. ENVIO DO FORMULÁRIO FALE CONOSCO (DIAGNÓSTICO)
+     ---------------------------------------------------- */
+  const form = document.getElementById('fale-conosco-form');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    // formData.append("access_key", "e13d012a-01ba-46f6-ab74-e596e49392d4");
+
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = "Enviando...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Sucesso! Sua mensagem foi enviada.");
+        form.reset();
+      } else {
+        console.log("Erro detalhado da Web3Forms:", data);
+        alert("Error: " + data.message);
+      }
+
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+      alert("Algo deu errado. Por favor, tente novamente.");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+
+  });
 
 });
