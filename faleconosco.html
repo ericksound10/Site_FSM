@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fale Conosco - Condomínio Forte São Mateus</title>
+    <!-- Link do FontAwesome para os ícones -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Vincula o mesmo arquivo de estilos do seu site -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO (Navbar integrada com link de volta) -->
+    <header class="cabecalho">
+        <div class="container-header">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img">
+                    <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
+                </div>
+            </a>
+            <!-- Link de retorno rápido para a página principal -->
+            <nav class="menu-navegacao menu-retorno">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Seção Fale Conosco -->
+    <!-- e13d012a-01ba-46f6-ab74-e596e49392d4 --> 
+     <!-- 261f3070-17e5-45a6-807c-8ce7cfc9150f  meu email pessoal para teste-->
+    <section id="fale-conosco" class="secao revelar-ao-scroll">
+        <h2 class="titulo-secao">Fale Conosco</h2>
+
+        <div class="card card-fale-conosco">
+            <!-- Ajustado o id para bater exatamente com o seu JavaScript -->
+            <form id="fale-conosco-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Chave de Acesso do Web3Forms -->
+                <input type="hidden" name="access_key" value="e13d012a-01ba-46f6-ab74-e596e49392d4">
+                <input type="hidden" name="subject" value="Nova mensagem - Condomínio Forte São Mateus">
+
+                <div class="grupo-campo">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="name" placeholder="Digite seu nome" required>
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="email">E-mail de Contato</label>
+                    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="apartamento">Unidade / Bloco</label>
+                    <input type="text" id="apartamento" name="unidade_bloco" placeholder="Ex: Apto 12 Bloco B" required>
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="message" rows="5" placeholder="Escreva sua dúvida..."
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="btn-acao">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- RODAPÉ INTEGRADO -->
+    <footer class="rodape">
+        <div class="direitos-autorais">
+            <p>&copy; 2026 Condomínio Forte São Mateus - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Vincula o mesmo JavaScript que gerencia as animações de scroll -->
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -112,9 +112,9 @@ a {
 .menu-navegacao a {
     color: rgba(255, 255, 255, 0.85);
     position: relative;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    /* font-weight: 500; */
+    padding: 0.5rem 0.6rem;
     border-radius: 6px;
 }
 
@@ -534,6 +534,7 @@ a {
 .email-contato {
     margin-top: 0;
     margin-bottom: 1.5rem;
+    word-break: break-all;
 }
 
 .data-publicacao {
@@ -554,7 +555,7 @@ a {
    BOTÕES E AÇÕES ULTRA VISUAIS
 --------------------------------------- */
 .btn-acao {
-    background-color: var(--verde-escuro);
+    background-color: var(--verde-escuro);  
     color: var(--branco);
     padding: 0.9rem 1.8rem;
     border-radius: 8px;
@@ -585,6 +586,108 @@ a {
 .card-documento .btn-acao:hover {
     background-color: var(--verde-escuro);
     color: var(--branco);
+}
+
+/* Definição de uma animação para girar o gradiente (efeito cobrinha) */
+@keyframes girarCobrinha {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-acao-boas-vindas {
+  position: relative; /* Necessário para posicionar a borda animada */
+  overflow: hidden;   /* Esconde o resto do gradiente que sai do botão */
+  background-color: var(--verde-escuro);
+  color: var(--verde-escuro);
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
+  border: none;       /* Remove a borda padrão */
+  margin-top: auto;
+  z-index: 1;         /* Garante que o texto fique acima do efeito */
+  transition: all 0.3s ease;
+}
+
+/* A "Cobrinha" (O gradiente que vai girar no fundo) */
+.btn-acao-boas-vindas::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* Gradiente cônico: cria a ponta da cobra (ex: dourado) e o resto transparente */
+  background: conic-gradient(
+    var(--dourado-bronze) 0deg, 
+    var(--dourado-bronze) 60deg, 
+    transparent 120deg, 
+    transparent 360deg
+  );
+  animation: girarCobrinha 3s linear infinite;
+  z-index: -2;
+}
+
+/* O "Preenchimento" (Capa interna que esconde o centro do gradiente, deixando só a borda) */
+.btn-acao-boas-vindas::after {
+  content: '';
+  position: absolute;
+  inset: 2px; /* Espessura da borda (2px) */
+  background-color: var(--branco); /* Mesma cor do fundo do botão */
+  border-radius: 6px; /* Levemente menor que o border-radius do botão */
+  z-index: -1;
+  transition: background-color 0.3s ease;
+}
+
+/* Estado de Hover (Quando passa o mouse) */
+.btn-acao-boas-vindas:hover {
+  color: var(--branco);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(196, 158, 122, 0.2);
+}
+
+/* No hover, o fundo interno muda para preencher o botão com a cor final */
+.btn-acao-boas-vindas:hover::after {
+  background-color: var(--verde-escuro);
+}
+
+
+/* ==========================================================================
+   Variação: .card-documento (Mantendo a compatibilidade com o seu código)
+   ========================================================================== */
+
+.card-documento .btn-acao-boas-vindas {
+  background-color: transparent;
+  color: var(--verde-escuro);
+  box-shadow: none;
+}
+
+/* Ajusta as cores da cobrinha para a versão do card de documento */
+.card-documento .btn-acao-boas-vindas::before {
+  background: conic-gradient(
+    var(--verde-escuro) 0deg, 
+    var(--verde-escuro) 60deg, 
+    transparent 120deg, 
+    transparent 360deg
+  );
+}
+
+/* A capa interna precisa começar transparente ou da cor do fundo do card */
+.card-documento .btn-acao-boas-vindas::after {
+  background-color: var(--branco); /* Mude para a cor de fundo do seu card se não for branco */
+}
+
+/* Hover da variação */
+.card-documento .btn-acao-boas-vindas:hover {
+  color: var(--branco);
+}
+
+.card-documento .btn-acao-boas-vindas:hover::after {
+  background-color: var(--verde-escuro);
 }
 
 /* ------------------------------------
@@ -651,6 +754,75 @@ a {
     display: block;
 }
 
+/* Estilo para o link do endereço no rodapé */
+.link-endereco-mapa {
+    display: block;
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+.link-endereco-mapa p {
+    color: rgba(255, 255, 255, 0.7) !important; /* Mantém a cor clara original do seu rodapé */
+    margin-bottom: 2px;
+}
+
+/* Efeito visual ao passar o mouse */
+.link-endereco-mapa:hover p {
+    color: var(--dourado-bronze) !important; /* Destaca em dourado quando o usuário passa o mouse */
+}
+
+.clique-ver-mapa {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--dourado-bronze);
+    margin-top: 6px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.link-endereco-mapa:hover .clique-ver-mapa {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Estilos do Formulário Fale Conosco */
+.card-fale-conosco {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.grupo-campo {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.grupo-campo label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--verde-escuro);
+}
+
+.grupo-campo input,
+.grupo-campo textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: var(--fundo-claro);
+    transition: var(--transicao);
+}
+
+.grupo-campo input:focus,
+.grupo-campo textarea:focus {
+    outline: none;
+    border-color: var(--dourado-bronze);
+    background-color: var(--branco);
+    box-shadow: 0 0 0 3px rgba(196, 158, 122, 0.1);
+}
+
 /* ------------------------------------
    RESPONSIVIDADE
 --------------------------------------- */
@@ -660,6 +832,71 @@ a {
 
 #mobile-nav {
     display: none;
+}
+
+    /* --------------------------------------------------------
+    ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE) 
+----------------------------------------------------------- */
+
+.grid-cards-noticias {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card-noticia-longa {
+    background-color: var(--branco);
+    padding: 3rem 2.5rem;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    border: 1px solid rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.card-noticia-longa::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 6px; 
+    height: 100%;
+    background-color: var(--dourado-bronze);
+    border-radius: var(--borda-raio) 0 0 var(--borda-raio);
+}
+
+.meta-noticia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card-noticia-longa h3 {
+    color: var(--verde-escuro);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+}
+
+.texto-completo p {
+    color: var(--texto-escuro);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+}
+
+.texto-completo p:last-child {
+    margin-bottom: 0;
+}
+
+/* Indicador visual de clique na imagem */
+.imagem-noticia {
+    cursor: zoom-in; 
 }
 
 /* ------------------------------------
@@ -677,12 +914,11 @@ a {
         font-size: 1.05rem; /* Evita que o título quebre em duas linhas */
     }
 
-    .logo-img {
-        height: 38px;
-    }
-
     .menu-navegacao {
+        display: flex;
+        gap: 0.5rem;
         display: none !important;
+        
     }
 
     .burger-menu {
@@ -753,6 +989,8 @@ a {
         max-width: 100% !important; 
         margin: 0 0 1rem 0 !important; /* Zera margens laterais que jogavam o card pra direita */
         padding: 2rem 1.5rem;
+        box-sizing: border-box; /* Garante que o padding não aumente o tamanho final do card */
+        overflow: hidden; /* Corta qualquer elemento rebelde que tente vazar */
     }
 
     #mobile-nav {
@@ -773,7 +1011,7 @@ a {
     }
 
     #mobile-nav.hidden {
-        display: block !important; 
+        display: none !important;  /* display: block !important;  */
         opacity: 0;
         visibility: hidden;
         pointer-events: none; 
@@ -855,70 +1093,7 @@ a {
     .card-noticia-longa h3 {
         font-size: 1.3rem;
     }
+
 }
 
 
-/* --------------------------------------------------------
-    ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE) 
------------------------------------------------------------ */
-
-.grid-cards-noticias {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.card-noticia-longa {
-    background-color: var(--branco);
-    padding: 3rem 2.5rem;
-    border-radius: var(--borda-raio);
-    box-shadow: var(--sombra-suave);
-    border: 1px solid rgba(0,0,0,0.03);
-    position: relative;
-}
-
-.card-noticia-longa::before {
-    content: '';
-    position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 6px; 
-    height: 100%;
-    background-color: var(--dourado-bronze);
-    border-radius: var(--borda-raio) 0 0 var(--borda-raio);
-}
-
-.meta-noticia {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.card-noticia-longa h3 {
-    color: var(--verde-escuro);
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.3px;
-}
-
-.texto-completo p {
-    color: var(--texto-escuro);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    margin-bottom: 1.2rem;
-}
-
-.texto-completo p:last-child {
-    margin-bottom: 0;
-}
-
-/* Indicador visual de clique na imagem */
-.imagem-noticia {
-    cursor: zoom-in; 
-}
