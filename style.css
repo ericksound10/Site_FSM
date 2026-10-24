@@ -5,8 +5,8 @@ html {
 .revelar-ao-scroll {
     opacity: 0;
     transform: translateY(20px);
-    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1),
+        opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
     will-change: transform, opacity;
 }
 
@@ -14,20 +14,32 @@ html {
     opacity: 1;
     transform: translateY(0);
 }
-.grid-cards .card:nth-child(1) { transition-delay: 0.1s; }
-.grid-cards .card:nth-child(2) { transition-delay: 0.25s; }
-.grid-cards .card:nth-child(3) { transition-delay: 0.4s; }
-.grid-cards .card:nth-child(4) { transition-delay: 0.55s; }
+
+.grid-cards .card:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.grid-cards .card:nth-child(2) {
+    transition-delay: 0.25s;
+}
+
+.grid-cards .card:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.grid-cards .card:nth-child(4) {
+    transition-delay: 0.55s;
+}
 
 /* ------------------------------------
    PALETA DE CORES E VARIÁVEIS MODERNAS
 --------------------------------------- */
 :root {
-    --verde-escuro: #1C3332;   
+    --verde-escuro: #1C3332;
     --verde-sutil: #2d4f4e;
-    --dourado-bronze: #C49E7A; 
+    --dourado-bronze: #C49E7A;
     --dourado-hover: #b38d69;
-    --fundo-claro: #F4F6F6;    
+    --fundo-claro: #F4F6F6;
     --branco: #FFFFFF;
     --texto-escuro: #2C3E50;
     --texto-mutado: #7F8C8D;
@@ -59,6 +71,212 @@ a {
     transition: var(--transicao);
 }
 
+/* ==========================================================================
+   ESTILOS DO MODO ESCURO (DARK MODE) - CORREÇÃO COMPLETA DAS PÁGINAS INTERNAS
+   ========================================================================== */
+
+body.dark-mode {
+    --fundo-claro: #0A1111;
+    /* Fundo da tela profundo e moderno */
+    --branco: #152726;
+    /* Fundo dos cards e informativos: verde oficial nítido */
+    --texto-escuro: #FFFFFF;
+    /* Força o texto principal a ficar 100% branco */
+    --texto-mutado: #CAD6D6;
+    /* Parágrafos e descrições em cinza-claro muito legível */
+    --sombra-suave: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- FORÇAR CORES NOS TEXTOS INTERNOS DE TODOS OS CARDS (HOME E MURAL) --- */
+body.dark-mode .card h3,
+body.dark-mode .card-noticia-longa h3 {
+    color: #FFFFFF !important;
+    /* Deixa os títulos dos cards totalmente brancos e visíveis */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .card p,
+body.dark-mode .texto-completo p,
+body.dark-mode .texto-completo strong {
+    color: #CAD6D6 !important;
+    /* Deixa a descrição interna clara e confortável para leitura */
+}
+
+/* Garante que os metadados (como a data da publicação com o ícone de calendário) fiquem visíveis */
+body.dark-mode .meta-noticia,
+body.dark-mode .data-publicacao {
+    color: #A0B2B2 !important;
+}
+
+/* --- TÍTULOS DE SEÇÕES (MURAL DE COMUNICADOS, FINANCEIRO...) --- */
+body.dark-mode .titulo-secao {
+    color: var(--dourado-bronze) !important;
+}
+
+/* --- ADAPTAÇÃO DAS TAGS / BADGES SUPERIORES (MANUTENÇÃO, ASSEMBLEIA...) --- */
+body.dark-mode .tag-financeiro,
+body.dark-mode .badge-categoria,
+body.dark-mode .badge-contatos-uteis,
+body.dark-mode .meta-noticia span {
+    background-color: rgba(196, 158, 122, 0.15) !important;
+    /* Fundo dourado sutil */
+    color: var(--dourado-bronze) !important;
+    /* Texto dourado legível */
+    border: 1px solid rgba(196, 158, 122, 0.3) !important;
+}
+
+/* --- CONFIGURAÇÃO DA NAVBAR SUPERIOR --- */
+body.dark-mode .cabecalho {
+    background-color: #060B0B;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .menu-navegacao a {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.dark-mode .menu-navegacao a:hover {
+    color: var(--dourado-bronze) !important;
+}
+
+/* --- BOTÕES DOS CARDS --- */
+body.dark-mode .btn-acao,
+body.dark-mode .btn-slide-noticia {
+    background-color: var(--dourado-bronze) !important;
+    color: #0A1111 !important;
+    font-weight: 700;
+}
+
+body.dark-mode .btn-acao:hover,
+body.dark-mode .btn-slide-noticia:hover {
+    background-color: #b38d69 !important;
+    color: #FFFFFF !important;
+}
+
+/* Variação específica para cards de documentos */
+body.dark-mode .card-documento .btn-acao {
+    background-color: transparent !important;
+    color: var(--dourado-bronze) !important;
+    border: 2px solid var(--dourado-bronze) !important;
+}
+
+body.dark-mode .card-documento .btn-acao:hover {
+    background-color: var(--dourado-bronze) !important;
+    color: #0A1111 !important;
+}
+
+/* --- ESTILIZAÇÃO DO BOTÃO ALTERNADOR DA NAVBAR --- */
+.btn-toggle-dark {
+    background: transparent;
+    border: 1px solid var(--dourado-bronze);
+    color: var(--dourado-bronze);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.btn-toggle-dark i {
+    font-size: 1.1rem;
+}
+
+.btn-toggle-dark:hover {
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .btn-toggle-dark {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+/* --- AJUSTES DO CARROSSEL --- */
+body.dark-mode .slide-conteudo {
+    background-color: rgba(21, 39, 38, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .slide-conteudo h1,
+body.dark-mode .slide-conteudo h2,
+body.dark-mode .slide-conteudo p {
+    color: #FFFFFF !important;
+}
+
+.item-menu-dark {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: var(--transicao);
+
+    /* Configuração idêntica aos links para empilhar o ícone */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Cor do ícone e texto no modo claro padrão */
+.item-menu-dark {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.item-menu-dark i {
+    font-size: 1.1rem;
+}
+
+/* Efeito de hover idêntico ao dos seus links */
+.item-menu-dark:hover {
+    color: var(--branco);
+}
+
+/* Cria a barrinha dourada embaixo ao passar o mouse */
+.item-menu-dark::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--dourado-bronze);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.item-menu-dark:hover::after {
+    width: 80%;
+}
+
+/* --- COMPORTAMENTO DA COR DA NAVBAR NO MODO ESCURO ATIVO --- */
+body.dark-mode .item-menu-dark {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.dark-mode .item-menu-dark:hover {
+    color: var(--dourado-bronze) !important;
+}
+
+body.dark-mode .titulo-categoria {
+    color: #FFFFFF !important; /* Títulos das subcategorias brancos */
+}
+
+body.dark-mode .card p a {
+    color: var(--dourado-bronze) !important; /* Telefones em dourado no modo dark */
+}
+
 /* ------------------------------------
    CABEÇALHO (NAVBAR MODERNA)
 --------------------------------------- */
@@ -68,7 +286,7 @@ a {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .container-header {
@@ -82,15 +300,15 @@ a {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px; 
+    gap: 12px;
 }
 
 .logo-img {
     height: 45px;
-    width: auto;  
-    object-fit: contain; 
+    width: auto;
+    object-fit: contain;
     border-radius: 4px;
-    background-color:  rgb(245, 241, 241);
+    background-color: rgb(245, 241, 241);
 }
 
 .logo-titulo {
@@ -106,21 +324,32 @@ a {
 
 .menu-navegacao {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .menu-navegacao a {
     color: rgba(255, 255, 255, 0.85);
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     /* font-weight: 500; */
     padding: 0.5rem 0.6rem;
     border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.menu-navegacao a i {
+    font-size: 1.1rem;
 }
 
 .menu-navegacao a:hover {
     color: var(--branco);
-     background-color: transparent;
+    background-color: transparent;
 }
 
 .menu-navegacao a::after {
@@ -148,7 +377,7 @@ a {
     height: 600px;
     overflow: hidden;
     /* background-color: #FFFFFF !important;  */
-    background-color: var(--verde-escuro) !important; 
+    background-color: var(--verde-escuro) !important;
 }
 
 .slide {
@@ -178,8 +407,10 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Faz o preenchimento perfeito e pesado */
-    z-index: -1; /* Joga a imagem para trás do texto */
+    object-fit: cover;
+    /* Faz o preenchimento perfeito e pesado */
+    z-index: -1;
+    /* Joga a imagem para trás do texto */
 }
 
 .slide-conteudo {
@@ -193,11 +424,12 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.08);
     opacity: 0;
     transform: translateY(30px);
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.slide-conteudo h1, .slide-conteudo h2 {
+.slide-conteudo h1,
+.slide-conteudo h2 {
     color: var(--verde-escuro) !important;
     font-size: 2.2rem;
     font-weight: 700;
@@ -211,7 +443,7 @@ a {
 }
 
 .slide-conteudo p {
-    color: #4A5568 !important; 
+    color: #4A5568 !important;
     font-size: 1.1rem;
     font-weight: 500;
     text-shadow: none !important;
@@ -240,32 +472,32 @@ a {
 .btn-slide-noticia:hover {
     background-color: var(--dourado-bronze);
     color: var(--branco);
-    transform: translateX(4px); /* Dá um leve empurrãozinho para a direita ao passar o mouse */
+    transform: translateX(4px);
 }
 
 /* --- ESTILO DAS IMAGENS DENTRO DOS COMUNICADOS --- */
 .imagem-noticia {
     display: block;
-    max-width: 100%;       /* Impede a imagem de ficar maior que o card */
-    height: auto;          /* Mantém a proporção original da foto sem distorcer */
-    margin: 1.5rem auto;   /* Espaçamento em cima/baixo e centraliza horizontalmente */
-    border-radius: 8px;    /* Arredonda os cantos para combinar com o layout do site */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave para dar profundidade */
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* --- ESTILOS DO POP-UP DE IMAGEM (MODAL) --- */
 .modal-noticia-preview {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: fixed;
-    z-index: 2000; /* Fica acima de absolutamente tudo, inclusive do menu */
+    z-index: 2000;
     padding-top: 60px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(28, 51, 50, 0.95); /* Fundo verde-escuro oficial com opacidade */
-    backdrop-filter: blur(8px); /* Desfoca o fundo do site para destacar a imagem */
+    background-color: rgba(28, 51, 50, 0.95);
+    backdrop-filter: blur(8px);
 }
 
 .modal-conteudo-wrapper {
@@ -283,9 +515,7 @@ a {
     object-fit: contain;
     border-radius: 4px;
     animation: zoomEfeitoIn 0.3s ease;
-    
-    /* Ativa suporte a zoom por toque nativo no navegador do celular */
-    touch-action: pinch-zoom; 
+    touch-action: pinch-zoom;
 }
 
 /* Legenda do documento abaixo da foto */
@@ -319,8 +549,15 @@ a {
 
 /* Animação suave de abertura */
 @keyframes zoomEfeitoIn {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* --- BARRA DE PROGRESSO TEMPORAL --- */
@@ -338,10 +575,10 @@ a {
     width: 0%;
     height: 100%;
     background-color: var(--dourado-bronze);
-    transition: width 5s linear; /* Controla o tempo de preenchimento (5 segundos) */
+    transition: width 5s linear;
 }
 
-/* --- INDICADORES (BOLINHAS DE NAVEGAÇÃO) --- */
+/* --- INDICADORES DE NAVEGAÇÃO --- */
 .carrossel-indicadores {
     position: absolute;
     bottom: 20px;
@@ -359,13 +596,14 @@ a {
     background-color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: var(--transicao);
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .indicador.ativo {
     background-color: var(--dourado-bronze);
     transform: scale(1.2);
-    width: 24px; /* Transforma a bolinha ativa em um traço moderno */
+    width: 24px;
+    /* Transforma a bolinha ativa em um traço moderno */
     border-radius: 6px;
 }
 
@@ -418,23 +656,26 @@ a {
     /* transition: var(--transicao); */
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 4px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
     background-color: var(--verde-escuro);
     transition: var(--transicao);
 }
 
 .card:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 20px 40px rgba(28, 51, 50, 0.08); 
+    box-shadow: 0 20px 40px rgba(28, 51, 50, 0.08);
 }
 
 .card:hover::before {
@@ -459,7 +700,7 @@ a {
 
 .card-imagem-topo {
     width: 100%;
-    height:auto;
+    height: auto;
     overflow: hidden;
 }
 
@@ -520,15 +761,15 @@ a {
 
 .bloco-telefones {
     display: flex;
-    align-items: flex-start; 
-    gap: 6px;               
-    margin-bottom: 1rem;    
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 1rem;
 }
 
 .lista-numeros {
     display: flex;
-    flex-direction: column;  
-    gap: 4px;               
+    flex-direction: column;
+    gap: 4px;
 }
 
 .email-contato {
@@ -547,15 +788,15 @@ a {
 }
 
 .card-boleto-unico {
-    max-width: 400px; 
-    margin: 0 auto;    
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 /* ------------------------------------
    BOTÕES E AÇÕES ULTRA VISUAIS
 --------------------------------------- */
 .btn-acao {
-    background-color: var(--verde-escuro);  
+    background-color: var(--verde-escuro);
     color: var(--branco);
     padding: 0.9rem 1.8rem;
     border-radius: 8px;
@@ -590,104 +831,110 @@ a {
 
 /* Definição de uma animação para girar o gradiente (efeito cobrinha) */
 @keyframes girarCobrinha {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .btn-acao-boas-vindas {
-  position: relative; /* Necessário para posicionar a borda animada */
-  overflow: hidden;   /* Esconde o resto do gradiente que sai do botão */
-  background-color: var(--verde-escuro);
-  color: var(--verde-escuro);
-  padding: 0.9rem 1.8rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-align: center;
-  display: block;
-  width: 100%;
-  box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
-  border: none;       /* Remove a borda padrão */
-  margin-top: auto;
-  z-index: 1;         /* Garante que o texto fique acima do efeito */
-  transition: all 0.3s ease;
+    position: relative;
+    /* Necessário para posicionar a borda animada */
+    overflow: hidden;
+    /* Esconde o resto do gradiente que sai do botão */
+    background-color: var(--verde-escuro);
+    color: var(--verde-escuro);
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
+    border: none;
+    margin-top: auto;
+    z-index: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 /* A "Cobrinha" (O gradiente que vai girar no fundo) */
 .btn-acao-boas-vindas::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  /* Gradiente cônico: cria a ponta da cobra (ex: dourado) e o resto transparente */
-  background: conic-gradient(
-    var(--dourado-bronze) 0deg, 
-    var(--dourado-bronze) 60deg, 
-    transparent 120deg, 
-    transparent 360deg
-  );
-  animation: girarCobrinha 3s linear infinite;
-  z-index: -2;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* Gradiente cônico: cria a ponta da cobra (ex: dourado) e o resto transparente */
+    background: conic-gradient(var(--dourado-bronze) 0deg,
+            var(--dourado-bronze) 60deg,
+            transparent 120deg,
+            transparent 360deg);
+    animation: girarCobrinha 3s linear infinite;
+    z-index: -2;
 }
 
 /* O "Preenchimento" (Capa interna que esconde o centro do gradiente, deixando só a borda) */
 .btn-acao-boas-vindas::after {
-  content: '';
-  position: absolute;
-  inset: 2px; /* Espessura da borda (2px) */
-  background-color: var(--branco); /* Mesma cor do fundo do botão */
-  border-radius: 6px; /* Levemente menor que o border-radius do botão */
-  z-index: -1;
-  transition: background-color 0.3s ease;
+    content: '';
+    position: absolute;
+    inset: 2px;
+    /* Espessura da borda (2px) */
+    background-color: var(--branco);
+    /* Mesma cor do fundo do botão */
+    border-radius: 6px;
+    /* Levemente menor que o border-radius do botão */
+    z-index: -1;
+    transition: background-color 0.3s ease;
 }
 
 /* Estado de Hover (Quando passa o mouse) */
 .btn-acao-boas-vindas:hover {
-  color: var(--branco);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(196, 158, 122, 0.2);
+    color: var(--branco);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(196, 158, 122, 0.2);
 }
 
 /* No hover, o fundo interno muda para preencher o botão com a cor final */
 .btn-acao-boas-vindas:hover::after {
-  background-color: var(--verde-escuro);
+    background-color: var(--verde-escuro);
 }
 
 
 /* ==========================================================================
-   Variação: .card-documento (Mantendo a compatibilidade com o seu código)
+   Variação: .card-documento
    ========================================================================== */
 
 .card-documento .btn-acao-boas-vindas {
-  background-color: transparent;
-  color: var(--verde-escuro);
-  box-shadow: none;
+    background-color: transparent;
+    color: var(--verde-escuro);
+    box-shadow: none;
 }
 
 /* Ajusta as cores da cobrinha para a versão do card de documento */
 .card-documento .btn-acao-boas-vindas::before {
-  background: conic-gradient(
-    var(--verde-escuro) 0deg, 
-    var(--verde-escuro) 60deg, 
-    transparent 120deg, 
-    transparent 360deg
-  );
+    background: conic-gradient(var(--verde-escuro) 0deg,
+            var(--verde-escuro) 60deg,
+            transparent 120deg,
+            transparent 360deg);
 }
 
 /* A capa interna precisa começar transparente ou da cor do fundo do card */
 .card-documento .btn-acao-boas-vindas::after {
-  background-color: var(--branco); /* Mude para a cor de fundo do seu card se não for branco */
+    background-color: var(--branco);
 }
 
-/* Hover da variação */
 .card-documento .btn-acao-boas-vindas:hover {
-  color: var(--branco);
+    color: var(--branco);
 }
 
 .card-documento .btn-acao-boas-vindas:hover::after {
-  background-color: var(--verde-escuro);
+    background-color: var(--verde-escuro);
 }
 
 /* ------------------------------------
@@ -706,7 +953,7 @@ a {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 3rem;
 }
 
@@ -720,7 +967,7 @@ a {
 }
 
 .bloco-rodape p {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
 }
 
@@ -730,7 +977,7 @@ a {
 
 .bloco-rodape ul li {
     margin-bottom: 0.8rem;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-direction: column;
 }
@@ -745,7 +992,7 @@ a {
     text-align: center;
     padding-top: 2.5rem;
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .logo-link {
@@ -762,13 +1009,15 @@ a {
 }
 
 .link-endereco-mapa p {
-    color: rgba(255, 255, 255, 0.7) !important; /* Mantém a cor clara original do seu rodapé */
+    color: rgba(255, 255, 255, 0.7) !important;
+    /* Mantém a cor clara original do seu rodapé */
     margin-bottom: 2px;
 }
 
 /* Efeito visual ao passar o mouse */
 .link-endereco-mapa:hover p {
-    color: var(--dourado-bronze) !important; /* Destaca em dourado quando o usuário passa o mouse */
+    color: var(--dourado-bronze) !important;
+    /* Destaca em dourado quando o usuário passa o mouse */
 }
 
 .clique-ver-mapa {
@@ -827,14 +1076,14 @@ a {
    RESPONSIVIDADE
 --------------------------------------- */
 .burger-menu {
-    display: none; 
+    display: none;
 }
 
 #mobile-nav {
     display: none;
 }
 
-    /* --------------------------------------------------------
+/* --------------------------------------------------------
     ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE) 
 ----------------------------------------------------------- */
 
@@ -851,16 +1100,16 @@ a {
     padding: 3rem 2.5rem;
     border-radius: var(--borda-raio);
     box-shadow: var(--sombra-suave);
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     position: relative;
 }
 
 .card-noticia-longa::before {
     content: '';
     position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 6px; 
+    top: 0;
+    left: 0;
+    width: 6px;
     height: 100%;
     background-color: var(--dourado-bronze);
     border-radius: var(--borda-raio) 0 0 var(--borda-raio);
@@ -896,7 +1145,113 @@ a {
 
 /* Indicador visual de clique na imagem */
 .imagem-noticia {
-    cursor: zoom-in; 
+    cursor: zoom-in;
+}
+
+/* --- POP-UP DE INSTRUÇÕES (KIT BOAS-VINDAS) --- */
+.modal-boas-vindas {
+    border: none;
+    background: transparent;
+    max-width: 650px;
+    width: 90%;
+    margin: auto;
+    padding: 0;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-radius: var(--borda-raio);
+}
+
+.modal-boas-vindas::backdrop {
+    background-color: rgba(28, 51, 50, 0.85);
+    /* Verde escuro do condomínio com opacidade */
+    backdrop-filter: blur(6px);
+}
+
+.modal-boas-vindas-conteudo {
+    background-color: var(--branco);
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(196, 158, 122, 0.2);
+}
+
+.modal-boas-vindas-header {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--dourado-bronze);
+}
+
+.modal-boas-vindas-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.botao-fechar-instrucoes {
+    background: none;
+    border: none;
+    color: var(--branco);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transicao);
+}
+
+.botao-fechar-instrucoes:hover {
+    color: var(--dourado-bronze);
+}
+
+.modal-boas-vindas-body {
+    padding: 2rem;
+    max-height: 70vh;
+    /* Excelente para mobile: limita o tamanho vertical e gera scroll interno */
+    overflow-y: auto;
+}
+
+.modal-boas-vindas-body h3 {
+    color: var(--verde-escuro);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+    border-left: 3px solid var(--dourado-bronze);
+    padding-left: 8px;
+}
+
+.modal-boas-vindas-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-boas-vindas-body ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.modal-boas-vindas-body ul li {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--texto-escuro);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 15px;
+}
+
+.modal-boas-vindas-body ul li::before {
+    content: "•";
+    color: var(--dourado-bronze);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Escondido por padrão no Desktop */
+.barra-inferior-app {
+    display: none;
 }
 
 /* ------------------------------------
@@ -907,18 +1262,20 @@ a {
         position: sticky;
         top: 0;
         z-index: 1010 !important;
-        padding: 1rem 1.2rem; /* Compacta o cabeçalho no celular */
+        padding: 1rem 1.2rem;
+        /* Compacta o cabeçalho no celular */
     }
 
     .logo-titulo {
-        font-size: 1.05rem; /* Evita que o título quebre em duas linhas */
+        font-size: 1.05rem;
+        /* Evita que o título quebre em duas linhas */
     }
 
     .menu-navegacao {
         display: flex;
         gap: 0.5rem;
         display: none !important;
-        
+
     }
 
     .burger-menu {
@@ -943,7 +1300,8 @@ a {
 
     /* --- AJUSTE CIRÚRGICO DO BANNER NO CELULAR --- */
     .carrossel-container {
-        height: 480px; /* Reduz a altura rígida para não esticar */
+        height: 480px;
+        /* Reduz a altura rígida para não esticar */
     }
 
     .slide {
@@ -952,18 +1310,22 @@ a {
     }
 
     .slide-conteudo {
-        padding: 1.5rem; /* Diminui o espaçamento interno pro balão respirar */
+        padding: 1.5rem;
+        /* Diminui o espaçamento interno pro balão respirar */
         max-width: 100%;
         width: 100%;
     }
 
-    .slide-conteudo h1, .slide-conteudo h2 {
-        font-size: 1.4rem !important; /* Diminui o título para não esticar a caixa */
+    .slide-conteudo h1,
+    .slide-conteudo h2 {
+        font-size: 1.4rem !important;
+        /* Diminui o título para não esticar a caixa */
         margin-bottom: 0.5rem;
     }
 
     .slide-conteudo p {
-        font-size: 0.9rem !important; /* Texto menor e legível */
+        font-size: 0.9rem !important;
+        /* Texto menor e legível */
         line-height: 1.4;
     }
 
@@ -971,7 +1333,8 @@ a {
         margin-top: 0.8rem;
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
-        width: 100%; /* Botão ocupa toda a largura no celular */
+        width: 100%;
+        /* Botão ocupa toda a largura no celular */
         justify-content: center;
     }
 
@@ -986,11 +1349,14 @@ a {
     /* Força TODOS os cards a centralizarem perfeitamente na tela sem vazar para a direita */
     .card {
         width: 100% !important;
-        max-width: 100% !important; 
-        margin: 0 0 1rem 0 !important; /* Zera margens laterais que jogavam o card pra direita */
+        max-width: 100% !important;
+        margin: 0 0 1rem 0 !important;
+        /* Zera margens laterais que jogavam o card pra direita */
         padding: 2rem 1.5rem;
-        box-sizing: border-box; /* Garante que o padding não aumente o tamanho final do card */
-        overflow: hidden; /* Corta qualquer elemento rebelde que tente vazar */
+        box-sizing: border-box;
+        /* Garante que o padding não aumente o tamanho final do card */
+        overflow: hidden;
+        /* Corta qualquer elemento rebelde que tente vazar */
     }
 
     #mobile-nav {
@@ -999,22 +1365,27 @@ a {
         top: 0;
         right: 0;
         height: 100vh;
-        width: 280px; 
+        width: 280px;
         background-color: var(--verde-escuro);
-        padding: 95px 2rem 2rem 2rem; 
+        padding: 95px 2rem 2rem 2rem;
         box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
         z-index: 1005;
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
-        transition: opacity 0.4s ease, visibility 0.4s ease;
+        transform: translateX(0);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.4s ease,
+            visibility 0.4s ease;
     }
 
     #mobile-nav.hidden {
-        display: none !important;  /* display: block !important;  */
+        /* display: none !important; */
+        /* display: block !important;  */
         opacity: 0;
         visibility: hidden;
-        pointer-events: none; 
+        pointer-events: none;
+        transform: translateX(100%);
     }
 
     #mobile-nav ul {
@@ -1036,19 +1407,19 @@ a {
         font-weight: 500;
         font-size: 1.1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        position: relative;        
+        position: relative;
         opacity: 0;
         transform: translateX(30px);
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                    color 0.2s ease,
-                    padding 0.2s ease;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            color 0.2s ease,
+            padding 0.2s ease;
     }
 
-    #mobile-nav li a:hover, 
+    #mobile-nav li a:hover,
     #mobile-nav li a:active {
         color: var(--dourado-bronze);
-        padding-left: 8px; 
+        padding-left: 8px;
     }
 
     #mobile-nav:not(.hidden) li a {
@@ -1061,24 +1432,48 @@ a {
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 0; 
+        width: 0;
         height: 2px;
         background-color: var(--dourado-bronze);
-        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    #mobile-nav:not(.hidden) li a::after { width: 40%; }
-    #mobile-nav:not(.hidden) li:nth-child(1) a::after { transition-delay: 0.20s; }
-    #mobile-nav:not(.hidden) li:nth-child(2) a::after { transition-delay: 0.27s; }
-    #mobile-nav:not(.hidden) li:nth-child(3) a::after { transition-delay: 0.34s; }
-    #mobile-nav:not(.hidden) li:nth-child(4) a::after { transition-delay: 0.41s; }
-    #mobile-nav:not(.hidden) li:nth-child(5) a::after { transition-delay: 0.48s; }
-    #mobile-nav:not(.hidden) li:nth-child(6) a::after { transition-delay: 0.55s; }
+    #mobile-nav:not(.hidden) li a::after {
+        width: 40%;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(1) a {
+        transition-delay: 0.10s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(2) a {
+        transition-delay: 0.17s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(3) a {
+        transition-delay: 0.24s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(4) a {
+        transition-delay: 0.31s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(5) a {
+        transition-delay: 0.38s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(6) a {
+        transition-delay: 0.45s;
+    }
+
+    #mobile-nav:not(.hidden) li:nth-child(7) a {
+        transition-delay: 0.52s;
+    }
 
     .menu-retorno {
         display: flex !important;
     }
-    
+
     .menu-retorno a {
         font-size: 0.85rem;
         padding: 0.5rem 0.8rem;
@@ -1090,10 +1485,102 @@ a {
     .card-noticia-longa {
         padding: 2rem 1.5rem;
     }
+
     .card-noticia-longa h3 {
         font-size: 1.3rem;
     }
 
+    .modal-boas-vindas {
+        width: 95%;
+    }
+
+    .modal-boas-vindas-header {
+        padding: 1.2rem;
+    }
+
+    .modal-boas-vindas-header h2 {
+        font-size: 1.05rem;
+    }
+
+    .modal-boas-vindas-body {
+        padding: 1.2rem;
+    }
+
+    .barra-inferior-app {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background-color: rgba(255, 255, 255, 0.92);
+        /* Fundo claro com leve transparência */
+        backdrop-filter: blur(10px);
+        /* Efeito de vidro desfocado elegante */
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        z-index: 2000;
+        /* Fica acima do conteúdo, mas abaixo dos modais abertos */
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: env(safe-area-inset-bottom);
+        /* Suporte para a barra inferior do iPhone */
+        box-sizing: border-box;
+    }
+
+    /* Espaçamento extra no body para o conteúdo da página não sumir atrás da barra fixa */
+    body {
+        padding-bottom: 75px !important;
+    }
+
+    .item-nav-app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--texto-mutado);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        gap: 3px;
+        width: 25%;
+        height: 100%;
+        transition: all 0.2s ease;
+    }
+
+    .item-nav-app i {
+        font-size: 1.25rem;
+        transition: transform 0.2s ease;
+    }
+
+    /* Estado ativo (página ou seção atual) ou foco no clique */
+    .item-nav-app.ativo,
+    .item-nav-app:active {
+        color: var(--verde-escuro);
+    }
+
+    .item-nav-app.ativo i {
+        transform: translateY(-2px);
+    }
+
+    /* --- ADAPTAÇÃO AUTOMÁTICA PARA O MODO ESCURO (DARK MODE) --- */
+    body.dark-mode .barra-inferior-app {
+        background-color: rgba(13, 22, 22, 0.92);
+        /* Tom escuro profundo do seu layout */
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-mode .item-nav-app {
+        color: #A0B2B2;
+        /* Cor mutada do modo escuro */
+    }
+
+    body.dark-mode .item-nav-app.ativo,
+    body.dark-mode .item-nav-app:active {
+        color: var(--dourado-bronze);
+        /* O destaque vira dourado no modo escuro */
+    }
+
 }
-
-

@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fale Conosco - Condomínio Forte São Mateus</title>
-    <!-- Link do FontAwesome para os ícones -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <!-- Vincula o mesmo arquivo de estilos do seu site -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -24,7 +22,7 @@
             </a>
             <!-- Link de retorno rápido para a página principal -->
             <nav class="menu-navegacao menu-retorno">
-                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+                <a href="index.html"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
             </nav>
         </div>
     </header>
@@ -37,7 +35,6 @@
         <h2 class="titulo-secao">Fale Conosco</h2>
 
         <div class="card card-fale-conosco">
-            <!-- Ajustado o id para bater exatamente com o seu JavaScript -->
             <form id="fale-conosco-form" action="https://api.web3forms.com/submit" method="POST">
                 <!-- Chave de Acesso do Web3Forms -->
                 <input type="hidden" name="access_key" value="e13d012a-01ba-46f6-ab74-e596e49392d4">
@@ -80,4 +77,26 @@
     <script src="script.js"></script>
 
 </body>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APLICATIVO (APENAS MOBILE) -->
+        <div class="barra-inferior-app">
+            <a href="index.html" class="item-nav-app ativo">
+                <i class="fa fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="index.html#financeiro" class="item-nav-app">
+                <i class="fa fa-dollar"></i>
+                <span>Boletos</span>
+            </a>
+            <a href="regras.html" class="item-nav-app">
+                <i class="fa fa-gavel"></i>
+                <span>Regras</span>
+            </a>
+            <a href="contatos-uteis.html" class="item-nav-app">
+                <i class="fa fa-phone"></i>
+                <span>Contatos</span>
+            </a>
+        </div>
+
+
 </html>
