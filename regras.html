@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regimento Interno - Forte São Mateus</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+ <!-- CABEÇALHO (Navbar integrada com link de volta) -->
+    <header class="cabecalho">
+        <div class="container-header">
+            <a href="index.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img">
+                    <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
+                </div>
+            </a>
+            <!-- Link de retorno rápido para a página principal -->
+            <nav class="menu-navegacao menu-retorno">
+                <a href="index.html"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo das Regras -->
+    <main class="conteudo-principal">
+        <section class="secao revelar-ao-scroll visivel">
+            <h2 class="titulo-secao">📋 Manual de Convivência e Regimento Interno</h2>
+            <p style="color: var(--texto-mutado); margin-bottom: 2rem;">Guia prático para uma convivência harmoniosa. O respeito mútuo garante a paz do nosso condomínio.</p>
+
+            <div class="grid-cards-noticias">
+                
+                <!-- CARD 1: SILÊNCIO -->
+                <article class="card-noticia-longa revelar-ao-scroll">
+                    <h3>🤫 Convivência Geral e Lei do Silêncio</h3>
+                    <div class="texto-completo">
+                        <p>• <strong>Horários e limites de barulho:</strong> O limite diurno (09h às 22h) é de 55 decibéis. No período noturno (22h às 09h), o limite cai para 45 decibéis.</p>
+                        <p>• <strong>Uso de furadeiras e martelos:</strong> Permitido de segunda a sexta, das 09h às 17h, e aos sábados, apenas entre 10h e 14h (proibido aos domingos e feriados).</p>
+                        <p>• <strong>Fachada e estética:</strong> É proibido alterar a cor ou formato de portas externas, janelas e paredes do terraço. Não estenda roupas ou coloque vasos nos peitoris.</p>
+                        <p>• <strong>Gás encanado:</strong> O condomínio possui rede geral. É terminantemente proibido o uso de botijão de gás no interior dos apartamentos.</p>
+                        <p>• <strong>Destinação do imóvel:</strong> As unidades são estritamente residenciais. É proibido sublocar frações ou estabelecer repúblicas.</p>
+                    </div>
+                </article>
+
+                <!-- CARD 2: MUDANÇAS E REFORMAS -->
+                <article class="card-noticia-longa revelar-ao-scroll">
+                    <h3>🚚 Mudanças, Obras e Reformas</h3>
+                    <div class="texto-completo">
+                        <p>• <strong>Agendamento de mudanças:</strong> Deve ser realizado pelo aplicativo da administradora com no mínimo 2 dias úteis de antecedência.</p>
+                        <p>• <strong>Horários de mudanças/obras:</strong> Segunda a sexta-feira, das 09h às 17h. Sábados para mudanças das 09h às 14h, e para barulho de obras das 10h às 16h.</p>
+                        <p>• <strong>Proteção e Entulho:</strong> Use a capa de proteção do elevador. É proibido descartar entulho nas lixeiras comuns; a caçamba é responsabilidade do morador.</p>
+                    </div>
+                </article>
+
+                <!-- CARD 3: CRIANÇAS -->
+                <article class="card-noticia-longa revelar-ao-scroll">
+                    <h3>🧒 Crianças e Áreas Comuns</h3>
+                    <div class="texto-completo">
+                        <p>• <strong>Acompanhamento obrigatório:</strong> Menores de 12 anos não podem circular ou brincar desacompanhados de um responsável maior nas áreas comuns (corredores, elevadores, garagem).</p>
+                        <p>• <strong>Playground:</strong> Funciona todos os dias, das 09h às 20h. É proibido consumir alimentos e bebidas (exceto água) nesta área.</p>
+                    </div>
+                </article>
+
+                <!-- CARD 4: PETS -->
+                <article class="card-noticia-longa revelar-ao-scroll">
+                    <h3>🐾 Animais Domésticos (Pets)</h3>
+                    <div class="texto-completo">
+                        <p>• <strong>Trânsito interno:</strong> Conduzir sempre com coleira e guia curta. Animais de pequeno porte devem ser levados no colo nos elevadores.</p>
+                        <p>• <strong>Focinheira obrigatória:</strong> Cães das raças Mastim Napolitano, Dobermann, Rottweiler ou Pitbull devem usar o equipamento nas áreas comuns.</p>
+                        <p>• <strong>Vacinação:</strong> A carteira deve ser entregue anualmente à administração para liberar a permanência do pet.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+ <!-- RODAPÉ INTEGRADO -->
+    <footer class="rodape">
+        <div class="direitos-autorais">
+            <p>&copy; 2026 Condomínio Forte São Mateus - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Vincula o mesmo JavaScript que gerencia as animações de scroll -->
+    <script src="script.js"></script>
+
+    <!-- INTERFACE DO POP-UP DE VISUALIZAÇÃO (MODAL) -->
+    <div id="modal-imagem" class="modal-noticia-preview">
+        <span class="botao-fechar-modal">&times;</span>
+        <div class="modal-conteudo-wrapper">
+            <img class="modal-imagem-expandida" id="img-ampliada" alt="Visualização ampliada">
+        </div>
+        <div id="modal-legenda"></div>
+    </div>
+
+</body>
+
+        <!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APLICATIVO (APENAS MOBILE) -->
+        <div class="barra-inferior-app">
+            <a href="index.html" class="item-nav-app ativo">
+                <i class="fa fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="index.html#financeiro" class="item-nav-app">
+                <i class="fa fa-dollar"></i>
+                <span>Boletos</span>
+            </a>
+            <a href="regras.html" class="item-nav-app">
+                <i class="fa fa-gavel"></i>
+                <span>Regras</span>
+            </a>
+            <a href="contatos-uteis.html" class="item-nav-app">
+                <i class="fa fa-phone"></i>
+                <span>Contatos</span>
+            </a>
+        </div>
+
+</html>

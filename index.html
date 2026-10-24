@@ -8,9 +8,10 @@
     <!-- Importação de Fontes Modernas e Ícones Visuais -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://cloudflare.com"> -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -38,24 +39,34 @@
             <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
             <nav id="mobile-nav" class="hidden">
                 <ul>
-                    <li><a href="#inicio"><i class="fa-solid fa-house"></i> Início</a></li>
-                    <li><a href="#financeiro"><i class="fa-solid fa-phone"></i> Financeiro</a></li>
-                    <li><a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a></li>
-                    <li><a href="contatos-uteis.html"><i class="fa-solid fa-phone"></i> Contato úteis</a></li>
-                    <li><a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a></li>
-                    <li><a href="noticias.html#mural-noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a></li>
-                    <li><a href="faleconosco.html"><i class="fa-solid fa-envelope"></i> Fale Conosco</a></li>
+                    <div class="mobile-dark-container">
+                        <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    </div>
+                    <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
                 </ul>
             </nav>
 
             <nav class="menu-navegacao">
-                <a href="#inicio"><i class="fa-solid fa-house"></i> Início</a>
-                <a href="#financeiro"><i class="fa-solid fa-phone"></i> Financeiro</a>
-                <a href="#boas-vindas"><i class="fa-solid fa-handshake"></i> Kit Boas-Vindas</a>
-                <a href="contatos-uteis.html"><i class="fa-solid fa-phone"></i> Contato úteis</a>
-                <a href="#atas"><i class="fa-solid fa-file-lines"></i> Atas e Documentos</a>
-                <a href="noticias.html#mural-noticias"><i class="fa-solid fa-bullhorn"></i> Notícias</a>
-                <a href="faleconosco.html" target="_blank"><i class="fa-solid fa-envelope"></i> Fale Conosco</a>
+                <a href="#inicio"><i class="fa fa-home"></i> Início</a>
+                <a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a>
+                <a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a>
+                <a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a>
+                <a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a>
+                <a href="noticias.html#mural-noticias"><i class="fa fa-bullhorn"></i> Notícias</a>
+                <a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a>
+                <!-- ADICIONE ESTE BOTÃO ABAIXO -->
+                <button id="btn-dark-desktop" class="item-menu-dark">
+                    <i class="fa fa-sun-o"></i>
+                <span>Claro</span>
+  </button>
             </nav>
         </div>
 
@@ -78,7 +89,7 @@
                     <h1>Bem-vindo ao Condomínio Forte São Mateus</span></h1>
                     <p>Seu espaço de paz, segurança e convivência em harmonia.</p>
                     <a href="#boas-vindas" class="btn-slide-noticia">Acesse o Kit de Boas-vindas <i
-                            class="fa-solid fa-arrow-right"></i></a>
+                            class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -92,7 +103,7 @@
                     <h1>Manutenção Preventiva <span>dos Elevadores</span></h1>
                     <p>Bloco 1 passará por inspeção técnica nesta terça-feira. Clique para saber os horários.</p>
                     <a href="noticias.html#noticia-manutencao-out2026" class="btn-slide-noticia">Leia a matéria completa
-                        <i class="fa-solid fa-arrow-right"></i></a>
+                        <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -106,7 +117,7 @@
                     <h1>Convocação para <span>Assembleia Geral</span></h1>
                     <p>A pauta completa e o link de acesso para o modelo híbrido já estão disponíveis.</p>
                     <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">Leia a matéria completa
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -156,7 +167,7 @@
                         <p>Emita a 2ª via do Boleto no site da administradora.</p>
                         <a href="https://www.condominiolight.com.br/consulta/?cpf" class="btn-acao" target="_blank"
                             rel="noopener noreferrer">
-                            <i class="fa-solid fa-file-pdf"></i> 2ª via Boleto
+                            <i class="fa fa-file-pdf"></i> 2ª via Boleto
                         </a>
                     </div>
                 </div>
@@ -166,11 +177,11 @@
                     <span class="tag-financeiro">FINANCEIRO</span>
                     <div class="card-financeiro">
                         <h3>Central do Cliente</h3>
-                        <p>Acesse sua conta e gerencie suas informações financeiras.</p>
-                        <!-- <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" download><i class="fa-solid fa-user"></i> Acessar Central</a> -->
+                        <p>Acesse sua conta e gerencie suas informações financeiras no site da administradora.</p>
+                        <!-- <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815" class="btn-acao" download><i class="fa fa-user"></i> Acessar Central</a> -->
                         <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815"
                             class="btn-acao" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-solid fa-file-pdf"></i> Acessar Central
+                            <i class="fa fa-file-pdf"></i> Acessar Central
                         </a>
                     </div>
                 </div>
@@ -181,10 +192,10 @@
                     <div class="card-financeiro">
                         <h3>Prestação de Contas Mensal</h3>
                         <p>Seu espaço para os relatórios de receitas e despesas, balancetes e o demonstrativo
-                            financeiro.</p>
+                            financeiro no site da administradora.</p>
                         <a href="https://www.webware.com.br/bin/administradora/default.asp?adm=14147815"
                             class="btn-acao" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-solid fa-file-pdf"></i> Acessar Central
+                            <i class="fa fa-file-pdf"></i> Acessar Central
                         </a>
                     </div>
                 </div>
@@ -207,7 +218,7 @@
                         <p>Conheça as regras de convivência, horários de silêncio e normas de uso das áreas comuns do
                             nosso condomínio.</p>
                         <a href="https://servc9-1.webware.com.br/arqstemp/6570_8.pdf" class="btn-acao-boas-vindas"
-                            download target="_blank"><i class="fa-solid fa-file-pdf"></i> Baixar Regimento</a>
+                            download target="_blank"><i class="fa fa-file-pdf"></i> Baixar Regimento</a>
                     </div>
                 </div>
 
@@ -217,15 +228,28 @@
                         <img src="imagens/reforma-FSM.jpg" alt="Reformas">
                     </div>
                     <div class="card-conteudo">
-                        <h3>Mudanças e Reformas</h3>
+                        <h3>Mudanças, Reformas e Encomendas</h3>
                         <p>Formulários de agendamento de mudanças, ARTs de reforma e orientações completas para
                             prestadores de serviços.</p>
-                        <a href="#" class="btn-acao-boas-vindas"><i class="fa-solid fa-calendar-days"></i> Ver
-                            Instruções</a>
+
+                        <button id="btn-abrir-instrucoes" class="btn-acao-boas-vindas">Ver Instruções</button>
                     </div>
                 </div>
 
-                <!-- Card 3: Contatos Úteis -->
+                <!-- Card 3: Regras Gerais -->
+                <div class="card revelar-ao-scroll">
+                    <div class="card-imagem-topo">
+                        <img src="imagens/reforma-FSM.jpg" alt="Reformas">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>Regras Gerais</h3>
+                        <p>Confira as regras de convivência, horários de silêncio e normas de uso das áreas comuns do
+                            nosso condomínio.</p>
+                        <a href="regras.html" class="btn-acao">Ler Regras</a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Contatos Úteis -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Contatos-uteis.jpg" alt="Contatos">
@@ -234,13 +258,13 @@
                         <h3>Contatos Úteis</h3>
                         <p>Telefones diretos da portaria, administração, manutenção, contatos da síndica e principais
                             serviços de emergência.</p>
-                        <a href="contatos-uteis.html" class="btn-acao-boas-vindas"><i
-                                class="fa-solid fa-address-book"></i> Acessar
+                        <a href="contatos-uteis.html" class="btn-acao-boas-vindas"><i class="fa fa-address-book"></i>
+                            Acessar
                             Lista </a>
                     </div>
                 </div>
 
-                <!-- Card 4: Guia do Bairro -->
+                <!-- Card 5: Guia do Bairro -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/guia-bairro.jpg" alt="Guia do Bairro">
@@ -249,12 +273,12 @@
                         <h3>Guia do Bairro</h3>
                         <p>Indicações úteis de padarias, farmácias, mercados, pet shops e prestadores de serviços
                             recomendados na região.</p>
-                        <a href="#" class="btn-acao-boas-vindas"><i class="fa-solid fa-map-location-dot"></i> Ver
+                        <a href="guia-bairro.html" class="btn-acao-boas-vindas"><i class="fa fa-map-location-dot"></i> Ver
                             Comércio Local</a>
                     </div>
                 </div>
 
-                <!-- Card 5: Lixo e Reciclagem -->
+                <!-- Card 6: Lixo e Reciclagem -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/reciclagem.jpg" alt="Reciclagem">
@@ -263,7 +287,7 @@
                         <h3>Lixo e Reciclagem</h3>
                         <p>Confira os dias e horários da coleta seletiva, regras para descarte de grandes volumes e
                             localização das lixeiras.</p>
-                        <a href="#" class="btn-acao-boas-vindas"><i class="fa-solid fa-trash-can"></i> Ver
+                        <a href="#" class="btn-acao-boas-vindas"><i class="fa fa-trash-can"></i> Ver
                             Cronograma</a>
                     </div>
                 </div>
@@ -341,10 +365,10 @@
                         <!-- <p><strong>Telefone:</strong> (11) 3901-1104</p> -->
                         <p class="email-contato"> <strong>Email:</strong> faleconosco@condominiolight.com.br <br>
                             atendimento4@condominiolight.com.br <br> atendimento7@condominiolight.com.br</p>
-                        <!-- <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" download><i class="fa-solid fa-file-pdf"></i> Fale Conosco</a> -->
+                        <!-- <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" download><i class="fa fa-file-pdf"></i> Fale Conosco</a> -->
                         <a href="https://www.condominiolight.com.br/contato/" class="btn-acao" target="_blank"
                             rel="noopener noreferrer">
-                            <i class="fa-solid fa-file-pdf"></i> Fale Conosco
+                            <i class="fa fa-envelope"></i> Fale Conosco
                         </a>
                     </div>
                 </div>
@@ -436,40 +460,40 @@
                 <!-- Ata Ordinária -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
-                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 15/01/2026</span>
+                        <span class="data-publicacao"><i class="fa fa-calendar"></i> 15/01/2026</span>
                         <h3>Ata da Assembleia Ordinária</h3>
-                        <p class="tag-documento"><i class="fa-solid fa-money-bill-wave"></i> Previsão Orçamentária</p>
+                        <p class="tag-documento"><i class="fa fa-money"></i> Previsão Orçamentária</p>
                         <p>Acesse o histórico e os tópicos debatidos na última reunião ordinária realizada com os
                             condôminos.</p>
                         <a href="documentos/ata-ordinaria-jan-2026.pdf" class="btn-acao" download><i
-                                class="fa-solid fa-download"></i> Baixar PDF</a>
+                                class="fa fa-download"></i> Baixar PDF</a>
                     </div>
                 </div>
 
                 <!-- Ata Extraordinária -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
-                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> 10/11/2025</span>
+                        <span class="data-publicacao"><i class="fa fa-calendar"></i> 10/11/2025</span>
                         <h3>Ata da Assembleia Extraordinária</h3>
-                        <p class="tag-documento"><i class="fa-solid fa-paint-roller"></i> Reformas da Fachada</p>
+                        <p class="tag-documento"><i class="fa fa-paint-brush"></i> Reformas da Fachada</p>
                         <p>Decisões tomadas em conjunto a respeito do cronograma de revitalização e melhorias
                             estruturais da nossa fachada.</p>
                         <a href="documentos/ata-extraordinaria-nov-2025.pdf" class="btn-acao" download><i
-                                class="fa-solid fa-download"></i> Baixar PDF</a>
+                                class="fa fa-download"></i> Baixar PDF</a>
                     </div>
                 </div>
 
                 <!-- Prestação de Contas -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-conteudo-simples">
-                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Publicado em
+                        <span class="data-publicacao"><i class="fa fa-calendar"></i> Publicado em
                             05/01/2026</span>
                         <h3>Prestação de Contas</h3>
-                        <p class="tag-documento"><i class="fa-solid fa-chart-line"></i> Dezembro / 2025</p>
+                        <p class="tag-documento"><i class="fa fa-line-chart"></i> Dezembro / 2025</p>
                         <p>Relatório de transparência financeira detalhado sobre o balanço de receitas e despesas
                             operacionais do mês de Dezembro.</p>
                         <a href="documentos/prestacao-contas-dez-2025.pdf" class="btn-acao" download><i
-                                class="fa-solid fa-download"></i> Baixar PDF</a>
+                                class="fa fa-download"></i> Baixar PDF</a>
                     </div>
                 </div>
 
@@ -486,13 +510,13 @@
                     <div class="card-conteudo-simples">
                         <span class="badge-categoria categoria-manutencao">Manutenção</span>
                         <h3>Manutenção preventiva dos elevadores</h3>
-                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Postado em 14 de Outubro,
+                        <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 14 de Outubro,
                             2026</span>
                         <p>Informamos que na próxima terça-feira, das 09h às 13h, os elevadores da torre A passarão por
                             inspeção técnica obrigatória de segurança.</p>
                         <a href="noticias.html#noticia-manutencao-out2026" class="btn-slide-noticia">
                             Leia a matéria completa
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -502,13 +526,13 @@
                     <div class="card-conteudo-simples">
                         <span class="badge-categoria categoria-assembleia">Assembleia</span>
                         <h3>Convocação para Assembleia Geral</h3>
-                        <span class="data-publicacao"><i class="fa-regular fa-calendar"></i> Postado em 10 de Outubro,
+                        <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 10 de Outubro,
                             2026</span>
                         <p>A convocação oficial com a pauta completa e o link de acesso para o modelo híbrido de reunião
                             já foi enviada por e-mail a todos.</p>
                         <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">
                             Leia a matéria completa
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -517,19 +541,15 @@
         </section>
 
         <!-- Seção do Mapa -->
-        <div class="bloco-mapa revelar-ao-scroll" style="margin-top: 2rem; width: 100%;">
-            <h3 style="color: var(--verde-escuro); margin-bottom: 1rem; font-size: 1.3rem;">Localização do Condomínio
+        <div class="card revelar-ao-scroll" style="margin-top: 2rem; width: 100%;">
+            <h3 style="color: var(--verde-escuro); margin-bottom: 1rem; font-size: 1.3rem;">
+                Localização do Condomínio
+                <i class="fa fa-map"></i>
             </h3>
 
             <a href="https://google.com" target="_blank" title="Clique para abrir rotas no Google Maps">
                 <div
                     style="position: relative; width: 100%; border-radius: var(--borda-raio); overflow: hidden; box-shadow: var(--sombra-suave); border: 1px solid rgba(0,0,0,0.05);">
-                    <!-- Este SRC longo e específico é o único formato que o Google aceita embutir em sites -->
-                    <!-- <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.9954987384267!2d-46.46924842466843!3d-23.604494378770234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce69399762b1a9%3A0x9c5c38167043a1f6!2sCondom%C3%ADnio%20Forte%20S%C3%A3o%20Mateus!5e0!3m2!1spt-BR!2sbr!4v1792686574769!5m2!1spt-BR!2sbr"
-                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe> -->
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.9954987384267!2d-46.46924842466843!3d-23.604494378770234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce69399762b1a9%3A0x9c5c38167043a1f6!2sCondom%C3%ADnio%20Forte%20S%C3%A3o%20Mateus!5e0!3m2!1spt-BR!2sbr!4v1792686574769!5m2!1spt-BR!2sbr"
                         width="100%" height="350" style="border:0; display: block;" allowfullscreen="" loading="lazy"
@@ -550,10 +570,10 @@
         <div class="container-rodape">
 
             <div class="bloco-rodape">
-                <h3>Contatos Úteis</h3>
+                <h3>Contatos</h3>
                 <ul>
                     <li><strong>Portaria:</strong> (11) 98438-2216</li>
-                    <li><strong>Administradora:</strong> contato@condominiofortesaomateus.com.br </li>
+                    <li><strong>E-mail:</strong> sindicancia@condominiofortesaomateus.com.br </li>
                     <li><strong>Síndica:</strong> (11) 99197-5036</li>
                 </ul>
             </div>
@@ -576,6 +596,73 @@
 
     <script src="script.js"></script>
 
+    <dialog id="modal-instrucoes" class="modal-boas-vindas">
+        <div class="modal-boas-vindas-wrapper">
+            <div class="modal-boas-vindas-conteudo">
+                <div class="modal-boas-vindas-header">
+                    <h2>📋 Instruções para Mudanças e Reformas</h2>
+                    <button class="botao-fechar-instrucoes" aria-label="Fechar">&times;</button>
+                </div>
+                <div class="modal-boas-vindas-body">
+                    <h3>🚚 Mudanças (Entrada e Saída)</h3>
+                    <ul>
+                        <li><strong>Agendamento:</strong> Deve ser realizado pelo aplicativo da administradora com no
+                            mínimo 2 dias úteis de antecedência (a ausência de agendamento gera multa direta).</li>
+                        <li><strong>Horários:</strong> Permitido de segunda a sexta-feira, das 09h às 17h, e aos sábados
+                            das 09h às 14h. Não são permitidas mudanças aos domingos e feriados.</li>
+                        <li><strong>Proteção:</strong> É obrigatório solicitar a colocação da capa de proteção do
+                            elevador à portaria antes de iniciar o transporte.</li>
+                        <li> <strong>Içamento de volumes:</strong> Só é permitido por empresa especializada, com entrega
+                            prévia de ART (Anotação de Responsabilidade Técnica) e Plano de Rigging na administração.
+                        </li>
+                    </ul>
+
+                    <h3>🛠️ Reformas e Obras</h3>
+                    <ul>
+                        <li><strong>Documentação:</strong> Toda obra requer o envio prévio da ART/RRT assinada por
+                            engenheiro/arquiteto e o cronograma detalhado à síndica.</li>
+                        <li><strong>Horário de Barulho:</strong> Permitido estritamente de segunda a sexta-feira, das
+                            09h às 17h. Sábados, das das 10h às 16h, domingos e feriados são proibidos quaisquer ruídos
+                            de obras.</li>
+                        <li><strong>Entulho:</strong> É proibido o descarte de restos de obra e entulho nas lixeiras
+                            comuns do condomínio. A caçamba e a retirada são de responsabilidade total do morador.</li>
+                    </ul>
+
+                    <h3>📦 Entrega e Retirada de Encomendas </h3>
+                    <ul>
+                        <li><strong>Retirada de encomendas na Portaria:</strong> O morador tem até 72 horas para retirar
+                            encomendas comuns, mas cestas básicas e remédios devem ser retirados no mesmo dia. O horário
+                            de recebimento e retirada é das 07h às 22h.</li>
+                        <li><strong>Horários:</strong> O horário de recebimento e retirada é das 07h às 22h.</li>
+                        <li><strong>Restrição de entregas por aplicativo:</strong> Entregadores de fast-food, farmácias,
+                            restaurantes e prestadores similares não entram nas torres; o morador deve descer até a
+                            portaria para retirar.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
 </body>
+
+        <!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APLICATIVO (APENAS MOBILE) -->
+        <div class="barra-inferior-app">
+            <a href="index.html" class="item-nav-app ativo">
+                <i class="fa fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="index.html#financeiro" class="item-nav-app">
+                <i class="fa fa-dollar"></i>
+                <span>Boletos</span>
+            </a>
+            <a href="regras.html" class="item-nav-app">
+                <i class="fa fa-gavel"></i>
+                <span>Regras</span>
+            </a>
+            <a href="contatos-uteis.html" class="item-nav-app">
+                <i class="fa fa-phone"></i>
+                <span>Contatos</span>
+            </a>
+        </div>
 
 </html>
