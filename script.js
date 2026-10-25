@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const indicadores = document.querySelectorAll('.indicador');
   const barraProgresso = document.querySelector('.barra-progresso');
   let slideAtual = 0;
-  let tempoSlide;
+  let tempoSlide = null; // Armazenará o temporizador de troca de slide
 
   function alternarSlide(index) {
     slides[slideAtual].classList.remove('ativo');
@@ -48,18 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
     alternarSlide(proximo);
   }
 
-  function reiniciarBarraProgresso() {
+function reiniciarBarraProgresso() {
     if (!barraProgresso) return;
-    clearInterval(tempoSlide);
+    
+    // 1. Limpa o temporizador anterior
+    clearTimeout(tempoSlide); 
+    
+    // 2. Reseta a barra instantaneamente para 0%
     barraProgresso.style.transition = 'none';
     barraProgresso.style.width = '0%';
 
-    setTimeout(() => {
-      barraProgresso.style.transition = 'width 5s linear';
-      barraProgresso.style.width = '100%';
-    }, 50);
+    // 3. Força o reflow para o navegador registrar o reset
+    barraProgresso.offsetHeight; 
 
-    tempoSlide = setInterval(proximoSlide, 5000);
+    // 4. Aumentamos para 6s para cobrir os 5s de exibição + 1s de efeito fade do CSS
+    barraProgresso.style.transition = 'width 6s linear';
+    barraProgresso.style.width = '100%';
+
+    // 5. O JavaScript também aguarda 6s para disparar o próximo slide
+    tempoSlide = setTimeout(proximoSlide, 6000);
   }
 
   indicadores.forEach((indicador, idx) => {

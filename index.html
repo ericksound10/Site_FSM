@@ -136,18 +136,6 @@
         </div>
     </section>
 
-    <!-- PROGRAMAÇÃO JAVASCRIPT PARA FAZER OS SLIDES PASSAREM SOZINHOS -->
-    <script>
-        let slides = document.querySelectorAll('.slide');
-        let slideAtual = 0;
-
-        setInterval(() => {
-            slides[slideAtual].classList.remove('ativo');
-            slideAtual = (slideAtual + 1) % slides.length;
-            slides[slideAtual].classList.add('ativo');
-        }, 4000); // Muda de slide a cada 4 segundos
-    </script>
-
     <!-- ------------------------------------
        CONTEÚDO PRINCIPAL DO PORTAL
     --------------------------------------- -->
