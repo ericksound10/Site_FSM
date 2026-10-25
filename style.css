@@ -155,12 +155,17 @@ body.dark-mode .btn-slide-noticia {
     background-color: var(--dourado-bronze) !important;
     color: #0A1111 !important;
     font-weight: 700;
+    transition: var(--transicao);
 }
 
 body.dark-mode .btn-acao:hover,
 body.dark-mode .btn-slide-noticia:hover {
-    background-color: #b38d69 !important;
-    color: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    /* Fundo vira branco para brilhar no escuro */
+    color: #0A1111 !important;
+    /* Mantém o texto escuro legível */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
 /* Variação específica para cards de documentos */
@@ -171,8 +176,11 @@ body.dark-mode .card-documento .btn-acao {
 }
 
 body.dark-mode .card-documento .btn-acao:hover {
-    background-color: var(--dourado-bronze) !important;
+    background-color: #FFFFFF !important;
+    /* Preenche de branco ao passar o mouse */
     color: #0A1111 !important;
+    /* Letra fica escura */
+    border-color: #FFFFFF !important;
 }
 
 /* --- ESTILIZAÇÃO DO BOTÃO ALTERNADOR DA NAVBAR --- */
@@ -358,21 +366,31 @@ body.dark-mode .card-documento .btn-acao {
 
 body.dark-mode .btn-acao:hover,
 body.dark-mode .card .btn-acao:hover {
-    background-color: #b38d69 !important;
-    color: #FFFFFF !important;
+    background-color: #dddcda !important;
+    color: #0A1111 !important;
     /* Texto vira branco ao passar o mouse */
 }
 
-/* 2. Botões com efeito de borda animada (.btn-acao-boas-vindas) */
+body.dark-mode .btn-acao {
+    background-color: var(--dourado-bronze) !important;
+    color: #0A1111 !important;
+    /* Texto escuro para forte contraste sobre o bronze */
+    font-weight: 700 !important;
+    border: none !important;
+    transition: var(--transicao) !important;
+}
+
+/* Botões com efeito de borda animada (.btn-acao-boas-vindas) */
 body.dark-mode .btn-acao-boas-vindas {
-    color: var(--dourado-bronze) !important;
-    /* Texto dourado legível antes do hover */
+    color: #0A1111 !important;
+    /* Texto escuro para contrastar no fundo branco */
+    background-color: transparent !important;
 }
 
 /* Ajusta o fundo da capa interna (::after) para a mesma cor escura do card */
 body.dark-mode .btn-acao-boas-vindas::after {
-    background-color: #152726 !important;
-    /* Cor interna verde-escura oficial do card */
+    background-color: #FFFFFF !important;
+    /* Miolo do botão fica 100% branco */
 }
 
 /* Ajusta o efeito de rotação/gradiente para usar cores nítidas no Modo Escuro */
@@ -385,13 +403,12 @@ body.dark-mode .btn-acao-boas-vindas::before {
 
 /* Comportamento ao passar o mouse (Hover) no botão com efeito */
 body.dark-mode .btn-acao-boas-vindas:hover {
-    color: #0A1111 !important;
-    /* Texto fica escuro quando o botão preenche de dourado */
+    color: #FFFFFF !important;
+    /*Cor letra ao passar o mouse*/
 }
 
 body.dark-mode .btn-acao-boas-vindas:hover::after {
     background-color: var(--dourado-bronze) !important;
-    /* Preenche o botão de dourado no hover */
 }
 
 /* ------------------------------------
@@ -939,8 +956,8 @@ body.dark-mode .card .btn-acao,
 body.dark-mode .card-documento .btn-acao,
 .btn-acao {
     /* Força o botão a ir para o rodapé do card, independente do texto acima */
-    margin-top: auto !important; 
-    
+    margin-top: auto !important;
+
     background-color: var(--verde-escuro);
     color: var(--branco);
     padding: 0.9rem 1.8rem;
@@ -1021,16 +1038,12 @@ body.dark-mode .card-documento .btn-acao,
     z-index: -2;
 }
 
-/* O "Preenchimento" (Capa interna que esconde o centro do gradiente, deixando só a borda) */
 .btn-acao-boas-vindas::after {
     content: '';
     position: absolute;
     inset: 2px;
-    /* Espessura da borda (2px) */
     background-color: var(--branco);
-    /* Mesma cor do fundo do botão */
     border-radius: 6px;
-    /* Levemente menor que o border-radius do botão */
     z-index: -1;
     transition: background-color 0.3s ease;
 }
@@ -1473,7 +1486,7 @@ body.dark-mode .card-documento .btn-acao,
     }
 
     body {
-        padding-bottom: 110px !important; /* Aumentado para dar uma folga elegante após o último card */
+        padding-bottom: 110px !important;
     }
 
     .cabecalho {
@@ -1481,12 +1494,10 @@ body.dark-mode .card-documento .btn-acao,
         top: 0;
         z-index: 1010 !important;
         padding: 1rem 1.2rem;
-        /* Compacta o cabeçalho no celular */
     }
 
     .logo-titulo {
         font-size: 1.05rem;
-        /* Evita que o título quebre em duas linhas */
     }
 
     .menu-navegacao {
@@ -1519,7 +1530,6 @@ body.dark-mode .card-documento .btn-acao,
     /* --- AJUSTE CIRÚRGICO DO BANNER NO CELULAR --- */
     .carrossel-container {
         height: 480px;
-        /* Reduz a altura rígida para não esticar */
     }
 
     .slide {
@@ -1529,7 +1539,6 @@ body.dark-mode .card-documento .btn-acao,
 
     .slide-conteudo {
         padding: 1.5rem;
-        /* Diminui o espaçamento interno pro balão respirar */
         max-width: 100%;
         width: 100%;
     }
@@ -1537,7 +1546,6 @@ body.dark-mode .card-documento .btn-acao,
     .slide-conteudo h1,
     .slide-conteudo h2 {
         font-size: 1.4rem !important;
-        /* Diminui o título para não esticar a caixa */
         margin-bottom: 0.5rem;
     }
 
@@ -1552,7 +1560,6 @@ body.dark-mode .card-documento .btn-acao,
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
         width: 100%;
-        /* Botão ocupa toda a largura no celular */
         justify-content: center;
     }
 
@@ -1738,18 +1745,14 @@ body.dark-mode .card-documento .btn-acao,
         width: 100%;
         height: 65px;
         background-color: rgba(255, 255, 255, 0.92);
-        /* Fundo claro com leve transparência */
         backdrop-filter: blur(10px);
-        /* Efeito de vidro desfocado elegante */
         -webkit-backdrop-filter: blur(10px);
         border-top: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
         z-index: 2000;
-        /* Fica acima do conteúdo, mas abaixo dos modais abertos */
         justify-content: space-around;
         align-items: center;
         padding-bottom: env(safe-area-inset-bottom);
-        /* Suporte para a barra inferior do iPhone */
         box-sizing: border-box;
     }
 
@@ -1791,7 +1794,6 @@ body.dark-mode .card-documento .btn-acao,
     /* --- ADAPTAÇÃO AUTOMÁTICA PARA O MODO ESCURO (DARK MODE) --- */
     body.dark-mode .barra-inferior-app {
         background-color: rgba(13, 22, 22, 0.92);
-        /* Tom escuro profundo do seu layout */
         border-top: 1px solid rgba(255, 255, 255, 0.06);
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
     }
@@ -1809,30 +1811,66 @@ body.dark-mode .card-documento .btn-acao,
 
     .barra-inferior-app.no-topo .item-nav-app {
         font-size: 0px;
-        /* Faz o texto sumir e não ocupar espaço vertical */
         gap: 0px;
-        /* Zera o espaço entre o ícone e o texto inexistente */
     }
 
     /* Garante que o ícone continue grande e centralizado perfeitamente no topo */
     .barra-inferior-app.no-topo .item-nav-app i {
         font-size: 1.4rem;
-        /* Aumenta um pouquinho o ícone enquanto estiver sem texto */
         transform: translateY(0);
     }
 
     .container-rodape {
         grid-template-columns: 1fr;
-        /* Transforma as 3 colunas em 1 única coluna empilhada */
         gap: 2.5rem;
         padding-bottom: 2rem;
     }
 
     .direitos-autorais {
         flex-direction: column;
-        /* Empilha os termos no celular */
         text-align: center;
         gap: 10px;
     }
 
+    /* IMPORTANTE: Remove o quadrado cinza nativo do celular que esconde seu efeito */
+    .btn-acao,
+    .btn-slide-noticia,
+    .btn-acao-boas-vindas {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* Efeito ao tocar nos botões padrão e de notícias */
+    .btn-acao:active,
+    .btn-slide-noticia:active {
+        background-color: #FFFFFF !important;
+        color: #0A1111 !important;
+        transform: scale(0.92) !important;
+        transition: transform 0.05s ease !important;
+    }
+
+    /* Modo Claro Mobile */
+    body:not(.dark-mode) .btn-acao:active,
+    body:not(.dark-mode) .btn-slide-noticia:active {
+        background-color: var(--dourado-hover) !important;
+        color: #FFFFFF !important;
+    }
+
+    .btn-acao-boas-vindas:active::after {
+        background-color: #FFFFFF !important;
+    }
+
+    .btn-acao-boas-vindas:active {
+        color: #0A1111 !important;
+        transform: scale(0.92) !important;
+        transition: transform 0.05s ease !important;
+    }
+
+    /* Modo Claro no botão de Boas-Vindas */
+    body:not(.dark-mode) .btn-acao-boas-vindas:active::after {
+        background-color: var(--verde-escuro) !important;
+    }
+
+    body:not(.dark-mode) .btn-acao-boas-vindas:active {
+        color: #FFFFFF !important;
+    }
 }
