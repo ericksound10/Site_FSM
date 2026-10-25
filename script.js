@@ -237,10 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
     /* 9. PROTEÇÃO DE DOCUMENTOS POR SENHA GLOBAL */
-  // Senha de acesso para os moradores do condomínio
+  // Senha de acesso para os moradores do condomínio 
   const SENHA_CONDOMINIO = "Morador2026!"; 
 
-  // Seleciona todos os links ou botões que possuem o atributo de proteção
+  // Seleciona todos os links ou botões que possuem o atributo de proteção 
   const documentosProtegidos = document.querySelectorAll('[data-protegido="true"]');
 
   documentosProtegidos.forEach(botao => {
