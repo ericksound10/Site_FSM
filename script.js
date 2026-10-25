@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* 1. SEU MENU HAMBÚRGUER ORIGINAL */
+  /* 1. MENU HAMBÚRGUER (MOBILE) */
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
 
@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* 2. AUTOMAÇÃO DO CARROSSEL (COM BARRA DE PROGRESSO E CONTROLES) */
+  /* 2. CARROSSEL SINCRONIZADO (COM BARRA DE PROGRESSO) */
   const slides = document.querySelectorAll('.slide');
   const indicadores = document.querySelectorAll('.indicador');
   const barraProgresso = document.querySelector('.barra-progresso');
   let slideAtual = 0;
-  let tempoSlide = null; // Armazenará o temporizador de troca de slide
+  let tempoSlide = null;
 
   function alternarSlide(index) {
     slides[slideAtual].classList.remove('ativo');
@@ -48,24 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
     alternarSlide(proximo);
   }
 
-function reiniciarBarraProgresso() {
+  function reiniciarBarraProgresso() {
     if (!barraProgresso) return;
     
-    // 1. Limpa o temporizador anterior
     clearTimeout(tempoSlide); 
     
-    // 2. Reseta a barra instantaneamente para 0%
     barraProgresso.style.transition = 'none';
     barraProgresso.style.width = '0%';
 
-    // 3. Força o reflow para o navegador registrar o reset
+    // Força o reflow para o navegador registrar o reset instantâneo
     barraProgresso.offsetHeight; 
 
-    // 4. Aumentamos para 6s para cobrir os 5s de exibição + 1s de efeito fade do CSS
+    // 6 segundos total (5s de exibição estável + 1s do efeito fade do CSS)
     barraProgresso.style.transition = 'width 6s linear';
     barraProgresso.style.width = '100%';
 
-    // 5. O JavaScript também aguarda 6s para disparar o próximo slide
     tempoSlide = setTimeout(proximoSlide, 6000);
   }
 
@@ -100,7 +97,7 @@ function reiniciarBarraProgresso() {
     observadorDeScroll.observe(elemento);
   });
 
-  /* 4. CONTROLE DO POP-UP DE IMAGENS COM SUPORTE A ZOOM */
+  /* 4. MODAL DE ZOOM PARA IMAGENS DAS NOTÍCIAS */
   const modal = document.getElementById('modal-imagem');
   const modalImg = document.getElementById('img-ampliada');
   const legendaTexto = document.getElementById('modal-legenda');
@@ -125,9 +122,7 @@ function reiniciarBarraProgresso() {
     }
   }
 
-  if (botaoFechar) {
-    botaoFechar.addEventListener('click', fecharOModal);
-  }
+  if (botaoFechar) botaoFechar.addEventListener('click', fecharOModal);
 
   if (modal) {
     modal.addEventListener('click', (event) => {
@@ -137,7 +132,7 @@ function reiniciarBarraProgresso() {
     });
   }
 
-  /* 4.5 CONTROLE DO POP-UP DE INSTRUÇÕES (BOAS-VINDAS) */
+  /* 5. MODAL DE INSTRUÇÕES (KIT DE BOAS-VINDAS) */
   const modalInstrucoes = document.getElementById('modal-instrucoes');
   const btnAbrirInstrucoes = document.getElementById('btn-abrir-instrucoes');
   const btnFecharInstrucoes = document.querySelector('.botao-fechar-instrucoes');
@@ -153,18 +148,14 @@ function reiniciarBarraProgresso() {
       document.body.style.overflow = 'auto';
     };
 
-    if (btnFecharInstrucoes) {
-      btnFecharInstrucoes.addEventListener('click', fecharInstrucoes);
-    }
+    if (btnFecharInstrucoes) btnFecharInstrucoes.addEventListener('click', fecharInstrucoes);
 
     modalInstrucoes.addEventListener('click', (event) => {
-      if (event.target === modalInstrucoes) {
-        fecharInstrucoes();
-      }
+      if (event.target === modalInstrucoes) fecharInstrucoes();
     });
   }
 
-  /* 5. ENVIO DO FORMULÁRIO FALE CONOSCO */
+  /* 6. ENVIO DO FORMULÁRIO FALE CONOSCO */
   const form = document.getElementById('fale-conosco-form');
   if (form) {
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -188,7 +179,7 @@ function reiniciarBarraProgresso() {
           alert("Sucesso! Sua mensagem foi enviada.");
           form.reset();
         } else {
-          alert("Error: " + data.message);
+          alert("Erro: " + data.message);
         }
       } catch (error) {
         alert("Algo deu errado. Por favor, tente novamente.");
@@ -199,7 +190,7 @@ function reiniciarBarraProgresso() {
     });
   }
 
-  /* 6. ALTERNADOR DE MODO ESCURO (DARK MODE) - CORRIGIDO FORA DO SUBMIT */
+  /* 7. MODO ESCURO (DARK MODE) */
   const btnDarkDesktop = document.getElementById('btn-dark-desktop');
   const btnDarkMobile = document.getElementById('btn-dark-mobile');
 
@@ -210,19 +201,11 @@ function reiniciarBarraProgresso() {
   }
 
   function atualizarInterfaceDark(ativo) {
-    const botoes = [btnDarkDesktop, btnDarkMobile];
-    botoes.forEach(btn => {
+    [btnDarkDesktop, btnDarkMobile].forEach(btn => {
       if (btn) {
         const icone = btn.querySelector('i');
-        const texto = btn.querySelector('span');
-        if (icone && texto) {
-          if (ativo) {
-            icone.className = 'fa fa-sun-o';
-            texto.textContent = btn === btnDarkMobile ? '' : '';
-          } else {
-            icone.className = 'fa fa-moon-o';
-            texto.textContent = btn === btnDarkMobile ? '' : '';
-          }
+        if (icone) {
+          icone.className = ativo ? 'fa fa-sun-o' : 'fa fa-moon-o';
         }
       }
     });
@@ -231,29 +214,26 @@ function reiniciarBarraProgresso() {
   if (btnDarkDesktop) btnDarkDesktop.addEventListener('click', alternarModoEscuro);
   if (btnDarkMobile) btnDarkMobile.addEventListener('click', alternarModoEscuro);
 
-  const preferenciaModoEscuro = localStorage.getItem('modo-escuro');
-  if (preferenciaModoEscuro === 'ativado') {
+  // Carrega a preferência salva do usuário
+  if (localStorage.getItem('modo-escuro') === 'ativado') {
     document.body.classList.add('dark-mode');
     atualizarInterfaceDark(true);
   }
 
-    /* 7. DETECTAR ROLAGEM PARA OCULTAR TEXTO DO MENU INFERIOR */
+  /* 8. CONTROLE DA BARRA INFERIOR (MOBILE APP) AO ROLARA TELA */
   const barraInferior = document.querySelector('.barra-inferior-app');
   
   if (barraInferior) {
-    window.addEventListener('scroll', () => {
-      // Verifica se a página está exatamente no topo
+    const verificarTopo = () => {
       if (window.scrollY === 0) {
         barraInferior.classList.add('no-topo');
       } else {
         barraInferior.classList.remove('no-topo');
       }
-    });
+    };
 
-    // Executa uma vez ao carregar a página para garantir o estado inicial
-    if (window.scrollY === 0) {
-      barraInferior.classList.add('no-topo');
-    }
+    window.addEventListener('scroll', verificarTopo);
+    verificarTopo(); // Executa o estado inicial imediatamente
   }
-
+  
 });
