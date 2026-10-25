@@ -11,6 +11,63 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ==========================================================================
+     PROMPT DE INSTALAÇÃO PERSONALIZADO (PWA)
+     ========================================================================== */
+  let gatilhoInstalacao = null;
+  const bannerInstalacao = document.getElementById('pwa-install-banner');
+  const btnInstalar = document.getElementById('btn-pwa-instalar');
+  const btnFecharBanner = document.getElementById('btn-pwa-fechar');
+
+  // Ouve o evento do navegador que avisa que o site está pronto para ser instalado
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Impede que o navegador mostre o prompt padrão indesejado
+    e.preventDefault();
+    // Salva o evento para ser executado quando o morador clicar em "Instalar"
+    gatilhoInstalacao = e;
+    
+    // Mostra o banner customizado apenas se o morador não tiver recusado antes
+    if (localStorage.getItem('pwa-banner-recusado') !== 'sim') {
+      if (bannerInstalacao) bannerInstalacao.style.display = 'flex';
+    }
+  });
+
+  // Ação ao clicar no botão "Instalar"
+  if (btnInstalar) {
+    btnInstalar.addEventListener('click', async () => {
+      if (!gatilhoInstalacao) return;
+      
+      // Abre a janelinha oficial de confirmação de instalação do navegador
+      gatilhoInstalacao.prompt();
+      
+      // Aguarda a resposta do morador
+      const { outcome } = await gatilhoInstalacao.userChoice;
+      console.log(`Escolha do usuário: ${outcome}`);
+      
+      // Limpa o gatilho, pois ele só pode ser usado uma vez
+      gatilhoInstalacao = null;
+      
+      // Esconde o banner
+      if (bannerInstalacao) bannerInstalacao.style.display = 'none';
+    });
+  }
+
+  // Ação ao clicar em "Agora não" (esconde o banner temporariamente)
+  if (btnFecharBanner) {
+    btnFecharBanner.addEventListener('click', () => {
+      if (bannerInstalacao) bannerInstalacao.style.display = 'none';
+      // Guarda a decisão no navegador para não incomodar o morador repetidamente
+      localStorage.setItem('pwa-banner-recusado', 'sim');
+    });
+  }
+
+  // Oculta o banner automaticamente se o app for instalado com sucesso
+  window.addEventListener('appinstalled', () => {
+    if (bannerInstalacao) bannerInstalacao.style.display = 'none';
+    gatilhoInstalacao = null;
+    console.log('PWA instalado com sucesso pelo morador!');
+  });
+
   /* 1. MENU HAMBÚRGUER (MOBILE) */
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
