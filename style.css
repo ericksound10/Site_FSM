@@ -2,6 +2,16 @@ html {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    /* Impede estritamente a rolagem lateral */
+    box-sizing: border-box;
+}
+
 .revelar-ao-scroll {
     opacity: 0;
     transform: translateY(20px);
@@ -270,11 +280,118 @@ body.dark-mode .item-menu-dark:hover {
 }
 
 body.dark-mode .titulo-categoria {
-    color: #FFFFFF !important; /* Títulos das subcategorias brancos */
+    color: #FFFFFF !important;
+    /* Títulos das subcategorias brancos */
 }
 
 body.dark-mode .card p a {
-    color: var(--dourado-bronze) !important; /* Telefones em dourado no modo dark */
+    color: var(--dourado-bronze) !important;
+    /* Telefones em dourado no modo dark */
+}
+
+/* --- CORREÇÃO DO MODAL DE INSTRUÇÕES (MODO ESCURO) --- */
+body.dark-mode .modal-boas-vindas-conteudo {
+    background-color: #152726 !important;
+    /* Aplica o verde oficial nos cards do modal */
+}
+
+body.dark-mode .modal-boas-vindas-body h3 {
+    color: var(--dourado-bronze) !important;
+    /* Destaca os títulos internos em dourado */
+}
+
+body.dark-mode .modal-boas-vindas-body ul li {
+    color: #CAD6D6 !important;
+    /* Torna as regras e textos da lista visíveis em cinza claro */
+}
+
+body.dark-mode .modal-boas-vindas-body ul li strong {
+    color: #FFFFFF !important;
+    /* Destaca os termos importantes (ex: "Agendamento:") em branco */
+}
+
+/* --- CORREÇÃO DO FORMULÁRIO FALE CONOSCO (MODO ESCURO) --- */
+body.dark-mode .card-fale-conosco {
+    background-color: #152726 !important;
+}
+
+body.dark-mode .grupo-campo label {
+    color: #FFFFFF !important;
+    /* Deixa os nomes dos campos legíveis */
+}
+
+body.dark-mode .grupo-campo input,
+body.dark-mode .grupo-campo textarea {
+    background-color: #0A1111 !important;
+    /* Fundo interno do input escuro */
+    color: #FFFFFF !important;
+    /* Texto digitado em branco */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- CORREÇÃO DO CABEÇALHO DO MODAL (MODO ESCURO) --- */
+body.dark-mode .modal-boas-vindas-header {
+    background-color: #060B0B !important;
+    /* Fundo escuro profundo para o cabeçalho */
+    border-bottom: 3px solid var(--dourado-bronze) !important;
+}
+
+body.dark-mode .modal-boas-vindas-header h2 {
+    color: #FFFFFF !important;
+    /* Força o título principal a ficar totalmente branco */
+}
+
+body.dark-mode .botao-fechar-instrucoes {
+    color: #FFFFFF !important;
+    /* Força o botão X a ficar branco */
+}
+
+body.dark-mode .btn-acao,
+body.dark-mode .card .btn-acao,
+body.dark-mode .card-documento .btn-acao {
+    background-color: var(--dourado-bronze) !important;
+    color: #0A1111 !important;
+    /* Texto escuro para dar contraste com o fundo dourado */
+    border: none !important;
+    font-weight: 700 !important;
+}
+
+body.dark-mode .btn-acao:hover,
+body.dark-mode .card .btn-acao:hover {
+    background-color: #b38d69 !important;
+    color: #FFFFFF !important;
+    /* Texto vira branco ao passar o mouse */
+}
+
+/* 2. Botões com efeito de borda animada (.btn-acao-boas-vindas) */
+body.dark-mode .btn-acao-boas-vindas {
+    color: var(--dourado-bronze) !important;
+    /* Texto dourado legível antes do hover */
+}
+
+/* Ajusta o fundo da capa interna (::after) para a mesma cor escura do card */
+body.dark-mode .btn-acao-boas-vindas::after {
+    background-color: #152726 !important;
+    /* Cor interna verde-escura oficial do card */
+}
+
+/* Ajusta o efeito de rotação/gradiente para usar cores nítidas no Modo Escuro */
+body.dark-mode .btn-acao-boas-vindas::before {
+    background: conic-gradient(var(--dourado-bronze) 0deg,
+            var(--dourado-bronze) 60deg,
+            transparent 120deg,
+            transparent 360deg) !important;
+}
+
+/* Comportamento ao passar o mouse (Hover) no botão com efeito */
+body.dark-mode .btn-acao-boas-vindas:hover {
+    color: #0A1111 !important;
+    /* Texto fica escuro quando o botão preenche de dourado */
+}
+
+body.dark-mode .btn-acao-boas-vindas:hover::after {
+    background-color: var(--dourado-bronze) !important;
+    /* Preenche o botão de dourado no hover */
 }
 
 /* ------------------------------------
@@ -610,10 +727,17 @@ body.dark-mode .card p a {
 /* ------------------------------------
    CONTEÚDO E SEÇÕES DO PAINEL
 --------------------------------------- */
-.conteudo-principal {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 2rem;
+main,
+.conteudo-principal,
+#contatos-secao,
+div[style*="display: grid"],
+main>div {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box !important;
 }
 
 .secao {
@@ -629,6 +753,9 @@ body.dark-mode .card p a {
     align-items: center;
     gap: 12px;
     letter-spacing: -0.5px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .titulo-secao::after {
@@ -759,6 +886,18 @@ body.dark-mode .card p a {
     margin: 0 auto;
 }
 
+.card-conteudo-simples {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.card-conteudo-simples p {
+    flex-grow: 1 !important;
+    margin-bottom: 2rem !important;
+}
+
 .bloco-telefones {
     display: flex;
     align-items: flex-start;
@@ -795,7 +934,13 @@ body.dark-mode .card p a {
 /* ------------------------------------
    BOTÕES E AÇÕES ULTRA VISUAIS
 --------------------------------------- */
+body.dark-mode .btn-acao,
+body.dark-mode .card .btn-acao,
+body.dark-mode .card-documento .btn-acao,
 .btn-acao {
+    /* Força o botão a ir para o rodapé do card, independente do texto acima */
+    margin-top: auto !important; 
+    
     background-color: var(--verde-escuro);
     color: var(--branco);
     padding: 0.9rem 1.8rem;
@@ -805,9 +950,6 @@ body.dark-mode .card p a {
     text-align: center;
     display: block;
     width: 100%;
-    box-shadow: 0 4px 6px rgba(28, 51, 50, 0.1);
-    border: 1px solid transparent;
-    margin-top: auto;
 }
 
 .btn-acao:hover {
@@ -951,7 +1093,7 @@ body.dark-mode .card p a {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 4rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 3rem;
@@ -969,6 +1111,40 @@ body.dark-mode .card p a {
 .bloco-rodape p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.bloco-rodape ul {
+    list-style: none;
+}
+
+.links-rodape li {
+    margin-bottom: 0.8rem;
+}
+
+.links-rodape a {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transicao);
+}
+
+.links-rodape a i {
+    font-size: 0.75rem;
+    color: var(--dourado-bronze);
+    transition: transform 0.3s ease;
+}
+
+.links-rodape a:hover {
+    color: var(--dourado-bronze) !important;
+    padding-left: 5px;
+    /* Efeito sutil de deslocamento ao passar o mouse */
+}
+
+.links-rodape a:hover i {
+    transform: translateX(2px);
 }
 
 .bloco-rodape ul {
@@ -976,23 +1152,45 @@ body.dark-mode .card p a {
 }
 
 .bloco-rodape ul li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    flex-direction: column;
+    font-size: 0.95rem;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 .bloco-rodape ul li strong {
     font-size: 0.85rem;
     text-transform: uppercase;
     color: var(--dourado-bronze);
+    display: block;
+    margin-bottom: 2px;
 }
 
 .direitos-autorais {
-    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
     padding-top: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    /* Joga os direitos para a esquerda e sua marca para a direita */
+    align-items: center;
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.4);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.creditos-assinatura a {
+    color: var(--dourado-bronze) !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+.creditos-assinatura a:hover {
+    color: #FFFFFF !important;
+    text-shadow: 0 0 8px rgba(196, 158, 122, 0.6);
 }
 
 .logo-link {
@@ -1258,6 +1456,26 @@ body.dark-mode .card p a {
    RESPONSIVIDADE (MOBILE)
 --------------------------------------- */
 @media (max-width: 768px) {
+
+    main,
+    .conteudo-principal,
+    .secao,
+    section,
+    body>div {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    body {
+        padding-bottom: 110px !important; /* Aumentado para dar uma folga elegante após o último card */
+    }
+
     .cabecalho {
         position: sticky;
         top: 0;
@@ -1339,24 +1557,29 @@ body.dark-mode .card p a {
     }
 
     /* --- CORREÇÃO DOS CARDS DESLOCADOS --- */
-    .grid-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 100%;
+    .grid-cards,
+    .grid-cards-noticias,
+    main .grid-cards,
+    section .grid-cards {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 1rem !important;
+        /* Margem sutil nas bordas do celular */
+        box-sizing: border-box !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
     }
 
     /* Força TODOS os cards a centralizarem perfeitamente na tela sem vazar para a direita */
     .card {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 0 0 1rem 0 !important;
-        /* Zera margens laterais que jogavam o card pra direita */
-        padding: 2rem 1.5rem;
-        box-sizing: border-box;
-        /* Garante que o padding não aumente o tamanho final do card */
-        overflow: hidden;
-        /* Corta qualquer elemento rebelde que tente vazar */
+        margin: 0 !important;
+        padding: 2rem 1.5rem !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
 
     #mobile-nav {
@@ -1374,9 +1597,10 @@ body.dark-mode .card p a {
         visibility: visible;
         pointer-events: auto;
         transform: translateX(0);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        /* transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
             opacity 0.4s ease,
-            visibility 0.4s ease;
+            visibility 0.4s ease; */
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #mobile-nav.hidden {
@@ -1518,8 +1742,8 @@ body.dark-mode .card p a {
         backdrop-filter: blur(10px);
         /* Efeito de vidro desfocado elegante */
         -webkit-backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
         z-index: 2000;
         /* Fica acima do conteúdo, mas abaixo dos modais abertos */
         justify-content: space-around;
@@ -1546,7 +1770,7 @@ body.dark-mode .card p a {
         gap: 3px;
         width: 25%;
         height: 100%;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
     }
 
     .item-nav-app i {
@@ -1581,6 +1805,34 @@ body.dark-mode .card p a {
     body.dark-mode .item-nav-app:active {
         color: var(--dourado-bronze);
         /* O destaque vira dourado no modo escuro */
+    }
+
+    .barra-inferior-app.no-topo .item-nav-app {
+        font-size: 0px;
+        /* Faz o texto sumir e não ocupar espaço vertical */
+        gap: 0px;
+        /* Zera o espaço entre o ícone e o texto inexistente */
+    }
+
+    /* Garante que o ícone continue grande e centralizado perfeitamente no topo */
+    .barra-inferior-app.no-topo .item-nav-app i {
+        font-size: 1.4rem;
+        /* Aumenta um pouquinho o ícone enquanto estiver sem texto */
+        transform: translateY(0);
+    }
+
+    .container-rodape {
+        grid-template-columns: 1fr;
+        /* Transforma as 3 colunas em 1 única coluna empilhada */
+        gap: 2.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .direitos-autorais {
+        flex-direction: column;
+        /* Empilha os termos no celular */
+        text-align: center;
+        gap: 10px;
     }
 
 }
