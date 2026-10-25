@@ -11,61 +11,75 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ==========================================================================
-     PROMPT DE INSTALAÇÃO PERSONALIZADO (PWA)
+   /* ==========================================================================
+     PROMPT DE INSTALAÇÃO SELETIVO (PWA ANDROID / IOS)
      ========================================================================== */
+  
+  // Função auxiliar para detectar se o dispositivo é iOS (iPhone, iPad, iPod)
+  const ehIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Verifica se o site já está rodando instalado ("standalone")
+  const jaEstaInstalado = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+  // Elementos do Android
   let gatilhoInstalacao = null;
-  const bannerInstalacao = document.getElementById('pwa-install-banner');
-  const btnInstalar = document.getElementById('btn-pwa-instalar');
-  const btnFecharBanner = document.getElementById('btn-pwa-fechar');
+  const bannerAndroid = document.getElementById('pwa-install-banner');
+  const btnInstalarAndroid = document.getElementById('btn-pwa-instalar');
+  const btnFecharAndroid = document.getElementById('btn-pwa-fechar');
 
-  // Ouve o evento do navegador que avisa que o site está pronto para ser instalado
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Impede que o navegador mostre o prompt padrão indesejado
-    e.preventDefault();
-    // Salva o evento para ser executado quando o morador clicar em "Instalar"
-    gatilhoInstalacao = e;
-    
-    // Mostra o banner customizado apenas se o morador não tiver recusado antes
-    if (localStorage.getItem('pwa-banner-recusado') !== 'sim') {
-      if (bannerInstalacao) bannerInstalacao.style.display = 'flex';
+  // Elementos do iOS
+  const bannerIOS = document.getElementById('pwa-ios-banner');
+  const btnFecharIOS = document.getElementById('btn-ios-fechar');
+
+  /* --- LOGICA PARA ANDROID / PC --- */
+  if (!ehIOS) {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      gatilhoInstalacao = e;
+      
+      // Só mostra se o morador não tiver recusado o banner do Android
+      if (localStorage.getItem('pwa-banner-recusado') !== 'sim') {
+        if (bannerAndroid) bannerAndroid.style.display = 'flex';
+      }
+    });
+
+    if (btnInstalarAndroid) {
+      btnInstalarAndroid.addEventListener('click', async () => {
+        if (!gatilhoInstalacao) return;
+        gatilhoInstalacao.prompt();
+        const { outcome } = await gatilhoInstalacao.userChoice;
+        gatilhoInstalacao = null;
+        if (bannerAndroid) bannerAndroid.style.display = 'none';
+      });
     }
-  });
 
-  // Ação ao clicar no botão "Instalar"
-  if (btnInstalar) {
-    btnInstalar.addEventListener('click', async () => {
-      if (!gatilhoInstalacao) return;
-      
-      // Abre a janelinha oficial de confirmação de instalação do navegador
-      gatilhoInstalacao.prompt();
-      
-      // Aguarda a resposta do morador
-      const { outcome } = await gatilhoInstalacao.userChoice;
-      console.log(`Escolha do usuário: ${outcome}`);
-      
-      // Limpa o gatilho, pois ele só pode ser usado uma vez
-      gatilhoInstalacao = null;
-      
-      // Esconde o banner
-      if (bannerInstalacao) bannerInstalacao.style.display = 'none';
-    });
+    if (btnFecharAndroid) {
+      btnFecharAndroid.addEventListener('click', () => {
+        if (bannerAndroid) bannerAndroid.style.display = 'none';
+        localStorage.setItem('pwa-banner-recusado', 'sim');
+      });
+    }
   }
 
-  // Ação ao clicar em "Agora não" (esconde o banner temporariamente)
-  if (btnFecharBanner) {
-    btnFecharBanner.addEventListener('click', () => {
-      if (bannerInstalacao) bannerInstalacao.style.display = 'none';
-      // Guarda a decisão no navegador para não incomodar o morador repetidamente
-      localStorage.setItem('pwa-banner-recusado', 'sim');
-    });
+  /* --- LÓGICA PARA IPHONE / IOS --- */
+  if (ehIOS && !jaEstaInstalado) {
+    // Só exibe o passo a passo se o morador não tiver fechado ele antes
+    if (localStorage.getItem('pwa-ios-recusado') !== 'sim') {
+      if (bannerIOS) bannerIOS.style.display = 'flex';
+    }
+
+    if (btnFecharIOS) {
+      btnFecharIOS.addEventListener('click', () => {
+        if (bannerIOS) bannerIOS.style.display = 'none';
+        localStorage.setItem('pwa-ios-recusado', 'sim');
+      });
+    }
   }
 
-  // Oculta o banner automaticamente se o app for instalado com sucesso
+  // Garante que os banners sumam se o app for aberto diretamente após instalado
   window.addEventListener('appinstalled', () => {
-    if (bannerInstalacao) bannerInstalacao.style.display = 'none';
+    if (bannerAndroid) bannerAndroid.style.display = 'none';
+    if (bannerIOS) bannerIOS.style.display = 'none';
     gatilhoInstalacao = null;
-    console.log('PWA instalado com sucesso pelo morador!');
   });
 
   /* 1. MENU HAMBÚRGUER (MOBILE) */
