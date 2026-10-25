@@ -11,6 +11,77 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+   /* ==========================================================================
+     PROMPT DE INSTALAÇÃO SELETIVO (PWA ANDROID / IOS)
+     ========================================================================== */
+  
+  // Função auxiliar para detectar se o dispositivo é iOS (iPhone, iPad, iPod)
+  const ehIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Verifica se o site já está rodando instalado ("standalone")
+  const jaEstaInstalado = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+  // Elementos do Android
+  let gatilhoInstalacao = null;
+  const bannerAndroid = document.getElementById('pwa-install-banner');
+  const btnInstalarAndroid = document.getElementById('btn-pwa-instalar');
+  const btnFecharAndroid = document.getElementById('btn-pwa-fechar');
+
+  // Elementos do iOS
+  const bannerIOS = document.getElementById('pwa-ios-banner');
+  const btnFecharIOS = document.getElementById('btn-ios-fechar');
+
+  /* --- LOGICA PARA ANDROID / PC --- */
+  if (!ehIOS) {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      gatilhoInstalacao = e;
+      
+      // Só mostra se o morador não tiver recusado o banner do Android
+      if (localStorage.getItem('pwa-banner-recusado') !== 'sim') {
+        if (bannerAndroid) bannerAndroid.style.display = 'flex';
+      }
+    });
+
+    if (btnInstalarAndroid) {
+      btnInstalarAndroid.addEventListener('click', async () => {
+        if (!gatilhoInstalacao) return;
+        gatilhoInstalacao.prompt();
+        const { outcome } = await gatilhoInstalacao.userChoice;
+        gatilhoInstalacao = null;
+        if (bannerAndroid) bannerAndroid.style.display = 'none';
+      });
+    }
+
+    if (btnFecharAndroid) {
+      btnFecharAndroid.addEventListener('click', () => {
+        if (bannerAndroid) bannerAndroid.style.display = 'none';
+        localStorage.setItem('pwa-banner-recusado', 'sim');
+      });
+    }
+  }
+
+  /* --- LÓGICA PARA IPHONE / IOS --- */
+  if (ehIOS && !jaEstaInstalado) {
+    // Só exibe o passo a passo se o morador não tiver fechado ele antes
+    if (localStorage.getItem('pwa-ios-recusado') !== 'sim') {
+      if (bannerIOS) bannerIOS.style.display = 'flex';
+    }
+
+    if (btnFecharIOS) {
+      btnFecharIOS.addEventListener('click', () => {
+        if (bannerIOS) bannerIOS.style.display = 'none';
+        localStorage.setItem('pwa-ios-recusado', 'sim');
+      });
+    }
+  }
+
+  // Garante que os banners sumam se o app for aberto diretamente após instalado
+  window.addEventListener('appinstalled', () => {
+    if (bannerAndroid) bannerAndroid.style.display = 'none';
+    if (bannerIOS) bannerIOS.style.display = 'none';
+    gatilhoInstalacao = null;
+  });
+
   /* 1. MENU HAMBÚRGUER (MOBILE) */
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
