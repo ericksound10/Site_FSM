@@ -233,7 +233,40 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', verificarTopo);
-    verificarTopo(); // Executa o estado inicial imediatamente
+    verificarTopo();
   }
   
+    /* 9. PROTEÇÃO DE DOCUMENTOS POR SENHA GLOBAL */
+  // Senha de acesso para os moradores do condomínio 
+  const SENHA_CONDOMINIO = "Morador2026!"; 
+
+  // Seleciona todos os links ou botões que possuem o atributo de proteção 
+  const documentosProtegidos = document.querySelectorAll('[data-protegido="true"]');
+
+  documentosProtegidos.forEach(botao => {
+    botao.addEventListener('click', (event) => {
+      // 1. Interrompe o download imediato do PDF
+      event.preventDefault(); 
+      
+      const urlDocumento = botao.getAttribute('href');
+
+      const senhaDigitada = prompt("Aviso de Segurança:\nEste documento é confidencial para moradores.\n\nPor favor, digite a senha do condomínio para baixar:");
+
+      // 3. Validação da senha
+      if (senhaDigitada === null) {
+        return; 
+      }
+
+      if (senhaDigitada === SENHA_CONDOMINIO) {
+        //alert("Senha correta! O download do seu documento começará agora.");
+        
+        // Abre o documento
+        window.open(urlDocumento, botao.getAttribute('target') || '_self');
+      } else {
+        alert("Senha incorreta! Acesso negado aos documentos internos.");
+      }
+    });
+  });
+  
+
 });
