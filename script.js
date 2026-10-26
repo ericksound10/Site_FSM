@@ -118,60 +118,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function consultarAPI(tipo) {
     return new Promise((resolve, reject) => {
-      const callback = 'apiCallback_' + Date.now() + '_' +
-        Math.random().toString(36).slice(2);
-
-      const script = document.createElement('script');
-      const timeout = setTimeout(() => {
-        limpar();
-        reject(new Error('Tempo limite ao consultar a API.'));
-      }, 15000);
-
-      function limpar() {
-        clearTimeout(timeout);
-        delete window[callback];
-        script.remove();
-      }
-
-      window[callback] = (resposta) => {
-        limpar();
-
-        if (!resposta || resposta.sucesso !== true) {
-          reject(new Error(resposta?.erro || 'Resposta inválida da API.'));
-          return;
-        }
-
-        resolve(resposta.dados);
-      };
-
-      script.onerror = (evento) => {
-        console.error('Erro no carregamento JSONP:', {
-          tipo: tipo,
-          url: script.src,
-          evento: evento
-        });
-
-        limpar();
-        reject(new Error('Não foi possível carregar a API.'));
-      };
-
       const separador = URL_API.includes('?') ? '&' : '?';
+      const urlCompleta = `${URL_API}${separador}tipo=${encodeURIComponent(tipo)}&_=${Date.now()}`;
 
-      script.src = URL_API +
-        separador +
-        'tipo=' + encodeURIComponent(tipo) +
-        '&callback=' + encodeURIComponent(callback) +
-        '&_=' + Date.now();
+      // Configura um tempo limite de 15 segundos para a requisição
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-      script.onload = () => {
-        console.log('Script da API carregado:', tipo, script.src);
-      };
-
-      script.addEventListener('error', () => {
-        console.error('Falha de rede ou bloqueio ao carregar:', script.src);
-      });
-
-      document.head.appendChild(script);
+      fetch(urlCompleta, { signal: controller.signal })
+        .then(resposta => {
+          clearTimeout(timeoutId);
+          if (!resposta.ok) {
+            throw new Error('Erro na resposta do servidor.');
+          }
+          return resposta.json();
+        })
+        .then(respostaJSON => {
+          if (!respostaJSON || respostaJSON.sucesso !== true) {
+            reject(new Error(respostaJSON?.erro || 'Resposta inválida da API.'));
+            return;
+          }
+          resolve(respostaJSON.dados);
+        })
+        .catch(erro => {
+          clearTimeout(timeoutId);
+          console.error('Erro na requisição da API:', tipo, erro);
+          reject(new Error('Não foi possível carregar a API.'));
+        });
     });
   }
 
@@ -330,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!containerHomeResumo && !containerMuralCompleto) return;
 
     try {
-      // Busca as notícias pela API, não mais pelo CSV.
       const dados = await consultarAPI('noticias');
 
       console.log('NOTÍCIAS RECEBIDAS:', dados);

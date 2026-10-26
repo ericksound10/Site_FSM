@@ -35,26 +35,29 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  
+  // Se for uma requisição externa (como a API do Google Sheets), não interfere
   if (!event.request.url.startsWith(self.location.origin)) return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Retorna o arquivo do cache se existir, mas busca uma versão nova na rede em paralelo
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        if (networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+    // Tenta buscar primeiro na rede/internet
+    fetch(event.request).then((networkResponse) => {
+      // Se a resposta for válida, atualiza o cache e entrega o arquivo novo
+      if (networkResponse.status === 200) {
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache);
+        });
+      }
+      return networkResponse;
+    }).catch(() => {
+      // Se falhar a rede (morador sem internet), busca o arquivo no cache seguro
+      return caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
         }
-        return networkResponse;
-      }).catch(() => {
-        // Se a rede falhar e não houver cache, evita que a tela quebre
+        // Se não tiver nem internet nem cache, exibe a mensagem de offline
         return new Response("Offline. Conecte-se à internet para atualizar o portal.");
       });
-
-      return cachedResponse || fetchPromise;
     })
   );
 });
@@ -64,8 +67,8 @@ self.addEventListener('push', (event) => {
   
   const opcoes = {
     body: dados.corpo,
-    icon: 'imagens/LogoForteSaoMateus.png', // Usa o ícone que já está no seu manifest
-    badge: 'imagens/LogoForteSaoMateus.png',
+    icon: '/imagens/LogoForteSaoMateus.png', // Usa o ícone que já está no seu manifest
+    badge: '/imagens/LogoForteSaoMateus.png',
     vibrate: [100, 50, 100],
     data: { url: '/noticias.html' } // Redireciona o morador ao clicar
   };
