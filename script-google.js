@@ -38,24 +38,6 @@ function doGet(e) {
     .createTextOutput(JSON.stringify(resultado))
     .setMimeType(ContentService.MimeType.JSON);
 }
-  // JSONP permite a leitura no navegador sem depender de CORS.
-  // Só aceita nomes simples de callback, nunca código arbitrário.
-//   if (callback) {
-//     if (!/^[a-zA-Z_$][0-9a-zA-Z_$.[\]]*$/.test(callback)) {
-//       return ContentService
-//         .createTextOutput('/* Callback inválido */')
-//         .setMimeType(ContentService.MimeType.JAVASCRIPT);
-//     }
-
-//     return ContentService
-//       .createTextOutput(callback + '(' + JSON.stringify(resultado) + ');')
-//       .setMimeType(ContentService.MimeType.JAVASCRIPT);
-//   }
-
-//   return ContentService
-//     .createTextOutput(JSON.stringify(resultado))
-//     .setMimeType(ContentService.MimeType.JSON);
-// }
 
 function obterDados(tipo) {
   const cache = CacheService.getScriptCache();
