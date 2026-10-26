@@ -11,9 +11,6 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // IDs públicos de exportação CSV das abas da sua planilha do Google
-  // (Substitua pelos IDs reais gerados no seu Google Sheets após publicar na web)
-
   const URL_API = 'https://script.google.com/macros/s/AKfycbw9GP_gDhlXbhiZzYrjsnu72kJfvi1TaORanwsiV03DwHUqfTrS1PRsjobJXsOtzV_V/exec';
 
 
@@ -294,11 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
    3. SISTEMA DE MURAL DE NOTÍCIAS
    ========================================================================== */
   async function carregarMuralNoticias() {
-    const containerHomeResumo =
-      document.getElementById('noticias-resumo-home');
-
-    const containerMuralCompleto =
-      document.getElementById('mural-noticias-completo');
+    const containerHomeResumo = document.getElementById('noticias-resumo-home');
+    const containerMuralCompleto = document.getElementById('mural-noticias-completo');
 
     if (!containerHomeResumo && !containerMuralCompleto) return;
 
@@ -306,10 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dados = await consultarAPI('noticias');
 
       console.log('NOTÍCIAS RECEBIDAS:', dados);
-      console.log(
-        'CONTÊINER DOS CARDS:',
-        document.getElementById('noticias-resumo-home')
-      );
+      console.log('CONTÊINER DOS CARDS:', containerHomeResumo);
 
       if (containerHomeResumo) {
         containerHomeResumo.innerHTML = '';
@@ -319,15 +310,23 @@ document.addEventListener('DOMContentLoaded', () => {
         containerMuralCompleto.innerHTML = '';
       }
 
-      // Cada item já chega organizado pela API.
       dados.forEach(item => {
         const {
           data,
           categoria,
           titulo,
           textoCompleto,
+          linkDestino,
           imagemUrl
         } = item;
+
+        const destinoOriginal = String(item.linkDestino || item.link_destino || '').trim();
+        const destino = destinoOriginal
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
 
         if (containerHomeResumo) {
           const card = document.createElement('div');
@@ -349,13 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
           dataEl.append(iconeData, document.createTextNode(' Postado em ' + data));
 
           const resumo = document.createElement('p');
-          resumo.textContent =
-            textoCompleto.length > 130
-              ? textoCompleto.substring(0, 130) + '...'
-              : textoCompleto;
+          resumo.textContent = textoCompleto.length > 130
+            ? textoCompleto.substring(0, 130) + '...'
+            : textoCompleto;
 
           const link = document.createElement('a');
-          link.href = 'noticias.html';
+          link.href = destino ? `noticias.html#${encodeURIComponent(destino)}` : 'noticias.html';
           link.className = 'btn-acao';
           link.textContent = 'Leia a matéria completa';
 
@@ -366,28 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (containerMuralCompleto) {
           const artigo = document.createElement('article');
           artigo.className = 'card-noticia-longa revelar-ao-scroll';
+          artigo.id = destino;
 
-          const destinoOriginal = String(
-            item.linkDestino || item.link_destino || ''
-          ).trim();
-
-          const idNoticia = destinoOriginal
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-|-$/g, '');
-
-          artigo.id = idNoticia;
-
-          console.log('Notícia criada:', {
-            titulo: item.titulo,
-            destinoOriginal,
-            idFinal: artigo.id
-          });
-
-          console.log('ID da notícia criada:', artigo.id, item.titulo);
-
+          console.log('Notícia criada:', { titulo: item.titulo, destinoOriginal, idFinal: artigo.id, linkDestino });
 
           const meta = document.createElement('div');
           meta.className = 'meta-noticia';
@@ -415,11 +394,6 @@ document.addEventListener('DOMContentLoaded', () => {
           paragrafo.textContent = textoCompleto;
           texto.appendChild(paragrafo);
 
-          if (imagemUrl && imagemUrl.trim() !== '') {
-            const img = document.createElement('img');
-
-          }
-
           if (imagemUrl) {
             console.log('URL da imagem:', imagemUrl);
             const img = document.createElement('img');
@@ -432,7 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
               img.alt = 'Imagem indisponível';
             };
 
-            // Abre o modal também para imagens carregadas dinamicamente.
             img.addEventListener('click', () => {
               const modal = document.getElementById('modal-imagem');
               const modalImg = document.getElementById('img-ampliada');
@@ -454,9 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      document.dispatchEvent(
-        new Event('noticiasCarregadas')
-      );
+      document.dispatchEvent(new Event('noticiasCarregadas'));
 
       if (typeof revinculacaoScrollReveal === 'function') {
         revinculacaoScrollReveal();
