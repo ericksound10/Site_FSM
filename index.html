@@ -77,6 +77,7 @@
     <!-- ------------------------------------
        CARROSSEL / HERO PRINCIPAL
     --------------------------------------- -->
+
     <section class="carrossel-container" id="inicio">
         <div class="carrossel-container">
 
@@ -121,6 +122,13 @@
                     <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">Leia a matéria completa
                         <i class="fa fa-arrow-right"></i>
                     </a>
+                </div>
+            </div>
+
+            <div class="carrossel-container">
+                <!-- Os slides do site entram aqui -->
+                <div class="carrossel-progresso">
+                    <div class="barra-progresso"></div>
                 </div>
             </div>
 
@@ -495,10 +503,17 @@
             </div>
         </section>
 
+
+
+
+
         <!-- SEÇÃO: NOTÍCIAS (COM CRONOGRAMA E BADGES DE IDENTIFICAÇÃO) -->
         <section id="noticias" class="secao">
             <h2 class="titulo-secao">Notícias e Comunicados</h2>
             <div class="grid-cards">
+
+                <div id="noticias-resumo-home" class="grid-cards">
+                    <!-- Os cards serão inseridos pelo JavaScript direto da planilha -->
 
                 <!-- Notícia 1 -->
                 <div class="card revelar-ao-scroll" id="noticia-elevadores">
@@ -604,7 +619,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.min.js"></script>
 
     <dialog id="modal-instrucoes" class="modal-boas-vindas">
         <div class="modal-boas-vindas-wrapper">
@@ -665,15 +680,19 @@
         </div>
     </div>
 
-        <!-- BANNER DO IPHONE / IOS (Esse novo que você selecionou) -->
-    <div id="pwa-ios-banner" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #1C3332; color: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 9999; width: 90%; max-width: 380px; flex-direction: column; font-family: sans-serif; border: 1px solid rgba(255,255,255,0.1);">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-        <strong style="font-size: 15px; color: #a3b8b6;">Instale no seu iPhone 📱</strong>
-        <button id="btn-ios-fechar" style="background: none; color: #a3b8b6; border: none; cursor: pointer; font-size: 16px; padding: 0 5px;">✕</button>
-    </div>
-    <p style="font-size: 13px; margin: 0 0 10px 0; line-height: 1.4;">
-        Para acessar o portal do condomínio como um aplicativo, toque no ícone de <strong>Compartilhar</strong> (quadrado com uma seta para cima) na barra do Safari e selecione <strong>"Adicionar à Tela de Início"</strong>.
-    </p>
+    <!-- BANNER DO IPHONE / IOS (Esse novo que você selecionou) -->
+    <div id="pwa-ios-banner"
+        style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #1C3332; color: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); z-index: 9999; width: 90%; max-width: 380px; flex-direction: column; font-family: sans-serif; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <strong style="font-size: 15px; color: #a3b8b6;">Instale no seu iPhone 📱</strong>
+            <button id="btn-ios-fechar"
+                style="background: none; color: #a3b8b6; border: none; cursor: pointer; font-size: 16px; padding: 0 5px;">✕</button>
+        </div>
+        <p style="font-size: 13px; margin: 0 0 10px 0; line-height: 1.4;">
+            Para acessar o portal do condomínio como um aplicativo, toque no ícone de <strong>Compartilhar</strong>
+            (quadrado com uma seta para cima) na barra do Safari e selecione <strong>"Adicionar à Tela de
+                Início"</strong>.
+        </p>
     </div>
 
 </body>

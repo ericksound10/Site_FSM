@@ -58,3 +58,27 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+self.addEventListener('push', (event) => {
+  const dados = event.data ? event.data.json() : { titulo: 'Novo Comunicado', corpo: 'Confira as novidades no portal.' };
+  
+  const opcoes = {
+    body: dados.corpo,
+    icon: 'imagens/LogoForteSaoMateus.png', // Usa o ícone que já está no seu manifest
+    badge: 'imagens/LogoForteSaoMateus.png',
+    vibrate: [100, 50, 100],
+    data: { url: '/noticias.html' } // Redireciona o morador ao clicar
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(dados.titulo, opcoes)
+  );
+});
+
+// Abre o site quando o morador clicar na notificação
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data.url)
+  );
+});
