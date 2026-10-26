@@ -1344,6 +1344,7 @@ body.dark-mode .card-documento .btn-acao,
 }
 
 .texto-completo p {
+    white-space: pre-wrap; /* Esta linha faz o navegador respeitar as quebras de linha automáticas da planilha */
     color: var(--texto-escuro);
     font-size: 1.05rem;
     line-height: 1.8;
@@ -1873,4 +1874,9 @@ body.dark-mode .card-documento .btn-acao,
     body:not(.dark-mode) .btn-acao-boas-vindas:active {
         color: #FFFFFF !important;
     }
+
+    #noticias-resumo-home .card.revelar-ao-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+}
 }
