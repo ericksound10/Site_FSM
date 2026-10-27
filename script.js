@@ -3,7 +3,7 @@
    ========================================================================== */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('PWA ativo com sucesso!', reg.scope))
       .catch(err => console.log('Erro ao registrar PWA:', err));
   });
