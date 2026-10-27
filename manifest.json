@@ -3,13 +3,13 @@
   "name": "Portal do Condomínio Forte São Mateus",
   "icons": [
     {
-      "src": "/imagens/LogoForteSaoMateus.png",
+      "src": "imagens/LogoForteSaoMateus.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/imagens/LogoForteSaoMateus.png",
+      "src": "imagens/LogoForteSaoMateus.png",
       "type": "image/png",
       "sizes": "512x512"
     }
