@@ -78,42 +78,33 @@
        CARROSSEL / HERO PRINCIPAL
     --------------------------------------- -->
 
-    <section class="carrossel-container" id="inicio">
+    <section class="carrossel-secao" id="inicio">
+        <!-- Apenas um container principal do carrossel -->
         <div class="carrossel-container">
 
-            <!-- SLIDE 1 (Ativo por padrão) -->
+            <!-- SLIDE 1: Fixo de Boas-Vindas -->
             <div class="slide ativo">
                 <picture class="slide-background">
                     <source media="(max-width: 768px)" srcset="imagens/banner-boas-vindas-4-Mobile.png">
                     <img src="imagens/banner-boas-vindas-4-Desktop.png" alt="Forte São Mateus">
                 </picture>
-                <!-- <div class="slide ativo" style="background-image: url('imagens/forte-sao-mateus.png');"> -->
                 <div class="slide-conteudo">
-                    <h1>Bem-vindo ao Condomínio Forte São Mateus</span></h1>
+                    <h1>Bem-vindo ao Condomínio Forte São Mateus</h1>
                     <p>Seu espaço de paz, segurança e convivência em harmonia.</p>
-                    <a href="#boas-vindas" class="btn-slide-noticia">Acesse o Kit de Boas-vindas <i
-                            class="fa fa-arrow-right"></i></a>
+                    <a href="#boas-vindas" class="btn-slide-noticia">
+                        Acesse o Kit de Boas-vindas <i class="fa fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
 
-            <div class="carrossel-container">
-                <!-- Os slides do site entram aqui -->
-                <div class="carrossel-progresso">
-                    <div class="barra-progresso"></div>
-                </div>
-            </div>
+            <!-- Os slides dinâmicos da planilha serão injetados pelo JS EXATAMENTE AQUI -->
 
-            <!-- BARRA DE PROGRESSO DO SLIDE -->
             <div class="carrossel-progresso">
                 <div class="barra-progresso"></div>
             </div>
 
             <!-- INDICADORES DE NAVEGAÇÃO (BOLINHAS) -->
-            <div class="carrossel-indicadores">
-                <span class="indicador ativo" data-slide="0"></span>
-                <span class="indicador" data-slide="1"></span>
-                <span class="indicador" data-slide="2"></span>
-            </div>
+            <div class="carrossel-indicadores"></div>
 
         </div>
     </section>
@@ -194,17 +185,31 @@
                 <!-- Card 2: Mudanças -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
-                        <img src="imagens/Mudanças-Reformas-Encomendas-2.png" alt="Reformas">
+                        <img src="imagens/Mudanças-e-Reformas.png" alt="Reformas">
                     </div>
                     <div class="card-conteudo">
-                        <h3>Mudanças, Reformas e Encomendas</h3>
-                        <p>Regras e procedimentos para solicitação de mudanças, reformas e encomendas no condomínio.</p>
+                        <h3>Mudanças e Reformas</h3>
+                        <p>Regras e procedimentos para solicitação de mudanças e reformas no condomínio.</p>
 
                         <button id="btn-abrir-instrucoes" class="btn-acao-boas-vindas">Ver Instruções</button>
                     </div>
                 </div>
 
-                <!-- Card 3: Regras Gerais -->
+                <!-- Card 3: Encomendas -->
+                <div class="card revelar-ao-scroll">
+                    <div class="card-imagem-topo">
+                        <img src="imagens/Entrega-e-retirada-de-encomendas.png" alt="Reformas">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>Entrega e Retirada de Encomendas</h3>
+                        <p>Regras e procedimentos para solicitação de mudanças e reformas no condomínio.</p>
+
+                        <button id="btn-abrir-encomendas" class="btn-acao-boas-vindas">Ver Instruções</button>
+                    </div>
+                </div>
+
+
+                <!-- Card 4: Regras Gerais -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Regras-Gerais.png" alt="Reformas">
@@ -217,7 +222,7 @@
                     </div>
                 </div>
 
-                <!-- Card 4: Contatos Úteis -->
+                <!-- Card 5: Contatos Úteis -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Contatos-uteis.png" alt="Contatos">
@@ -232,7 +237,7 @@
                     </div>
                 </div>
 
-                <!-- Card 5: Guia do Bairro -->
+                <!-- Card 6: Guia do Bairro -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Guia-bairro-1.png" alt="Guia do Bairro">
@@ -247,7 +252,7 @@
                     </div>
                 </div>
 
-                <!-- Card 6: Lixo e Reciclagem -->
+                <!-- Card 7: Lixo e Reciclagem -->
                 <div class="card revelar-ao-scroll">
                     <div class="card-imagem-topo">
                         <img src="imagens/Guia-descarte-lixo-1.png" alt="Reciclagem">
@@ -482,39 +487,41 @@
                 <div id="noticias-resumo-home" class="grid-cards">
                     <!-- Os cards serão inseridos pelo JavaScript direto da planilha -->
 
-                <!-- Notícia 1 -->
-                <div class="card revelar-ao-scroll" id="noticia-elevadores">
-                    <div class="card-conteudo-simples">
-                        <span class="badge-categoria categoria-manutencao">Manutenção</span>
-                        <h3>Manutenção preventiva dos elevadores</h3>
-                        <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 14 de Outubro,
-                            2026</span>
-                        <p>Informamos que na próxima terça-feira, das 09h às 13h, os elevadores da torre A passarão por
-                            inspeção técnica obrigatória de segurança.</p>
-                        <a href="noticias.html#noticia-manutencao-out2026" class="btn-slide-noticia">
-                            Leia a matéria completa
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
+                    <!-- Notícia 1 -->
+                    <div class="card revelar-ao-scroll" id="noticia-elevadores">
+                        <div class="card-conteudo-simples">
+                            <span class="badge-categoria categoria-manutencao">Manutenção</span>
+                            <h3>Manutenção preventiva dos elevadores</h3>
+                            <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 14 de Outubro,
+                                2026</span>
+                            <p>Informamos que na próxima terça-feira, das 09h às 13h, os elevadores da torre A passarão
+                                por
+                                inspeção técnica obrigatória de segurança.</p>
+                            <a href="noticias.html#noticia-manutencao-out2026" class="btn-slide-noticia">
+                                Leia a matéria completa
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Notícia 2 -->
-                <div class="card revelar-ao-scroll" id="noticia-assembleia">
-                    <div class="card-conteudo-simples">
-                        <span class="badge-categoria categoria-assembleia">Assembleia</span>
-                        <h3>Convocação para Assembleia Geral</h3>
-                        <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 10 de Outubro,
-                            2026</span>
-                        <p>A convocação oficial com a pauta completa e o link de acesso para o modelo híbrido de reunião
-                            já foi enviada por e-mail a todos.</p>
-                        <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">
-                            Leia a matéria completa
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
+                    <!-- Notícia 2 -->
+                    <div class="card revelar-ao-scroll" id="noticia-assembleia">
+                        <div class="card-conteudo-simples">
+                            <span class="badge-categoria categoria-assembleia">Assembleia</span>
+                            <h3>Convocação para Assembleia Geral</h3>
+                            <span class="data-publicacao"><i class="fa fa-calendar"></i> Postado em 10 de Outubro,
+                                2026</span>
+                            <p>A convocação oficial com a pauta completa e o link de acesso para o modelo híbrido de
+                                reunião
+                                já foi enviada por e-mail a todos.</p>
+                            <a href="noticias.html#noticia-assembleia-out2026" class="btn-slide-noticia">
+                                Leia a matéria completa
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
         </section>
 
         <!-- Seção do Mapa -->
@@ -619,19 +626,67 @@
                         <li><strong>Entulho:</strong> É proibido o descarte de restos de obra e entulho nas lixeiras
                             comuns do condomínio. A caçamba e a retirada são de responsabilidade total do morador.</li>
                     </ul>
-
-                    <h3>📦 Entrega e Retirada de Encomendas </h3>
-                    <ul>
-                        <li><strong>Retirada de encomendas na Portaria:</strong> O morador tem até 72 horas para retirar
-                            encomendas comuns, mas cestas básicas e remédios devem ser retirados no mesmo dia. O horário
-                            de recebimento e retirada é das 07h às 22h.</li>
-                        <li><strong>Horários:</strong> O horário de recebimento e retirada é das 07h às 22h.</li>
-                        <li><strong>Restrição de entregas por aplicativo:</strong> Entregadores de fast-food, farmácias,
-                            restaurantes e prestadores similares não entram nas torres; o morador deve descer até a
-                            portaria para retirar.</li>
-                    </ul>
                 </div>
             </div>
+        </div>
+    </dialog>
+
+    <!-- Pop-up de Encomendas  -->
+    <dialog id="modal-encomendas" class="modal-boas-vindas">
+        <div class="modal-boas-vindas-conteudo">
+
+            <!-- Cabeçalho idêntico ao da imagem -->
+            <div class="modal-boas-vindas-header">
+                <h2>📦 Instruções para Recebimento e Retirada</h2>
+                <button class="botao-fechar-instrucoes botao-fechar-encomendas"
+                    aria-label="Fechar modal">&times;</button>
+            </div>
+
+            <div class="modal-boas-vindas-body">
+
+                <!-- Grupo 1: Recebimento na Portaria -->
+                <h3>📦 Recebimento de Volumes</h3>
+                <ul>
+                    <li><strong>Volume Permitido:</strong> A portaria aceitará apenas encomendas de pequeno e médio
+                        volume. É proibido o recebimento de móveis, eletrodomésticos ou volumes de grande porte.</li>
+                    <li><strong>Restrições de Entrega:</strong> Não são aceitos produtos perecíveis, remédios, refeições
+                        (fast-food) ou qualquer entrega que exija código de confirmação ou pagamento no ato. O morador
+                        deve descer para receber.</li>
+                    <li><strong>Dados do Pacote:</strong> Encomendas com dados de identificação incompletos, incorretos
+                        ou nome que não conste no cadastro do condomínio serão devolvidas imediatamente ao remetente.
+                    </li>
+                </ul>
+
+                <!-- Grupo 2: Prazos e Retirada -->
+                <h3>⏳ Prazos e Retirada de Encomendas</h3>
+                <ul>
+                    <li><strong>Horário de Funcionamento:</strong> O recebimento e a retirada de encomendas ocorrem
+                        estritamente de segunda a domingo, das <strong>07h às 22h</strong>.</li>
+                    <li><strong>Prazo Limite:</strong> O morador tem o prazo máximo de <strong>72 horas</strong> para
+                        retirar suas encomendas na portaria.</li>
+                    <li><strong>Urgências (Cesta Básica/Remédio):</strong> Cestas básicas e medicamentos devem ser
+                        retirados obrigatoriamente no mesmo dia do recebimento. <span
+                            style="color: #E74C3C; font-weight: 600;">O descumprimento gera multa direta</span>.</li>
+                    <li><strong>Retirada por Menores:</strong> As encomendas só serão liberadas para crianças a partir
+                        de 12 anos. É proibida a entrega para menores desacompanhados.</li>
+                </ul>
+
+                <!-- Grupo 3: Casos Especiais -->
+                <h3>⚖️ Correspondências Judiciais</h3>
+                <ul>
+                    <li><strong>Procedimento:</strong> Notificações e intimações judiciais não são recebidas pela
+                        portaria. O oficial será identificado e encaminhado diretamente ao apartamento do destinatário.
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Rodapé com o botão padrão "Entendido" centralizado/alinhado -->
+            <div class="modal-footer" style="padding: 0 2rem 2rem 2rem; background-color: transparent;">
+                <button class="btn-acao botao-fechar-encomendas"
+                    style="cursor: pointer; border: none;">Entendido</button>
+            </div>
+
         </div>
     </dialog>
 
