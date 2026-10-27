@@ -178,15 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const dados = await consultarAPI('banners');
 
-      // Remove somente os banners dinâmicos de execuções anteriores.
+      // Limpa os banners dinâmicos anteriores
       carrosselContainer
         .querySelectorAll('.slide[data-dinamico="true"]')
         .forEach(slide => slide.remove());
 
+      // LIMPA COMPLETAMENTE AS BOLINHAS ANTERIORES PARA RECONSTRUIR DO ZERO
       if (indicadoresContainer) {
-        indicadoresContainer
-          .querySelectorAll('.indicador[data-dinamico="true"]')
-          .forEach(indicador => indicador.remove());
+        indicadoresContainer.innerHTML = '';
+
+        // Cria a bolinha para o slide FIXO de Boas-Vindas que já está no HTML
+        const bolinhaFixa = document.createElement('div');
+        bolinhaFixa.className = 'indicador ativo'; // Começa ativa porque o slide de boas-vindas é o primeiro
+        indicadoresContainer.appendChild(bolinhaFixa);
       }
 
       dados.forEach(item => {
@@ -640,6 +644,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalInstrucoes.addEventListener('click', (event) => {
       if (event.target === modalInstrucoes) fecharInstrucoes();
+    });
+  }
+
+  /* 5.2. MODAL DE ENCOMENDAS */
+  const modalEncomendas = document.getElementById('modal-encomendas');
+  const btnAbrirEncomendas = document.getElementById('btn-abrir-encomendas');
+  const btnsFecharEncomendas = document.querySelectorAll('.botao-fechar-encomendas');
+
+  if (btnAbrirEncomendas && modalEncomendas) {
+    // Abre o modal de encomendas
+    btnAbrirEncomendas.addEventListener('click', () => {
+      modalEncomendas.showModal();
+      document.body.style.overflow = 'hidden'; // Trava o scroll da página
+    });
+
+    // Função para fechar o modal
+    const fecharEncomendas = () => {
+      modalEncomendas.close();
+      document.body.style.overflow = 'auto'; // Libera o scroll da página
+    };
+
+    // Vincula o evento a todos os botões com a classe fechar (o 'X' e o botão do footer)
+    btnsFecharEncomendas.forEach(btn => {
+      btn.addEventListener('click', fecharEncomendas);
+    });
+
+    // Fecha se o morador clicar na parte escura (fora do modal)
+    modalEncomendas.addEventListener('click', (event) => {
+      if (event.target === modalEncomendas) {
+        fecharEncomendas();
+      }
     });
   }
 
