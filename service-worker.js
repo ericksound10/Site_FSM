@@ -1,11 +1,11 @@
 const CACHE_NAME = 'condominio-pwa-v1';
 
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/script.js',
-  '/style.css',
-  '/manifest.json'
+  './',
+  'index.html',
+  'script.js',
+  'style.css',
+  'manifest.json'
 ];
 
 // 1. Grava os arquivos essenciais no cache assim que instala
