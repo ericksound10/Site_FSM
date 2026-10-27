@@ -67,10 +67,10 @@ self.addEventListener('push', (event) => {
   
   const opcoes = {
     body: dados.corpo,
-    icon: '/imagens/LogoForteSaoMateus.png', // Usa o ícone que já está no seu manifest
-    badge: '/imagens/LogoForteSaoMateus.png',
+    icon: 'imagens/LogoForteSaoMateus.png',
+    badge: 'imagens/LogoForteSaoMateus.png',
     vibrate: [100, 50, 100],
-    data: { url: '/noticias.html' } // Redireciona o morador ao clicar
+    data: { url: '/noticias.html' }
   };
 
   event.waitUntil(
