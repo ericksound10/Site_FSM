@@ -14,15 +14,51 @@
     <!-- CABEÇALHO (Navbar integrada com link de volta) -->
     <header class="cabecalho">
         <div class="container-header">
-            <a href="index.html" class="logo-link">
+            <a href="index.html#inicio" class="logo-link">
                 <div class="logo-container">
-                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img">
-                    <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
+                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img" href="inicio">
+                    <div class="logo-titulo"> <span>Condomínio Forte São Mateus</span></div>
                 </div>
             </a>
 
-            <nav class="menu-navegacao menu-retorno">
-                <a href="index.html"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
+            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
+            <nav id="mobile-nav" class="hidden">
+                <ul>
+                    <!-- <div class="mobile-dark-container">
+                        <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    </div> -->
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
+                </ul>
+            </nav>
+
+            <!-- BARRA DE PESQUISA INTEGRADA NA NAVBAR -->
+            <div class="mural-busca-container" >
+                <input type="text" id="input-busca-noticias" placeholder="Pesquisar notícias... ">                                
+            </div>
+
+            <nav class="menu-navegacao">
+                <a href="index.html" class="link-retorno-menu">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Início</span>
+                </a>
             </nav>
         </div>
     </header>
@@ -33,41 +69,14 @@
             <h1 class="titulo-secao revelar-ao-scroll">Mural de Comunicados e Notícias</h1>
 
             <div id="mural-noticias-completo" class="grid-cards-noticias">
-                    <!-- O código vai preencher aqui sozinho -->
-                     
+
+                <!-- Serão carregados dados da planilha aqui -->
+
+                <!-- MENSAGEM DE CARREGAMENTO (Sumiu o conteúdo fixo antigo) -->
+                <div id="carregando-noticias" style="text-align: center; padding: 40px; width: 100%; color: #888;">
+                    <i class="fa fa-spinner fa-spin" style="font-size: 32px; margin-bottom: 10px; color: #baa181;"></i>
+                    <p style="font-size: 16px; font-weight: 500;">Buscando comunicados...</p>
                 </div>
-                <br>
-
-            <!-- GRID DE NOTÍCIAS LONGAS -->
-            <div class="grid-cards-noticias" id="mural-noticias">                
-
-                <!-- NOTÍCIA 1 (Sempre adicione a mais recente no topo) -->
-                <article class="card-noticia-longa revelar-ao-scroll" id="noticia-manutencao-out2026">
-                    <div class="meta-noticia">
-                        <span class="badge-categoria">Manutenção</span>
-                        <span class="data-publicacao"><i class="fa fa-calendar"></i> 21 de Outubro de 2026</span>
-                    </div>
-                    <h3>Manutenção Preventiva dos Elevadores das Torres 1 e 3</h3>
-                    <div class="texto-completo">
-                        <p>Prezados moradores, informamos que no próximo dia 27 de outubro (terça-feira), os elevadores do condomínio passarão por uma inspeção técnica preventiva realizada pela empresa responsável contratada.</p>
-                        <p>A manutenção ocorrerá de forma alternada para não isolar nenhum andar, iniciando pela Torre 1 das 09h às 11h, e seguindo para a Torre 3 das 11h às 13h. Pedimos a colaboração de todos para que programem seus horários de saída e mudanças.</p>
-                    </div>
-                </article>
-
-                <!-- NOTÍCIA 2 -->
-                <article class="card-noticia-longa revelar-ao-scroll" id="noticia-assembleia-out2026">
-                    <div class="meta-noticia">
-                        <span class="badge-categoria">Assembleia</span>
-                        <span class="data-publicacao"><i class="fa fa-calendar"></i> 15 de Outubro de 2026</span>
-                    </div>
-                    <h3>Convocação para Assembleia Geral Ordinária Híbrida</h3>
-                    <div class="texto-completo">
-                        <p>COND. FORTE SÃO MATEUS - PASSO A PASSO PARA PARTICIPAR DA ASSEMBLEIA HÍBRIDA EM 22/10/2026
-                            (Quinta-feira)</p>
-                        <img src="imagens/Assembleia-condominio-out-2026.jpg" alt="Assembleia Híbrida"
-                            class="imagem-noticia">
-                    </div>
-                </article>
 
             </div>
         </section>
