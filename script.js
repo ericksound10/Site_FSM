@@ -15,11 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ==========================================================================
-    PROMPT DE INSTALAÇÃO SELETIVO (PWA ANDROID / IOS)
-    ========================================================================== */
+  PROMPT DE INSTALAÇÃO SELETIVO (PWA ANDROID / IOS)
+  ========================================================================== */
 
-  // Função auxiliar para detectar se o dispositivo é iOS (iPhone, iPad, iPod)
-  const ehIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // 1. Detecção moderna de iOS (inclui iPhones e iPads atualizados)
+  const ehIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
   // Verifica se o site já está rodando instalado ("standalone")
   const jaEstaInstalado = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
@@ -39,17 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       gatilhoInstalacao = e;
 
-      // Só mostra se o morador não tiver recusado o banner do Android
-      if (localStorage.getItem('pwa-banner-recusado') !== 'sim') {
+      // Só mostra se o morador não tiver recusado o banner do Android e o app não estiver instalado
+      if (localStorage.getItem('pwa-banner-recusado') !== 'sim' && !jaEstaInstalado) {
         if (bannerAndroid) bannerAndroid.style.display = 'flex';
       }
     });
 
+    // Proteção: Garante que o evento só roda se o botão realmente existir na página HTML
     if (btnInstalarAndroid) {
       btnInstalarAndroid.addEventListener('click', async () => {
         if (!gatilhoInstalacao) return;
         gatilhoInstalacao.prompt();
         const { outcome } = await gatilhoInstalacao.userChoice;
+        console.log(`Usuário escolheu instalação: ${outcome}`);
         gatilhoInstalacao = null;
         if (bannerAndroid) bannerAndroid.style.display = 'none';
       });
@@ -78,11 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Garante que os banners sumam se o app for aberto diretamente após instalado
+  // Garante que os banners sumam e limpa o localStorage se o app for instalado
   window.addEventListener('appinstalled', () => {
     if (bannerAndroid) bannerAndroid.style.display = 'none';
     if (bannerIOS) bannerIOS.style.display = 'none';
     gatilhoInstalacao = null;
+    // Reseta as recusas caso o usuário limpe o app e volte ao site futuramente
+    localStorage.removeItem('pwa-banner-recusado');
+    localStorage.removeItem('pwa-ios-recusado');
   });
 
   /* 1. MENU HAMBÚRGUER (MOBILE) */
@@ -301,7 +309,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!containerHomeResumo && !containerMuralCompleto) return;
 
     try {
-      const dados = await consultarAPI('noticias');
+  let dados = await consultarAPI('noticias');
+
+  // Ordena de forma inteligente: da data mais recente para a mais antiga
+  dados.sort((a, b) => {
+    // Função interna para transformar DD/MM/AAAA em um objeto Date comparável
+    const converterData = (stringData) => {
+      if (!stringData) return new Date(0); 
+      const partes = stringData.split('/');
+      return new Date(partes[2], partes[1] - 1, partes[0]);
+    };
+
+    return converterData(b.data) - converterData(a.data);
+  });
 
       console.log('NOTÍCIAS RECEBIDAS:', dados);
       console.log('CONTÊINER DOS CARDS:', containerHomeResumo);
@@ -799,6 +819,35 @@ document.addEventListener('DOMContentLoaded', () => {
       if (permission === 'granted') {
         console.log('O morador aceitou receber notificações!');
       }
+    });
+  }
+
+  /* ==========================================================================
+     11. SISTEMA DE BUSCA DINÂMICA NO MURAL DE NOTÍCIAS
+     ========================================================================== */
+  const inputBusca = document.getElementById('input-busca-noticias');
+
+  if (inputBusca) {
+    inputBusca.addEventListener('input', () => {
+      // Pega o termo digitado e transforma em minúsculo para ignorar maiúsculas/minúsculas
+      const termoBusca = inputBusca.value.toLowerCase().trim();
+      
+      // Seleciona todos os cards de notícias que foram injetados na tela
+      const cardsNoticias = document.querySelectorAll('#mural-noticias-completo .card-noticia-longa');
+
+      cardsNoticias.forEach(card => {
+        // Captura os textos internos do card para pesquisa
+        const titulo = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const texto = card.querySelector('.texto-completo')?.textContent.toLowerCase() || '';
+        const categoria = card.querySelector('.badge-categoria')?.textContent.toLowerCase() || '';
+
+        // Se o termo estiver no título, no texto ou na categoria, mantém visível
+        if (titulo.includes(termoBusca) || texto.includes(termoBusca) || categoria.includes(termoBusca)) {
+          card.style.display = 'block'; // Mostra o card
+        } else {
+          card.style.display = 'none';  // Esconde o card
+        }
+      });
     });
   }
 

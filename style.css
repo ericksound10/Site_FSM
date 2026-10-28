@@ -313,7 +313,7 @@ body.dark-mode .modal-boas-vindas-body ul li {
 
 body.dark-mode .modal-boas-vindas-body ul li strong {
     color: #FFFFFF !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .modal-boas-vindas-body p,
@@ -431,9 +431,15 @@ body.dark-mode .btn-acao-boas-vindas:hover::after {
 .container-header {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    /* Distribui logo na esquerda, busca no centro e botão na direita */
+    align-items: center !important;
+    /* Alinha todos os elementos perfeitamente pelo centro vertical */
+    gap: 20px;
+    /* Evita que os elementos batam um no outro em telas menores */
+    width: 100%;
 }
 
 .logo-container {
@@ -513,7 +519,7 @@ body.dark-mode .btn-acao-boas-vindas:hover::after {
 .carrossel-container {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 500px;
     overflow: hidden;
     /* background-color: #FFFFFF !important;  */
     background-color: var(--verde-escuro) !important;
@@ -547,9 +553,9 @@ body.dark-mode .btn-acao-boas-vindas:hover::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Faz o preenchimento perfeito e pesado */
+    /* Alinha a imagem totalmente à esquerda e centraliza na vertical */
+    object-position: left center;
     z-index: -1;
-    /* Joga a imagem para trás do texto */
 }
 
 .slide-conteudo {
@@ -770,6 +776,7 @@ main>div {
     color: var(--verde-escuro);
     font-size: 1.75rem;
     font-weight: 700;
+    margin-top: 3rem;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
@@ -1349,7 +1356,8 @@ body.dark-mode .card-documento .btn-acao,
 }
 
 .texto-completo p {
-    white-space: pre-wrap; /* Esta linha faz o navegador respeitar as quebras de linha automáticas da planilha */
+    white-space: pre-wrap;
+    /* Esta linha faz o navegador respeitar as quebras de linha automáticas da planilha */
     color: var(--texto-escuro);
     font-size: 1.05rem;
     line-height: 1.8;
@@ -1471,10 +1479,54 @@ body.dark-mode .card-documento .btn-acao,
     display: none;
 }
 
+.mural-busca-container {
+    position: relative !important; /* Essencial para que a lupa absoluta se oriente por ele */
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mural-busca-container input[type="text"] {
+    width: 100%;
+    /* O preenchimento da direita (45px) impede que o texto digitado passe por baixo do ícone */
+    padding: 10px 45px 10px 15px !important;
+    font-size: 15px;
+    margin: 0 !important;
+}
+
+.mural-busca-container input[type="text"]:focus {
+    border-color: #baa181;
+    box-shadow: 0 4px 12px rgba(186, 161, 129, 0.2);
+}
+
+/* Força a lupa a ficar centralizada verticalmente e alinhada à direita interna */
+.mural-busca-container .icone-lupa-mural {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 15px !important; /* Ajusta a distância da borda direita interna */
+    color: #baa181 !important;
+    font-size: 16px !important;
+    pointer-events: none; /* Garante que clicar na lupa clique no input */
+    z-index: 99 !important;
+}
+
 /* ------------------------------------
    RESPONSIVIDADE (MOBILE)
 --------------------------------------- */
 @media (max-width: 768px) {
+
+    header,
+    nav,
+    .navbar {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
 
     main,
     .conteudo-principal,
@@ -1491,8 +1543,68 @@ body.dark-mode .card-documento .btn-acao,
         box-sizing: border-box !important;
     }
 
+    #noticias-resumo-home .card.revelar-ao-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .mural-busca-container {
+        position: fixed !important;
+        bottom: 75px !important;
+        display: flex !important;
+        align-items: center !important;
+        /* Correção: removido o justify-content inválido */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: calc(100% - 30px) !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 9999 !important;
+    }
+
+    .mural-busca-container input[type="text"] {
+        width: 100%;
+        /* Garante espaço interno na direita para o texto não passar por baixo da lupa */
+        padding: 12px 45px 12px 18px !important; 
+        font-size: 16px;
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        background-color: #ffffff;
+        color: #333333;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+
+    .mural-busca-container .icone-lupa-mural {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        right: 18px !important; /* Afastamento da borda direita */
+        color: #baa181 !important;
+        font-size: 16px !important;
+        pointer-events: none; /* Evita que o clique no ícone atrapalhe o foco do input */
+        z-index: 100 !important; /* Garante que fique visualmente acima do input */
+    }
+
+    body.dark-mode .mural-busca-container input[type="text"] {
+        background-color: #152726 !important;
+        color: #ffffff !important;
+        border-color: var(--dourado-bronze) !important;
+        width: 100%;
+        padding: 10px 45px 10px 15px !important;
+        /* Aumentado para 45px para isolar o espaço da lupa */
+        font-size: 15px;
+        margin: 0 !important;
+    }
+
+    #mural-noticias-completo {
+        padding-bottom: 160px !important;
+    }
+
     body {
-        padding-bottom: 110px !important;
+        padding-bottom: 75px !important;
     }
 
     .cabecalho {
@@ -1502,8 +1614,34 @@ body.dark-mode .card-documento .btn-acao,
         padding: 1rem 1.2rem;
     }
 
+    .container-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        height: 45px !important;
+        /* Casando perfeitamente com a altura máxima da imagem do logo */
+    }
+
+    .cabecalho,
+    .logo-container {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .logo-img {
+        display: block !important;
+        margin: 0 !important;
+        height: 45px !important;
+        /* Mantém a proporção nítida */
+    }
+
     .logo-titulo {
         font-size: 1.05rem;
+        margin: 0 !important;
+        /* Limpa margens nativas de h1/h2 que empurram o texto para baixo */
+        line-height: 1 !important;
+        /* Centraliza a linha do texto com o meio do logo */
     }
 
     .menu-navegacao {
@@ -1515,6 +1653,8 @@ body.dark-mode .card-documento .btn-acao,
 
     .burger-menu {
         display: flex !important;
+        align-items: center !important;
+        margin: 0 !important;
         flex-direction: column;
         justify-content: space-between;
         width: 30px;
@@ -1533,7 +1673,6 @@ body.dark-mode .card-documento .btn-acao,
         transition: 0.3s;
     }
 
-    /* --- AJUSTE CIRÚRGICO DO BANNER NO CELULAR --- */
     .carrossel-container {
         height: 480px;
     }
@@ -1879,9 +2018,4 @@ body.dark-mode .card-documento .btn-acao,
     body:not(.dark-mode) .btn-acao-boas-vindas:active {
         color: #FFFFFF !important;
     }
-
-    #noticias-resumo-home .card.revelar-ao-scroll {
-    opacity: 1 !important;
-    transform: none !important;
-}
 }

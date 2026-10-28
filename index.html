@@ -8,8 +8,6 @@
     <!-- Importação de Fontes Modernas e Ícones Visuais -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <!-- <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="https://cloudflare.com"> -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Vincula o Manifesto do PWA -->
@@ -41,17 +39,20 @@
             <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
             <nav id="mobile-nav" class="hidden">
                 <ul>
-                    <div class="mobile-dark-container">
+                    <!-- <div class="mobile-dark-container">
                         <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
                             <i class="fa fa-moon-o"></i> <span></span>
                         </button>
-                    </div>
+                    </div> -->
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
                     <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
                     <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
                     <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
                     <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
                     <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
-                    <li><a href="noticias.html#mural-noticias"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li> <a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
                     <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
                 </ul>
             </nav>
@@ -62,12 +63,12 @@
                 <a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a>
                 <a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a>
                 <a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a>
-                <a href="noticias.html#mural-noticias"><i class="fa fa-bullhorn"></i> Notícias</a>
+                <a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a>
                 <a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a>
 
                 <button id="btn-dark-desktop" class="item-menu-dark">
                     <i class="fa fa-sun-o"></i>
-                    <span>Claro</span>
+                    <span></span>
                 </button>
             </nav>
         </div>
@@ -486,6 +487,12 @@
 
                 <div id="noticias-resumo-home" class="grid-cards">
                     <!-- Os cards serão inseridos pelo JavaScript direto da planilha -->
+
+                    <div id="carregando-home" style="text-align: center; padding: 20px; width: 100%; color: #888;">
+                        <i class="fa fa-refresh fa-spin"
+                            style="font-size: 24px; margin-bottom: 8px; color: #baa181;"></i>
+                        <p style="font-size: 14px;">Carregando últimas notícias...</p>
+                    </div>
 
                     <!-- Notícia 1 -->
                     <div class="card revelar-ao-scroll" id="noticia-elevadores">
