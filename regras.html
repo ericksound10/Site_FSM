@@ -20,9 +20,31 @@
                     <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
                 </div>
             </a>
-            <!-- Link de retorno rápido para a página principal -->
-            <nav class="menu-navegacao menu-retorno">
-                <a href="index.html#boas-vindas"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
+            <div class="busca-container">
+                <input type="text" id="input-busca-regras" placeholder="Busque por regras, horários, silêncio...">
+            </div>
+             <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
+            <nav id="mobile-nav" class="hidden">
+                <ul>
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -34,46 +56,263 @@
             <p style="color: var(--texto-mutado); margin-bottom: 2rem;">Guia prático para uma convivência harmoniosa. O
                 respeito mútuo garante a paz do nosso condomínio.</p>
 
-            <div class="grid-cards-noticias">
+            <div class="grid-cards-regras">
 
                 <!-- CARD 1: SILÊNCIO -->
-                <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3>🤫 Convivência Geral e Lei do Silêncio</h3>
-                    <div class="texto-completo">
-                        <p>• <strong>Horários e limites de barulho:</strong> O limite diurno (09h às 22h) é de 55 decibéis. No período noturno (22h às 09h), o limite cai para 45 decibéis.</p>
-                        <p>• <strong>Uso de furadeiras e martelos:</strong> Permitido de segunda a sexta, das 09h às 17h, e aos sábados, apenas entre 10h e 14h (proibido aos domingos e feriados).</p>
-                        <p>• <strong>Fachada e estética:</strong> É proibido alterar a cor ou formato de portas externas, janelas e paredes do terraço. Não estenda roupas ou coloque vasos nos peitoris.</p>
-                        <p>• <strong>Gás encanado:</strong> O condomínio possui rede geral. É terminantemente proibido o uso de botijão de gás no interior dos apartamentos.</p>
-                        <p>• <strong>Destinação do imóvel:</strong> As unidades são estritamente residenciais. É proibido sublocar frações ou estabelecer repúblicas.</p>
+                <article class="card-texto-longo revelar-ao-scroll">
+                    <h3 class="titulo-categoria" >🤫 Convivência Geral e Lei do Silêncio</h3>
+                    <div class="texto-completo2">
+                        <p>
+                            • <strong>Limites de barulho:</strong>
+                            <span
+                                style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 4px;"><i
+                                    class="fa fa-sun-o"></i> 09h às 22h [55dB]</span>e no período noturno <span
+                                style="background: #f7fafc; color: #4a5568; border: 1px solid #cbd5e0; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 4px;"><i
+                                    class="fa fa-moon-o"></i> 22h às 09h [45dB]</span>. O silêncio absoluto garante o
+                            sossego coletivo.
+                        </p>
+                        <p>
+                            • <strong>Uso de furadeiras e martelos:</strong> Permitido de
+                            <span
+                                style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 2px;">Seg
+                                a Sex: 09h às 17h</span> e
+                            <span
+                                style="background: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 2px;">Sáb:
+                                10h às 16h</span>. Barulhos de obras são <span
+                                style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;">totalmente
+                                proibidos</span> aos domingos e feriados.
+                        </p>
+                        <p>
+                            • <strong>Fachada e estética:</strong> É <span
+                                style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;"><i
+                                    class="fa fa-ban"></i> proibido alterar</span> a cor ou formato de portas externas,
+                            janelas e paredes do terraço. Não estenda roupas ou coloque vasos nos peitoris.
+                        </p>
+                        <p>
+                            • <strong>Gás encanado:</strong> O condomínio possui rede geral centralizada. É
+                            terminantemente <span
+                                style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;"><i
+                                    class="fa fa-fire"></i> proibido botijão</span> no interior dos apartamentos.
+                        </p>
+                        <p>
+                            • <strong>Destinação do imóvel:</strong> As unidades são estritamente residenciais. É
+                            proibido fracionar o imóvel, sublocar frações ou estabelecer repúblicas estudantis.
+                        </p>
                     </div>
                 </article>
 
                 <!-- CARD 2: MUDANÇAS E REFORMAS -->
-                <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3>🚚 Mudanças, Obras e Reformas</h3>
-                    <div class="texto-completo">
-                        <p>• <strong>Agendamento de mudanças:</strong> Deve ser realizado pelo aplicativo da administradora com no mínimo 2 dias úteis de antecedência.</p>
-                        <p>• <strong>Horários de mudanças/obras:</strong> Segunda a sexta-feira, das 09h às 17h. Sábados para mudanças das 09h às 14h, e para barulho de obras das 10h às 16h.</p>
-                        <p>• <strong>Proteção e Entulho:</strong> Use a capa de proteção do elevador. É proibido descartar entulho nas lixeiras comuns; a caçamba é responsabilidade do morador.</p>
+                <article class="card-texto-longo revelar-ao-scroll" id="regra-mudancas">
+                    <h3 class="titulo-categoria">🚚 Mudanças, Obras e Reformas</h3>
+                    <div class="texto-completo2">
+                        <p>
+                            • <strong>Agendamento de mudanças:</strong> Deve ser realizado pelo aplicativo da
+                            administradora com antecedência mínima de <span
+                                style="background: #ffebee; color: #c62828; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold;"><i
+                                    class="fa fa-calendar"></i> 2 dias úteis</span>.
+                        </p>
+                        <p>
+                            • <strong>Horários permitidos:</strong> Mudanças e obras ocorrem de <span
+                                style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 2px;">Seg
+                                a Sex: 09h às 17h</span>. Aos sábados, mudanças de <span
+                                style="background: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 2px;">09h
+                                às 17h</span> e ruídos de obras apenas das <span
+                                style="background: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin: 0 2px;">10h
+                                às 16h</span>.
+                        </p>
+                        <p>
+                            • <strong>Proteção e Entulho:</strong> É obrigatório usar a capa protetora do elevador. É
+                            proibido descartar restos de obras nas lixeiras comuns; a caçamba é responsabilidade
+                            exclusiva do morador.
+                        </p>
                     </div>
                 </article>
 
                 <!-- CARD 3: CRIANÇAS -->
-                <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3>🧒 Crianças e Áreas Comuns</h3>
-                    <div class="texto-completo">
-                        <p>• <strong>Acompanhamento obrigatório:</strong> Menores de 12 anos não podem circular ou brincar desacompanhados de um responsável maior nas áreas comuns (corredores, elevadores, garagem).</p>
-                        <p>• <strong>Playground:</strong> Funciona todos os dias, das 09h às 20h. É proibido consumir alimentos e bebidas (exceto água) nesta área.</p>
+                <article class="card-texto-longo revelar-ao-scroll" id="regra-criancas">
+                    <h3 class="titulo-categoria">🧒 Crianças e Áreas Comuns</h3>
+                    <div class="texto-completo2">
+                        <p>
+                            • <strong>Acompanhamento obrigatório:</strong> Crianças <span
+                                style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;"><i
+                                    class="fa fa-warning"></i> menores de 12 anos</span> não podem circular ou brincar
+                            desacompanhadas de um responsável maior nas áreas comuns (corredores, elevadores, garagem).
+                        </p>
+                        <p>
+                            • <strong>Playground:</strong> O espaço funciona <span
+                                style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold;"><i
+                                    class="fa fa-clock-o"></i> diariamente das 09h às 20h</span>. É expressamente
+                            proibido consumir qualquer tipo de alimento ou bebida (exceto água) nesta área.
+                        </p>
                     </div>
                 </article>
 
                 <!-- CARD 4: PETS -->
-                <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3>🐾 Animais Domésticos (Pets)</h3>
-                    <div class="texto-completo">
-                        <p>• <strong>Trânsito interno:</strong> Conduzir sempre com coleira e guia curta. Animais de pequeno porte devem ser levados no colo nos elevadores.</p>
-                        <p>• <strong>Focinheira obrigatória:</strong> Cães das raças Mastim Napolitano, Dobermann, Rottweiler ou Pitbull devem usar o equipamento nas áreas comuns.</p>
-                        <p>• <strong>Vacinação:</strong> A carteira deve ser entregue anualmente à administração para liberar a permanência do pet.</p>
+                <article class="card-texto-longo revelar-ao-scroll" id="regra-pets">
+                    <h3 class="titulo-categoria">🐾 Animais Domésticos (Pets)</h3>
+                    <div class="texto-completo2">
+                        <p>
+                            • <strong>Trânsito interno:</strong> Conduzir sempre os pets com coleira e guia curta.
+                            Animais de pequeno porte devem ser levados <span
+                                style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold;">obrigatoriamente
+                                no colo</span> nos elevadores e halls sociais.
+                        </p>
+                        <p>
+                            • <strong>Focinheira obrigatória:</strong> Cães das raças Mastim Napolitano, Dobermann,
+                            Rottweiler ou Pitbull devem usar obrigatoriamente o equipamento em qualquer área comum do
+                            edifício.
+                        </p>
+                        <p>
+                            • <strong>Vacinação:</strong> A cópia atualizada da carteira de vacinação deve ser entregue
+                            à administração com <span
+                                style="background: #ffebee; color: #c62828; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold;"><i
+                                    class="fa fa-refresh"></i> renovação anual</span>.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- REGRAS DO ESPAÇO PET -->
+                <article class="card-texto-longo revelar-ao-scroll" id="regras-espaco-pet">
+                    <div class="meta-texto-longo">
+                        <span class="badge-categoria">Áreas Comuns</span>
+                        <div class="data-publicacao"><i class="fa fa-calendar"></i> Regimento 2026</div>
+                    </div>
+
+                    <h3 class="titulo-categoria"><i class="fa fa-paw" style="margin-right: 8px; color: #27ae60;"></i> Regras do Espaço Pet</h3>
+
+                    <div class="texto-completo2">
+                        <p>O espaço destinado ao pet é de uso exclusivo dos moradores e possui normas estritas de
+                            convivência e silêncio:</p>
+                        <ul>
+                            <li>
+                                <strong
+                                    style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-clock-o"></i> 09h às 21h
+                                </strong>
+                                <strong>Horário de Utilização:</strong> O espaço funciona diariamente de terça a domingo
+                                dentro deste período.
+                            </li>
+                            <li><strong>Idade Mínima:</strong> É proibida a utilização do espaço por menores de 12 anos
+                                sem o acompanhamento de um responsável.</li>
+                            <li><strong>Higiene e Luzes:</strong> É obrigatório recolher as fezes do seu pet e apagar as
+                                luzes ao sair. O descumprimento sujeita a unidade à <span
+                                    style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;">multa
+                                    direta</span>, dispensada a advertência prévia.</li>
+                            <li><strong>Controle de Ruído:</strong> O nível de barulho deve ser o mínimo possível. É
+                                proibido gritar, gargalhar, ouvir música sem fones ou falar alto ao celular.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- REGRAS DO PLAYGROUND -->
+                <article class="card-texto-longo revelar-ao-scroll" id="regras-playground">
+                    <div class="meta-texto-longo">
+                        <span class="badge-categoria">Áreas Comuns</span>
+                        <div class="data-publicacao"><i class="fa fa-calendar"></i> Regimento 2026</div>
+                    </div>
+
+                    <h3 class="titulo-categoria"><i class="fa fa-child" style="margin-right: 8px; color: #e67e22;"></i> Regras do Playground</h3>
+
+                    <div class="texto-completo2">
+                        <p>Área recreativa infantil destinada à socialização segura das crianças do condomínio:</p>
+                        <ul>
+                            <li>
+                                <strong
+                                    style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-clock-o"></i> 09h às 20h
+                                </strong>
+                                <strong>Horário de Funcionamento:</strong> Aberto de domingo a domingo. Fica totalmente
+                                vedado o acesso ou uso fora deste período.
+                            </li>
+                            <li><strong>Acompanhamento Obrigatório:</strong> Recomendado para menores de 12 anos
+                                acompanhados de pais ou responsáveis, que devem supervisionar o uso dos brinquedos.</li>
+                            <li><strong>Restrição de Consumo:</strong> Fica expressamente <span
+                                    style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;">proibido
+                                    o uso de alimentos e bebidas</span> (alcoólicas ou não) na área, sendo permitida
+                                apenas água.</li>
+                            <li><strong>Segurança e Brinquedos:</strong> Proibida a prática de futebol com bolas ou
+                                portar objetos cortantes. Danos causados por mau uso geram ressarcimento dos custos mais
+                                multa pecuniária direta.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- REGRAS DE CARGA E DESCARGA -->
+                <article class="card-texto-longo revelar-ao-scroll" id="regras-carga-descarga">
+                    <div class="meta-texto-longo">
+                        <span class="badge-categoria">Áreas Comuns</span>
+                        <div class="data-publicacao"><i class="fa fa-calendar"></i> Regimento 2026</div>
+                    </div>
+
+                    <h3 class="titulo-categoria"><i class="fa fa-truck" style="margin-right: 8px; color: #2980b9;"></i> Vaga de Carga e Descarga
+                    </h3>
+
+                    <div class="texto-completo2">
+                        <p>Regras operacionais para a utilização rápida das vagas destinadas ao abastecimento
+                            temporário:</p>
+                        <ul>
+                            <li>
+                                <strong
+                                    style="background: #ffebee; color: #c62828; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-hourglass-end"></i> Máximo: 30 minutos
+                                </strong>
+                                <strong>Tempo Limite de Permanência:</strong> A utilização da vaga possui tolerância
+                                máxima improrrogável de meia hora.
+                            </li>
+                            <li><strong>Autorização:</strong> O estacionamento temporário do veículo depende
+                                obrigatoriamente de autorização expressa do morador responsável pela unidade.</li>
+                            <li><strong>Cadastro Obrigatório:</strong> O condutor e o veículo prestador de serviço devem
+                                estar devidamente cadastrados e identificados junto à portaria antes de iniciar a
+                                operação.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- REGRAS DA LAVANDERIA -->
+                <article class="card-texto-longo revelar-ao-scroll" id="regras-lavanderia">
+                    <div class="meta-texto-longo">
+                        <span class="badge-categoria">Áreas Comuns</span>
+                        <div class="data-publicacao"><i class="fa fa-calendar"></i> Regimento 2026</div>
+                    </div>
+
+                    <h3 class="titulo-categoria"><i class="fa fa-tint" style="margin-right: 8px; color: #9b59b6;"></i> Regras do Espaço
+                        Lavanderia</h3>
+
+                    <div class="texto-completo2">
+                        <p>Normas atualizadas e aprovadas em Assembleia Geral Extraordinária para a gestão do maquinário
+                            coletivo:</p>
+                        <ul>
+                            <li>
+                                <strong
+                                    style="background: #e1f5fe; color: #0288d1; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-clock-o"></i> Seg a Sex: 07h às 22h
+                                </strong>
+                                <strong>Funcionamento em Dias Úteis:</strong> Horário padrão para operação das máquinas
+                                durante a semana.
+                            </li>
+                            <li>
+                                <strong
+                                    style="background: #e8f5e9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-clock-o"></i> Finais de Semana: 07h às 23h
+                                </strong>
+                                <strong>Horário Estendido:</strong> Período de funcionamento aos sábados, domingos e
+                                feriados.
+                            </li>
+                            <li>
+                                <strong
+                                    style="background: #ffebee; color: #c62828; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 5px; display: inline-block;">
+                                    <i class="fa fa-warning"></i> Tolerância: 10 minutos
+                                </strong>
+                                <strong>Prazo para Retirada:</strong> Terminado o ciclo, o morador tem este prazo para
+                                recolher os pertences. Após o limite, fica autorizada a remoção das roupas por outro
+                                usuário para o cesto coletivo e o infrator estará sujeito a <span
+                                    style="color: #e74c3c; font-weight: bold; background: #fdf2f2; padding: 2px 6px; border-radius: 4px;">multa
+                                    direta</span>.
+                            </li>
+                            <li><strong>Restrições Importantes:</strong> Uso proibido para menores de 18 anos. É
+                                estritamente proibido interromper ciclos em andamento, lavar calçados, tapetes ou peças
+                                com graxa e óleo. Obrigatória a limpeza do filtro da máquina após cada utilização.</li>
+                        </ul>
                     </div>
                 </article>
 

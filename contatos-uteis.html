@@ -20,9 +20,32 @@
                     <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
                 </div>
             </a>
-            <!-- Link de retorno rápido para a página principal -->
-            <nav class="menu-navegacao menu-retorno">
-                <a href="index.html#boas-vindas"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
+            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
+            <nav id="mobile-nav" class="hidden">
+                <ul>
+                    <!-- <div class="mobile-dark-container">
+                        <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    </div> -->
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                            <i class="fa fa-moon-o"></i> <span></span>
+                        </button>
+                    <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
+                </ul>
             </nav>
         </div>
     </header>

@@ -1224,7 +1224,6 @@ body.dark-mode .card-documento .btn-acao,
     display: block;
 }
 
-/* Estilo para o link do endereço no rodapé */
 .link-endereco-mapa {
     display: block;
     text-decoration: none;
@@ -1233,14 +1232,11 @@ body.dark-mode .card-documento .btn-acao,
 
 .link-endereco-mapa p {
     color: rgba(255, 255, 255, 0.7) !important;
-    /* Mantém a cor clara original do seu rodapé */
     margin-bottom: 2px;
 }
 
-/* Efeito visual ao passar o mouse */
 .link-endereco-mapa:hover p {
     color: var(--dourado-bronze) !important;
-    /* Destaca em dourado quando o usuário passa o mouse */
 }
 
 .clique-ver-mapa {
@@ -1257,7 +1253,6 @@ body.dark-mode .card-documento .btn-acao,
     text-decoration: underline;
 }
 
-/* Estilos do Formulário Fale Conosco */
 .card-fale-conosco {
     max-width: 600px;
     margin: 0 auto;
@@ -1295,9 +1290,6 @@ body.dark-mode .card-documento .btn-acao,
     box-shadow: 0 0 0 3px rgba(196, 158, 122, 0.1);
 }
 
-/* ------------------------------------
-   RESPONSIVIDADE
---------------------------------------- */
 .burger-menu {
     display: none;
 }
@@ -1305,10 +1297,6 @@ body.dark-mode .card-documento .btn-acao,
 #mobile-nav {
     display: none;
 }
-
-/* --------------------------------------------------------
-    ESTILOS GERAIS DO MURAL (FUNCIONA EM DESKTOP E MOBILE) 
------------------------------------------------------------ */
 
 .grid-cards-noticias {
     display: flex;
@@ -1355,16 +1343,15 @@ body.dark-mode .card-documento .btn-acao,
     letter-spacing: -0.3px;
 }
 
-.texto-completo p {
-    white-space: pre-wrap;
-    /* Esta linha faz o navegador respeitar as quebras de linha automáticas da planilha */
+.texto-completo2 p {
+    /* white-space: pre-wrap; */
     color: var(--texto-escuro);
     font-size: 1.05rem;
     line-height: 1.8;
     margin-bottom: 1.2rem;
 }
 
-.texto-completo p:last-child {
+.texto-completo2 p:last-child {
     margin-bottom: 0;
 }
 
@@ -1514,6 +1501,97 @@ body.dark-mode .card-documento .btn-acao,
     z-index: 99 !important;
 }
 
+.grid-cards-regras {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card-texto-longo {
+    background-color: var(--branco);
+    padding: 3rem 2.5rem;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-suave);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.card-texto-longo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background-color: var(--dourado-bronze);
+    border-radius: var(--borda-raio) 0 0 var(--borda-raio);
+}
+
+.meta-texto-longo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card-texto-longo h3 {
+    color: var(--verde-escuro);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+}
+
+.texto-completo p {
+    white-space: pre-wrap;
+    color: var(--texto-escuro);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+}
+
+.texto-completo p:last-child {
+    margin-bottom: 0;
+}
+
+.busca-container {
+    position: relative !important; /* Essencial para que a lupa absoluta se oriente por ele */
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.busca-container input[type="text"] {
+    width: 100%;
+    /* O preenchimento da direita (45px) impede que o texto digitado passe por baixo do ícone */
+    padding: 10px 45px 10px 15px !important;
+    font-size: 15px;
+    margin: 0 !important;
+}
+
+.busca-container input[type="text"]:focus {
+    border-color: #baa181;
+    box-shadow: 0 4px 12px rgba(186, 161, 129, 0.2);
+}
+
+.busca-container .icone-lupa-mural {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 15px !important; 
+    color: #baa181 !important;
+    font-size: 16px !important;
+    pointer-events: none;
+    z-index: 99 !important;
+}
+
 /* ------------------------------------
    RESPONSIVIDADE (MOBILE)
 --------------------------------------- */
@@ -1589,6 +1667,57 @@ body.dark-mode .card-documento .btn-acao,
     }
 
     body.dark-mode .mural-busca-container input[type="text"] {
+        background-color: #152726 !important;
+        color: #ffffff !important;
+        border-color: var(--dourado-bronze) !important;
+        width: 100%;
+        padding: 10px 45px 10px 15px !important;
+        /* Aumentado para 45px para isolar o espaço da lupa */
+        font-size: 15px;
+        margin: 0 !important;
+    }
+
+    .busca-container {
+        position: fixed !important;
+        bottom: 75px !important;
+        display: flex !important;
+        align-items: center !important;
+        /* Correção: removido o justify-content inválido */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: calc(100% - 30px) !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 9999 !important;
+    }
+
+    .busca-container input[type="text"] {
+        width: 100%;
+        /* Garante espaço interno na direita para o texto não passar por baixo da lupa */
+        padding: 12px 45px 12px 18px !important; 
+        font-size: 16px;
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        background-color: #ffffff;
+        color: #333333;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+
+    .busca-container .icone-lupa-mural {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        right: 18px !important; /* Afastamento da borda direita */
+        color: #baa181 !important;
+        font-size: 16px !important;
+        pointer-events: none; /* Evita que o clique no ícone atrapalhe o foco do input */
+        z-index: 100 !important; /* Garante que fique visualmente acima do input */
+    }
+
+    body.dark-mode .busca-container input[type="text"] {
         background-color: #152726 !important;
         color: #ffffff !important;
         border-color: var(--dourado-bronze) !important;
