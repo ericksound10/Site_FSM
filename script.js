@@ -309,19 +309,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!containerHomeResumo && !containerMuralCompleto) return;
 
     try {
-  let dados = await consultarAPI('noticias');
+      let dados = await consultarAPI('noticias');
 
-  // Ordena de forma inteligente: da data mais recente para a mais antiga
-  dados.sort((a, b) => {
-    // Função interna para transformar DD/MM/AAAA em um objeto Date comparável
-    const converterData = (stringData) => {
-      if (!stringData) return new Date(0); 
-      const partes = stringData.split('/');
-      return new Date(partes[2], partes[1] - 1, partes[0]);
-    };
+      // Ordena de forma inteligente: da data mais recente para a mais antiga
+      dados.sort((a, b) => {
+        // Função interna para transformar DD/MM/AAAA em um objeto Date comparável
+        const converterData = (stringData) => {
+          if (!stringData) return new Date(0);
+          const partes = stringData.split('/');
+          return new Date(partes[2], partes[1] - 1, partes[0]);
+        };
 
-    return converterData(b.data) - converterData(a.data);
-  });
+        return converterData(b.data) - converterData(a.data);
+      });
 
       console.log('NOTÍCIAS RECEBIDAS:', dados);
       console.log('CONTÊINER DOS CARDS:', containerHomeResumo);
@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
 
       try {
-        const response = await fetch("https://web3forms.com", {
+        const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           body: formData
         });
@@ -829,10 +829,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (inputBusca) {
     inputBusca.addEventListener('input', () => {
-      // Pega o termo digitado e transforma em minúsculo para ignorar maiúsculas/minúsculas
-      const termoBusca = inputBusca.value.toLowerCase().trim();
       
-      // Seleciona todos os cards de notícias que foram injetados na tela
+      const termoBusca = inputBusca.value.toLowerCase().trim();
       const cardsNoticias = document.querySelectorAll('#mural-noticias-completo .card-noticia-longa');
 
       cardsNoticias.forEach(card => {
@@ -851,7 +849,154 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Inicializa as chamadas das APIs das planilhas
+  /* ==========================================================================
+   12. SISTEMA DE BUSCA DINÂMICA NO REGIMENTO INTERNO
+   ========================================================================== */
+  const inputBuscaRegras = document.getElementById('input-busca-regras');
+
+  if (inputBuscaRegras) {
+    inputBuscaRegras.addEventListener('input', () => {
+      const termoBusca = inputBuscaRegras.value.trim();
+      const termoMinusculo = termoBusca.toLowerCase();
+
+      const cardsRegras = document.querySelectorAll('.card-regras, section, article, .box-regra');
+
+      cardsRegras.forEach(card => {
+
+        const elementosTexto = card.querySelectorAll('p, li, h3');
+
+        let encontrouNoCard = false;
+
+        elementosTexto.forEach(elemento => {
+          // Armazena o HTML original de cada texto para não quebrar a estrutura
+          if (!elemento.dataset.textoOriginal) {
+            elemento.dataset.textoOriginal = elemento.innerHTML;
+          }
+
+          const textoOriginal = elemento.dataset.textoOriginal;
+
+          // Extrai o texto limpo para comparação segura
+          const divTemporaria = document.createElement('div');
+          divTemporaria.innerHTML = textoOriginal;
+          const textoPuroMinusculo = divTemporaria.textContent.toLowerCase();
+
+          if (termoMinusculo === '') {
+            elemento.innerHTML = textoOriginal;
+            return;
+          }
+
+          // Se encontrar o termo no texto, marca que o card deve aparecer e adiciona o foco
+          if (textoPuroMinusculo.includes(termoMinusculo)) {
+            encontrouNoCard = true;
+            const expressaoReg = new RegExp(`(${termoBusca})`, 'gi');
+            elemento.innerHTML = textoOriginal.replace(expressaoReg, '<mark class="foco-busca">$1</mark>');
+          } else {
+            elemento.innerHTML = textoOriginal;
+          }
+        });
+
+        if (termoMinusculo === '' || encontrouNoCard) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  /* ==========================================================================
+   13. SISTEMA DE BUSCA BLINDADO COM DESTAQUE E FILTRO DE CATEGORIAS - GUIA BAIRRO
+   ========================================================================== */
+  const inputBuscaBairro = document.getElementById('input-busca-bairro');
+
+if (inputBuscaBairro) {
+  inputBuscaBairro.addEventListener('input', () => {
+    
+    const removerAcentos = (texto) => {
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    };
+
+    const termoBusca = inputBuscaBairro.value.trim();
+    const termoSemAcento = removerAcentos(termoBusca);
+
+    const cardsLocais = document.querySelectorAll('main div, article div, main section, .card, .local');
+
+    cardsLocais.forEach(card => {
+      const tituloLocal = card.querySelector('h3, h4');
+      if (!tituloLocal) return; 
+
+      const elementosTexto = card.querySelectorAll('h3, h4, p, span, li');
+      let encontrouNoCard = false;
+
+      elementosTexto.forEach(elemento => {
+        if (!elemento.dataset.textoOriginal) {
+          elemento.dataset.textoOriginal = elemento.innerHTML;
+        }
+
+        const textoOriginal = elemento.dataset.textoOriginal;
+
+        const divTemporaria = document.createElement('div');
+        divTemporaria.innerHTML = textoOriginal;
+        const textoPuroSemAcento = removerAcentos(divTemporaria.textContent);
+
+        if (termoSemAcento === '') {
+          elemento.innerHTML = textoOriginal;
+          return;
+        }
+
+        if (textoPuroSemAcento.includes(termoSemAcento)) {
+          encontrouNoCard = true;
+          // Escapa caracteres especiais para o RegExp funcionar sem falhas
+          const expressaoReg = new RegExp(`(${termoBusca.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')})`, 'gi');
+          elemento.innerHTML = textoOriginal.replace(expressaoReg, '<mark class="foco-busca">$1</mark>');
+        } else {
+          elemento.innerHTML = textoOriginal;
+        }
+      });
+
+      // Aplica visibilidade no cartão individual
+      if (termoSemAcento === '' || encontrouNoCard) {
+        card.style.display = ''; 
+        card.classList.add('local-visivel-busca');
+      } else {
+        card.style.display = 'none'; 
+        card.classList.remove('local-visivel-busca');
+      }
+    });
+
+    // 2. CONTROLE TOTAL DOS TÍTULOS DE CATEGORIAS GRANDES (H3 MACROS)
+    const titulosCategorias = document.querySelectorAll('main > h3, .conteudo > h3');
+    
+    titulosCategorias.forEach(categoria => {
+      if (termoSemAcento === '') {
+        categoria.style.display = '';
+        return;
+      }
+
+      let containerPai = categoria.parentElement;
+      let temLocaisVisiveis = false;
+      let proximoElemento = categoria.nextElementSibling;
+
+      while (proximoElemento && proximoElemento.tagName !== 'H3' && proximoElemento.tagName !== 'FOOTER') {
+        if (proximoElemento.classList.contains('local-visivel-busca') || proximoElemento.querySelector('.local-visivel-busca')) {
+          temLocaisVisiveis = true;
+          break;
+        }
+        proximoElemento = proximoElemento.nextElementSibling;
+      }
+
+      if (temLocaisVisiveis) {
+        categoria.style.display = '';
+      } else {
+        categoria.style.display = 'none';
+      }
+    });
+
+    document.querySelectorAll('.local-visivel-busca').forEach(el => el.classList.remove('local-visivel-busca'));
+  });
+}
+
+ 
   carregarBannersDinamicos();
   carregarMuralNoticias();
 

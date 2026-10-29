@@ -20,9 +20,32 @@
                     <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
                 </div>
             </a>
-            <!-- Link de retorno rápido para a página principal -->
-            <nav class="menu-navegacao menu-retorno">
-                <a href="index.html#boas-vindas"><i class="fa fa-arrow-left"></i> Voltar ao Início</a>
+            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
+            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav id="mobile-nav" class="hidden">
+                <ul>
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                        <i class="fa fa-moon-o"></i> <span></span>
+                    </button>
+                    <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
+                </ul>
+            </nav>
+            <nav class="menu-navegacao">
+                <a href="index.html" class="link-retorno-menu">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Início</span>
+                </a>
             </nav>
         </div>
     </header>
@@ -31,40 +54,57 @@
     <main class="conteudo-principal">
         <section class="secao revelar-ao-scroll visivel">
             <h2 class="titulo-secao">📋 Guia de Descarte de Lixo</h2>
-            <h3 style="color: var(--texto-mutado); margin-bottom: 2rem;"  >Normas de Coleta e Convivência</h3>
+            <h3 style="color: var(--texto-mutado); margin-bottom: 2rem;">Normas de Coleta e Convivência</h3>
 
             <div class="grid-cards-noticias">
 
                 <!-- CARD 1: Lixo Doméstico e Orgânico -->
                 <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-trash" style="color: var(--dourado-bronze);"></i> Lixo Doméstico e Orgânico</h3>
-                     <div class="texto-completo">
-                        <p>Para garantir a higiene, a salubridade e o respeito entre todos os moradores do Condomínio Forte São Mateus, o descarte de resíduos deve seguir rigorosamente as regras aprovadas no Regimento Interno. O descumprimento destas normas sujeita a unidade a <strong>multa direta, dispensada a advertência prévia</strong>.</p>
-                        
+                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-trash"
+                            style="color: var(--dourado-bronze);"></i> Lixo Doméstico e Orgânico</h3>
+                    <div class="texto-completo">
+                        <p>Para garantir a higiene, a salubridade e o respeito entre todos os moradores do Condomínio
+                            Forte São Mateus, o descarte de resíduos deve seguir rigorosamente as regras aprovadas no
+                            Regimento Interno. O descumprimento destas normas sujeita a unidade a <strong>multa direta,
+                                dispensada a advertência prévia</strong>.</p>
+
                         <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.08); margin: 2rem 0;">
 
                         <!-- Bloco 1: Lixo Comum -->
                         <div style="margin-bottom: 2rem;">
-                            <p>O condomínio possui uma lixeira central localizada <strong>ao lado da portaria social</strong>. Todo lixo doméstico (restos de alimentos, descartes de banheiro, etc.) deve ser transportado pelo morador ou funcionário devidamente embalado em <strong>sacos plásticos pretos e bem lacrados</strong>. É proibido deixar lixo fora das lixeiras ou nos corredores.</p>
+                            <p>O condomínio possui uma lixeira central localizada <strong>ao lado da portaria
+                                    social</strong>. Todo lixo doméstico (restos de alimentos, descartes de banheiro,
+                                etc.) deve ser transportado pelo morador ou funcionário devidamente embalado em
+                                <strong>sacos plásticos pretos e bem lacrados</strong>. É proibido deixar lixo fora das
+                                lixeiras ou nos corredores.</p>
                         </div>
                 </article>
 
                 <!-- CARD 2: Materiais Perfurocortantes e Vidros -->
                 <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-exclamation-triangle" style="color: #F1C40F;"></i> Materiais Perfurocortantes e Vidros</h3>
+                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-exclamation-triangle"
+                            style="color: #F1C40F;"></i> Materiais Perfurocortantes e Vidros</h3>
                     <!-- Bloco 2: Perfurocortantes -->
-                        <div style="margin-bottom: 2rem;">
-                            <p>É expressamente proibido descartar vidros quebrados, espetos, agulhas ou materiais infectocontagiosos direto nos sacos comuns. Eles devem ser <strong>acondicionados em recipientes rígidos específicos</strong> (como garrafas PET cortadas ou caixas de papelão lacradas) e o fato deve ser <strong>comunicado diretamente ao Zelador</strong> para a remoção segura.</p>
-                        </div>
+                    <div style="margin-bottom: 2rem;">
+                        <p>É expressamente proibido descartar vidros quebrados, espetos, agulhas ou materiais
+                            infectocontagiosos direto nos sacos comuns. Eles devem ser <strong>acondicionados em
+                                recipientes rígidos específicos</strong> (como garrafas PET cortadas ou caixas de
+                            papelão lacradas) e o fato deve ser <strong>comunicado diretamente ao Zelador</strong> para
+                            a remoção segura.</p>
+                    </div>
                 </article>
 
                 <!-- CARD 3: Grandes Volumes e Entulho de Obras -->
                 <article class="card-noticia-longa revelar-ao-scroll">
-                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-times-circle" style="color: #E74C3C;"></i> Grandes Volumes e Entulho de Obras</h3>
+                    <h3 style="color: var(--verde-escuro); margin-bottom: 0.5rem;"><i class="fa fa-times-circle"
+                            style="color: #E74C3C;"></i> Grandes Volumes e Entulho de Obras</h3>
                     <div class="texto-completo">
-                      <!-- Bloco 3: Grandes Volumes -->
+                        <!-- Bloco 3: Grandes Volumes -->
                         <div style="margin-bottom: 2rem;">
-                            <p>A lixeira do condomínio é de uso estritamente doméstico. É <strong>terminantemente proibido</strong> depositar móveis antigos, eletrodomésticos, madeiras ou restos de materiais de obras e reformas. O descarte desses itens é de responsabilidade exclusiva do morador através da contratação de caçambas particulares.</p>
+                            <p>A lixeira do condomínio é de uso estritamente doméstico. É <strong>terminantemente
+                                    proibido</strong> depositar móveis antigos, eletrodomésticos, madeiras ou restos de
+                                materiais de obras e reformas. O descarte desses itens é de responsabilidade exclusiva
+                                do morador através da contratação de caçambas particulares.</p>
                         </div>
                     </div>
                 </article>
