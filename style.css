@@ -1343,6 +1343,30 @@ body.dark-mode .card-documento .btn-acao,
     letter-spacing: -0.3px;
 }
 
+.card-noticia-longa {
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.card-noticia-longa .texto-completo {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.card-noticia-longa .texto-completo img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    /*max-height: 580px;*/  
+    object-fit: contain;
+    margin: 20px auto;
+    border-radius: 10px;
+    cursor: zoom-in;
+}
+
 .texto-completo2 p {
     /* white-space: pre-wrap; */
     color: var(--texto-escuro);
@@ -1592,6 +1616,92 @@ body.dark-mode .card-documento .btn-acao,
     z-index: 99 !important;
 }
 
+.slide-somente-imagem {
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+.slide-somente-imagem .slide-background {
+    cursor: pointer;
+}
+
+/* .slide-somente-imagem .slide-background img {
+    object-fit: contain;
+    object-position: center;
+    background-color: #060B0B;
+} */
+
+.slide[data-dinamico="true"] .slide-background img {
+    cursor: zoom-in;
+    object-fit: contain;
+    object-position: center;
+    background-color: #060B0B;
+}
+
+.texto-completo img,
+.slide[data-dinamico="true"] .slide-background img {
+    cursor: zoom-in;
+}
+
+.modal-imagem {
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+}
+
+.modal-conteudo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 50px 20px 20px;
+    box-sizing: border-box;
+}
+
+#img-ampliada {
+    display: block;
+    max-width: 95%;
+    max-height: 85vh;
+    object-fit: contain;
+    margin: auto;
+}
+
+#modal-legenda {
+    color: white;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.botao-fechar-modal {
+    position: fixed;
+    top: 15px;
+    right: 30px;
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+.botao-fechar-modal:hover {
+    color: #ccc;
+}
+
+.texto-completo img,
+.slide[data-dinamico="true"] .slide-background img {
+    cursor: zoom-in;
+}
+
+.carrossel-container:hover {
+    cursor: default;
+}
 /* ------------------------------------
    RESPONSIVIDADE (MOBILE)
 --------------------------------------- */
