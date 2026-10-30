@@ -204,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dados.forEach(item => {
         const {
           data,
+          data_expiracao,
+          somente_imagem,
           titulo,
           subtitulo,
           botaoTexto,
@@ -215,61 +217,83 @@ document.addEventListener('DOMContentLoaded', () => {
         novoSlide.className = 'slide';
         novoSlide.dataset.dinamico = 'true';
 
+        // Torna o banner inteiro clicável
+        const destinoOriginal = String(
+          item.linkDestino || item.link_destino || ''
+        ).trim();
+
+        if (destinoOriginal) {
+          novoSlide.style.cursor = 'pointer';
+
+          novoSlide.addEventListener('click', (evento) => {
+
+            // Não interfere no clique do botão interno
+            if (evento.target.closest('a, button')) return;
+
+            const destino = destinoOriginal
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-|-$/g, '');
+
+            window.location.href = destino
+              ? `noticias.html#${encodeURIComponent(destino)}`
+              : 'noticias.html';
+          });
+        }
+
         const fundo = document.createElement('div');
         fundo.className = 'slide-background';
 
         if (imagemUrl) {
           const img = document.createElement('img');
+
           img.src = ajustarLinkImagem(imagemUrl);
-          img.alt = titulo;
+          img.alt = titulo || "Banner Condomínio";
+          img.style.cursor = 'zoom-in';
+
           fundo.appendChild(img);
         }
+        novoSlide.appendChild(fundo);
 
-        const conteudo = document.createElement('div');
-        conteudo.className = 'slide-conteudo';
+        // LÓGICA DO "SOMENTE IMAGEM": Só gera o texto se o campo não indicar que é apenas imagem
+        const condicoesImagem = ['sim', 'true', 'x', 's'];
+        const ehSomenteImagem = condicoesImagem.includes(somente_imagem);
 
-        const etiqueta = document.createElement('small');
-        etiqueta.className = 'tag-financeiro';
-        etiqueta.textContent = data;
+        // SE FOR APENAS IMAGEM, ADICIONA UMA CLASSE EXCLUSIVA DE ESTILO
+        if (ehSomenteImagem) {
+          novoSlide.classList.add('slide-somente-imagem');
+        }
 
-        const tituloEl = document.createElement('h2');
-        tituloEl.textContent = titulo;
+        if (!ehSomenteImagem) {
+          const conteudo = document.createElement('div');
+          conteudo.className = 'slide-conteudo';
 
-        const subtituloEl = document.createElement('p');
-        subtituloEl.textContent = subtitulo;
+          const etiqueta = document.createElement('small');
+          etiqueta.className = 'tag-financeiro';
+          etiqueta.textContent = data;
 
-        const link = document.createElement('a');
-        link.className = 'btn-slide-noticia';
+          const tituloEl = document.createElement('h2');
+          tituloEl.textContent = titulo;
 
-        const destinoOriginal = String(
-          item.linkDestino || item.link_destino || ''
-        ).trim();
+          const subtituloEl = document.createElement('p');
+          subtituloEl.textContent = subtitulo;
 
-        const destino = destinoOriginal
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '');
+          const link = document.createElement('a');
+          link.className = 'btn-slide-noticia';
 
-        console.log('Destino do banner:', {
-          titulo: item.titulo,
-          destinoOriginal: destinoOriginal,
-          destinoFinal: destino
-        });
 
-        link.href = destino
-          ? `noticias.html#${encodeURIComponent(destino)}`
-          : 'noticias.html';
 
-        link.textContent = (botaoTexto || '') + ' ';
+          link.textContent = (botaoTexto || 'Saiba Mais') + ' ';
 
-        const icone = document.createElement('i');
-        icone.className = 'fa fa-arrow-right';
-        link.appendChild(icone);
+          const icone = document.createElement('i');
+          icone.className = 'fa fa-arrow-right';
+          link.appendChild(icone);
 
-        conteudo.append(etiqueta, tituloEl, subtituloEl, link);
-        novoSlide.append(fundo, conteudo);
+          conteudo.append(etiqueta, tituloEl, subtituloEl, link);
+          novoSlide.appendChild(conteudo);
+        }
 
         const elementoAlvo =
           carrosselContainer.querySelector('.carrossel-progresso') ||
@@ -289,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-
       reiniciarLogicaCarrossel();
 
     } catch (erro) {
@@ -298,6 +321,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function criarModalZoom() {
+    let modal = document.getElementById('modal-imagem');
+
+    // Se já existir no HTML, reutiliza
+    if (modal) return modal;
+
+    // Cria o modal automaticamente
+    modal = document.createElement('div');
+    modal.id = 'modal-imagem';
+    modal.className = 'modal-imagem';
+
+    const fechar = document.createElement('span');
+    fechar.className = 'botao-fechar-modal';
+    fechar.innerHTML = '&times;';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'modal-conteudo-wrapper';
+
+    const img = document.createElement('img');
+    img.id = 'img-ampliada';
+
+    const legenda = document.createElement('div');
+    legenda.id = 'modal-legenda';
+
+    wrapper.append(img, legenda);
+    modal.append(fechar, wrapper);
+
+    document.body.appendChild(modal);
+
+    return modal;
+  }
+
+
+  // Abre o modal com a imagem selecionada
+  function abrirModalZoom(img) {
+    const modal = criarModalZoom();
+
+    const modalImg = modal.querySelector('#img-ampliada');
+    const legendaTexto = modal.querySelector('#modal-legenda');
+
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    legendaTexto.textContent = img.alt;
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+
+  // Fecha o modal
+  function fecharOModal() {
+    const modal = document.getElementById('modal-imagem');
+
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  }
 
   /* ==========================================================================
    3. SISTEMA DE MURAL DE NOTÍCIAS
@@ -419,29 +500,11 @@ document.addEventListener('DOMContentLoaded', () => {
           texto.appendChild(paragrafo);
 
           if (imagemUrl) {
-            console.log('URL da imagem:', imagemUrl);
             const img = document.createElement('img');
+
             img.src = ajustarLinkImagem(imagemUrl);
-            img.alt = titulo;
-            img.className = 'imagem-noticia';
-
-            img.onerror = () => {
-              console.error('Não foi possível carregar a imagem:', img.src);
-              img.alt = 'Imagem indisponível';
-            };
-
-            img.addEventListener('click', () => {
-              const modal = document.getElementById('modal-imagem');
-              const modalImg = document.getElementById('img-ampliada');
-              const legenda = document.getElementById('modal-legenda');
-
-              if (modal && modalImg && legenda) {
-                modal.style.display = 'block';
-                modalImg.src = img.src;
-                legenda.textContent = img.alt;
-                document.body.style.overflow = 'hidden';
-              }
-            });
+            img.alt = titulo || "Imagem da notícia";
+            img.style.cursor = 'zoom-in';
 
             texto.appendChild(img);
           }
@@ -550,42 +613,134 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================================================================== */
   let slideAtual = 0;
   let tempoSlide = null;
+
+  let carrosselPausado = false;
+  let inicioContagem = 0;
+  let tempoRestante = 6000;
+
   function reiniciarLogicaCarrossel() {
-    const slides = document.querySelectorAll('.slide');
-    const indicadores = document.querySelectorAll('.indicador');
-    const barraProgresso = document.querySelector('.barra-progresso');
+    const carrossel = document.querySelector('.carrossel-container');
+    if (!carrossel) return;
+
+    const slides = carrossel.querySelectorAll('.slide');
+    const indicadores = document.querySelectorAll('.carrossel-indicadores .indicador');
+    const barraProgresso = carrossel.querySelector('.barra-progresso');
+
     if (slides.length === 0) return;
-    slides[0].classList.add('ativo');
-    if (indicadores[0]) indicadores[0].classList.add('ativo');
-    function alternarSlide(index) {
-      if (!slides[slideAtual] || !slides[index]) return;
-      slides[slideAtual].classList.remove('ativo');
-      if (indicadores[slideAtual]) indicadores[slideAtual].classList.remove('ativo');
+
+    clearTimeout(tempoSlide);
+
+    slideAtual = Math.min(slideAtual, slides.length - 1);
+    carrosselPausado = false;
+    tempoRestante = 6000;
+
+    function mostrarSlide(index) {
+      slides.forEach(slide => slide.classList.remove('ativo'));
+      indicadores.forEach(ind => ind.classList.remove('ativo'));
+
       slideAtual = index;
+
       slides[slideAtual].classList.add('ativo');
-      if (indicadores[slideAtual]) indicadores[slideAtual].classList.add('ativo');
-      reiniciarBarraProgresso();
+
+      if (indicadores[slideAtual]) {
+        indicadores[slideAtual].classList.add('ativo');
+      }
+
+      tempoRestante = 6000;
+      iniciarContagem();
     }
+
     function proximoSlide() {
-      let proximo = (slideAtual + 1) % slides.length;
-      alternarSlide(proximo);
+      const proximo = (slideAtual + 1) % slides.length;
+      mostrarSlide(proximo);
     }
-    function reiniciarBarraProgresso() {
-      if (!barraProgresso) return;
+
+    function iniciarContagem() {
       clearTimeout(tempoSlide);
-      barraProgresso.style.transition = 'none';
-      barraProgresso.style.width = '0%';
-      barraProgresso.offsetHeight;
-      barraProgresso.style.transition = 'width 6s linear';
-      barraProgresso.style.width = '100%';
-      tempoSlide = setTimeout(proximoSlide, 6000);
+
+      if (carrosselPausado) return;
+
+      if (barraProgresso) {
+        barraProgresso.style.transition = 'none';
+
+        const larguraAtual = 100 * (1 - tempoRestante / 6000);
+        barraProgresso.style.width = larguraAtual + '%';
+
+        barraProgresso.offsetHeight;
+
+        barraProgresso.style.transition =
+          `width ${tempoRestante}ms linear`;
+
+        barraProgresso.style.width = '100%';
+      }
+
+      inicioContagem = Date.now();
+
+      tempoSlide = setTimeout(proximoSlide, tempoRestante);
     }
-    indicadores.forEach((indicador, idx) => {
-      indicador.addEventListener('click', () => {
-        if (idx !== slideAtual) alternarSlide(idx);
-      });
+
+    function pausarCarrossel() {
+      if (carrosselPausado) return;
+
+      carrosselPausado = true;
+
+      const decorrido = Date.now() - inicioContagem;
+      tempoRestante = Math.max(0, tempoRestante - decorrido);
+
+      clearTimeout(tempoSlide);
+
+      if (barraProgresso) {
+        const largura = getComputedStyle(barraProgresso).width;
+        barraProgresso.style.transition = 'none';
+        barraProgresso.style.width = largura;
+      }
+    }
+
+    function retomarCarrossel() {
+      if (!carrosselPausado) return;
+
+      carrosselPausado = false;
+
+      if (tempoRestante <= 0) {
+        proximoSlide();
+      } else {
+        iniciarContagem();
+      }
+    }
+
+    // Indicadores de navegação manual
+    indicadores.forEach((indicador, index) => {
+      indicador.onclick = () => {
+        if (index !== slideAtual) {
+          mostrarSlide(index);
+        }
+      };
     });
-    reiniciarBarraProgresso();
+
+    // Desktop: pausa ao passar o mouse
+    // Evita registrar os mesmos eventos novamente
+    if (!carrossel.dataset.eventosPausa) {
+
+      carrossel.addEventListener('mouseenter', pausarCarrossel);
+      carrossel.addEventListener('mouseleave', retomarCarrossel);
+
+      // Celular: pausa enquanto mantém o dedo pressionado
+      carrossel.addEventListener('touchstart', pausarCarrossel, {
+        passive: true
+      });
+
+      document.addEventListener('touchend', retomarCarrossel, {
+        passive: true
+      });
+
+      document.addEventListener('touchcancel', retomarCarrossel, {
+        passive: true
+      });
+
+      carrossel.dataset.eventosPausa = 'true';
+    }
+
+    mostrarSlide(slideAtual);
   }
 
   /* 3. EFEITOS DE ROLAGEM (SCROLL REVEAL) */
@@ -610,39 +765,41 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* 4. MODAL DE ZOOM PARA IMAGENS DAS NOTÍCIAS */
-  const modal = document.getElementById('modal-imagem');
-  const modalImg = document.getElementById('img-ampliada');
-  const legendaTexto = document.getElementById('modal-legenda');
-  const botaoFechar = document.querySelector('.botao-fechar-modal');
-  const imagensNoticias = document.querySelectorAll('.texto-completo img');
+  document.addEventListener('click', (evento) => {
 
-  imagensNoticias.forEach(img => {
-    img.addEventListener('click', () => {
-      if (modal && modalImg && legendaTexto) {
-        modal.style.display = "block";
-        modalImg.src = img.src;
-        legendaTexto.innerHTML = img.alt;
-        document.body.style.overflow = 'hidden';
-      }
-    });
+    // Clique no botão de fechar
+    if (evento.target.closest('.botao-fechar-modal')) {
+      fecharOModal();
+      return;
+    }
+
+    // Verifica se clicou em uma imagem ampliável
+    const img = evento.target.closest(
+      '.texto-completo img, .slide[data-dinamico="true"] .slide-background img'
+    );
+
+    if (img) {
+      evento.preventDefault();
+      evento.stopPropagation();
+
+      abrirModalZoom(img);
+      return;
+    }
+
+    // Fecha ao clicar no fundo escuro
+    const modal = document.getElementById('modal-imagem');
+
+    if (modal && evento.target === modal) {
+      fecharOModal();
+    }
   });
 
-  function fecharOModal() {
-    if (modal) {
-      modal.style.display = "none";
-      document.body.style.overflow = 'auto';
+  // Fecha com a tecla ESC
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape') {
+      fecharOModal();
     }
-  }
-
-  if (botaoFechar) botaoFechar.addEventListener('click', fecharOModal);
-
-  if (modal) {
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal || event.target.classList.contains('modal-conteudo-wrapper')) {
-        fecharOModal();
-      }
-    });
-  }
+  });
 
   /* 5. MODAL DE INSTRUÇÕES (KIT DE BOAS-VINDAS) */
   const modalInstrucoes = document.getElementById('modal-instrucoes');
@@ -829,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (inputBusca) {
     inputBusca.addEventListener('input', () => {
-      
+
       const termoBusca = inputBusca.value.toLowerCase().trim();
       const cardsNoticias = document.querySelectorAll('#mural-noticias-completo .card-noticia-longa');
 
@@ -852,151 +1009,346 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
    12. SISTEMA DE BUSCA DINÂMICA NO REGIMENTO INTERNO
    ========================================================================== */
+
   const inputBuscaRegras = document.getElementById('input-busca-regras');
 
   if (inputBuscaRegras) {
-    inputBuscaRegras.addEventListener('input', () => {
-      const termoBusca = inputBuscaRegras.value.trim();
-      const termoMinusculo = termoBusca.toLowerCase();
 
-      const cardsRegras = document.querySelectorAll('.card-regras, section, article, .box-regra');
+    const removerAcentos = (texto) =>
+      texto.normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+
+    // Guarda o HTML original sem perder a estrutura
+    const elementosOriginais = new WeakMap();
+
+    function salvarOriginal(elemento) {
+      if (!elementosOriginais.has(elemento)) {
+        elementosOriginais.set(elemento, elemento.cloneNode(true));
+      }
+    }
+
+    // Restaura o conteúdo original
+    function restaurarOriginal(elemento) {
+      const original = elementosOriginais.get(elemento);
+
+      if (original) {
+        elemento.replaceChildren(
+          ...Array.from(original.cloneNode(true).childNodes)
+        );
+      }
+    }
+
+    // Destaca somente os nós de texto, preservando HTML e ícones
+    function destacarTexto(elemento, termo) {
+
+      const walker = document.createTreeWalker(
+        elemento,
+        NodeFilter.SHOW_TEXT
+      );
+
+      const nos = [];
+
+      while (walker.nextNode()) {
+        nos.push(walker.currentNode);
+      }
+
+      const termoNormalizado = removerAcentos(termo);
+
+      nos.forEach(no => {
+
+        const texto = no.nodeValue;
+        const textoNormalizado = removerAcentos(texto);
+
+        if (!textoNormalizado.includes(termoNormalizado)) return;
+
+        const fragmento = document.createDocumentFragment();
+
+        let inicio = 0;
+
+        while (inicio < texto.length) {
+
+          let posicao = -1;
+          let fim = -1;
+
+          for (let i = inicio; i < texto.length; i++) {
+
+            for (let j = i + 1; j <= texto.length; j++) {
+
+              if (
+                removerAcentos(texto.slice(i, j)) ===
+                termoNormalizado
+              ) {
+                posicao = i;
+                fim = j;
+                break;
+              }
+            }
+
+            if (posicao !== -1) break;
+          }
+
+          if (posicao === -1) {
+            fragmento.appendChild(
+              document.createTextNode(texto.slice(inicio))
+            );
+            break;
+          }
+
+          fragmento.appendChild(
+            document.createTextNode(texto.slice(inicio, posicao))
+          );
+
+          const marca = document.createElement('mark');
+          marca.className = 'foco-busca';
+          marca.textContent = texto.slice(posicao, fim);
+
+          fragmento.appendChild(marca);
+
+          inicio = fim;
+        }
+
+        no.parentNode.replaceChild(fragmento, no);
+      });
+    }
+
+    inputBuscaRegras.addEventListener('input', () => {
+
+      const termoBusca = inputBuscaRegras.value.trim();
+      const termoNormalizado = removerAcentos(termoBusca);
+
+      const cardsRegras = document.querySelectorAll(
+        '.grid-cards-regras > .card-texto-longo'
+      );
 
       cardsRegras.forEach(card => {
 
-        const elementosTexto = card.querySelectorAll('p, li, h3');
+        const elementosTexto = card.querySelectorAll(
+          'h3, h4, p, li, span, strong'
+        );
 
         let encontrouNoCard = false;
 
         elementosTexto.forEach(elemento => {
-          // Armazena o HTML original de cada texto para não quebrar a estrutura
-          if (!elemento.dataset.textoOriginal) {
-            elemento.dataset.textoOriginal = elemento.innerHTML;
-          }
 
-          const textoOriginal = elemento.dataset.textoOriginal;
+          salvarOriginal(elemento);
+          restaurarOriginal(elemento);
 
-          // Extrai o texto limpo para comparação segura
-          const divTemporaria = document.createElement('div');
-          divTemporaria.innerHTML = textoOriginal;
-          const textoPuroMinusculo = divTemporaria.textContent.toLowerCase();
+          const texto = removerAcentos(elemento.textContent);
 
-          if (termoMinusculo === '') {
-            elemento.innerHTML = textoOriginal;
-            return;
-          }
+          if (termoNormalizado === '') return;
 
-          // Se encontrar o termo no texto, marca que o card deve aparecer e adiciona o foco
-          if (textoPuroMinusculo.includes(termoMinusculo)) {
+          if (texto.includes(termoNormalizado)) {
+
             encontrouNoCard = true;
-            const expressaoReg = new RegExp(`(${termoBusca})`, 'gi');
-            elemento.innerHTML = textoOriginal.replace(expressaoReg, '<mark class="foco-busca">$1</mark>');
-          } else {
-            elemento.innerHTML = textoOriginal;
+
+            destacarTexto(elemento, termoBusca);
           }
         });
 
-        if (termoMinusculo === '' || encontrouNoCard) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display =
+          termoNormalizado === '' || encontrouNoCard
+            ? ''
+            : 'none';
       });
+
     });
   }
 
-  /* ==========================================================================
-   13. SISTEMA DE BUSCA BLINDADO COM DESTAQUE E FILTRO DE CATEGORIAS - GUIA BAIRRO
-   ========================================================================== */
   const inputBuscaBairro = document.getElementById('input-busca-bairro');
 
-if (inputBuscaBairro) {
-  inputBuscaBairro.addEventListener('input', () => {
-    
-    const removerAcentos = (texto) => {
-      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    };
+  if (inputBuscaBairro) {
 
-    const termoBusca = inputBuscaBairro.value.trim();
-    const termoSemAcento = removerAcentos(termoBusca);
+    const removerAcentos = (texto) =>
+      texto.normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
 
-    const cardsLocais = document.querySelectorAll('main div, article div, main section, .card, .local');
+    // Guarda o conteúdo original de cada elemento
+    const elementosOriginais = new WeakMap();
 
-    cardsLocais.forEach(card => {
-      const tituloLocal = card.querySelector('h3, h4');
-      if (!tituloLocal) return; 
+    function salvarOriginal(elemento) {
+      if (!elementosOriginais.has(elemento)) {
+        elementosOriginais.set(elemento, elemento.cloneNode(true));
+      }
+    }
 
-      const elementosTexto = card.querySelectorAll('h3, h4, p, span, li');
-      let encontrouNoCard = false;
+    // Restaura o HTML original sem perder atributos
+    function restaurarOriginal(elemento) {
+      const original = elementosOriginais.get(elemento);
 
-      elementosTexto.forEach(elemento => {
-        if (!elemento.dataset.textoOriginal) {
-          elemento.dataset.textoOriginal = elemento.innerHTML;
+      if (original) {
+        elemento.replaceChildren(
+          ...Array.from(original.cloneNode(true).childNodes)
+        );
+      }
+    }
+
+    // Destaca apenas textos, preservando tags e ícones
+    function destacarTexto(elemento, termo) {
+
+      const walker = document.createTreeWalker(
+        elemento,
+        NodeFilter.SHOW_TEXT
+      );
+
+      const nos = [];
+
+      while (walker.nextNode()) {
+        nos.push(walker.currentNode);
+      }
+
+      nos.forEach(no => {
+
+        const texto = no.nodeValue;
+        const textoNormalizado = removerAcentos(texto);
+        const termoNormalizado = removerAcentos(termo);
+
+        if (!textoNormalizado.includes(termoNormalizado)) return;
+
+        const fragmento = document.createDocumentFragment();
+
+        let inicio = 0;
+
+        // Localiza as ocorrências preservando os acentos originais
+        while (inicio < texto.length) {
+
+          let posicao = -1;
+          let fim = -1;
+
+          for (let i = inicio; i < texto.length; i++) {
+
+            for (let j = i + 1; j <= texto.length; j++) {
+
+              if (
+                removerAcentos(texto.slice(i, j)) ===
+                termoNormalizado
+              ) {
+                posicao = i;
+                fim = j;
+                break;
+              }
+            }
+
+            if (posicao !== -1) break;
+          }
+
+          if (posicao === -1) {
+            fragmento.appendChild(
+              document.createTextNode(texto.slice(inicio))
+            );
+            break;
+          }
+
+          fragmento.appendChild(
+            document.createTextNode(texto.slice(inicio, posicao))
+          );
+
+          const marca = document.createElement('mark');
+          marca.className = 'foco-busca';
+          marca.textContent = texto.slice(posicao, fim);
+
+          fragmento.appendChild(marca);
+
+          inicio = fim;
         }
 
-        const textoOriginal = elemento.dataset.textoOriginal;
+        no.parentNode.replaceChild(fragmento, no);
+      });
+    }
 
-        const divTemporaria = document.createElement('div');
-        divTemporaria.innerHTML = textoOriginal;
-        const textoPuroSemAcento = removerAcentos(divTemporaria.textContent);
+    inputBuscaBairro.addEventListener('input', () => {
 
-        if (termoSemAcento === '') {
-          elemento.innerHTML = textoOriginal;
-          return;
-        }
+      const termoBusca = inputBuscaBairro.value.trim();
+      const termoNormalizado = removerAcentos(termoBusca);
 
-        if (textoPuroSemAcento.includes(termoSemAcento)) {
-          encontrouNoCard = true;
-          // Escapa caracteres especiais para o RegExp funcionar sem falhas
-          const expressaoReg = new RegExp(`(${termoBusca.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')})`, 'gi');
-          elemento.innerHTML = textoOriginal.replace(expressaoReg, '<mark class="foco-busca">$1</mark>');
+      const cardsLocais = document.querySelectorAll(
+        'main div, article div, main section, .card, .local'
+      );
+
+      cardsLocais.forEach(card => {
+
+        const tituloLocal = card.querySelector('h3, h4');
+        if (!tituloLocal) return;
+
+        const elementosTexto = card.querySelectorAll(
+          'h3, h4, p, span, li'
+        );
+
+        let encontrouNoCard = false;
+
+        elementosTexto.forEach(elemento => {
+
+          salvarOriginal(elemento);
+          restaurarOriginal(elemento);
+
+          const textoPuro = removerAcentos(
+            elemento.textContent
+          );
+
+          if (termoNormalizado === '') return;
+
+          if (textoPuro.includes(termoNormalizado)) {
+
+            encontrouNoCard = true;
+
+            destacarTexto(elemento, termoBusca);
+          }
+        });
+
+        if (
+          termoNormalizado === '' ||
+          encontrouNoCard
+        ) {
+          card.style.display = '';
+          card.classList.add('local-visivel-busca');
         } else {
-          elemento.innerHTML = textoOriginal;
+          card.style.display = 'none';
+          card.classList.remove('local-visivel-busca');
         }
       });
 
-      // Aplica visibilidade no cartão individual
-      if (termoSemAcento === '' || encontrouNoCard) {
-        card.style.display = ''; 
-        card.classList.add('local-visivel-busca');
-      } else {
-        card.style.display = 'none'; 
-        card.classList.remove('local-visivel-busca');
-      }
-    });
+      // Controle dos títulos das categorias
+      const titulosCategorias = document.querySelectorAll(
+        '.titulo-categoria'
+      );
+      titulosCategorias.forEach(categoria => {
 
-    // 2. CONTROLE TOTAL DOS TÍTULOS DE CATEGORIAS GRANDES (H3 MACROS)
-    const titulosCategorias = document.querySelectorAll('main > h3, .conteudo > h3');
-    
-    titulosCategorias.forEach(categoria => {
-      if (termoSemAcento === '') {
-        categoria.style.display = '';
-        return;
-      }
-
-      let containerPai = categoria.parentElement;
-      let temLocaisVisiveis = false;
-      let proximoElemento = categoria.nextElementSibling;
-
-      while (proximoElemento && proximoElemento.tagName !== 'H3' && proximoElemento.tagName !== 'FOOTER') {
-        if (proximoElemento.classList.contains('local-visivel-busca') || proximoElemento.querySelector('.local-visivel-busca')) {
-          temLocaisVisiveis = true;
-          break;
+        if (termoNormalizado === '') {
+          categoria.style.display = '';
+          return;
         }
-        proximoElemento = proximoElemento.nextElementSibling;
-      }
 
-      if (temLocaisVisiveis) {
-        categoria.style.display = '';
-      } else {
-        categoria.style.display = 'none';
-      }
+        let proximoElemento = categoria.nextElementSibling;
+        let temLocaisVisiveis = false;
+
+        while (
+          proximoElemento &&
+          !proximoElemento.classList.contains('titulo-categoria') &&
+          proximoElemento.tagName !== 'FOOTER'
+        ) {
+
+          if (
+            proximoElemento.classList.contains('local-visivel-busca') ||
+            proximoElemento.querySelector('.local-visivel-busca')
+          ) {
+            temLocaisVisiveis = true;
+            break;
+          }
+
+          proximoElemento = proximoElemento.nextElementSibling;
+        }
+
+        categoria.style.display = temLocaisVisiveis ? '' : 'none';
+
+      });
+      document.querySelectorAll('.local-visivel-busca')
+        .forEach(el => el.classList.remove('local-visivel-busca'));
+
     });
+  }
 
-    document.querySelectorAll('.local-visivel-busca').forEach(el => el.classList.remove('local-visivel-busca'));
-  });
-}
 
- 
   carregarBannersDinamicos();
   carregarMuralNoticias();
 
