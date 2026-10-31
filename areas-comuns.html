@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural de Notícias - Condomínio Forte São Mateus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO (Navbar integrada com link de volta) -->
+    <header class="cabecalho">
+        <div class="container-header">
+            <a href="index.html#inicio" class="logo-link">
+                <div class="logo-container">
+                    <img src="imagens/LogoForteSaoMateus.png" alt="Logo" class="logo-img" href="inicio">
+                    <div class="logo-titulo"> <span>Condomínio Forte São Mateus</span></div>
+                </div>
+            </a>
+
+            <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
+            <nav id="mobile-nav" class="hidden">
+                <ul>
+                    <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
+                        <i class="fa fa-moon-o"></i> <span></span>
+                    </button>
+                    <li><a href="index.html#inicio"><i class="fa fa-home"></i> Início</a></li>
+                    <li><a href="index.html#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
+                    <li><a href="index.html#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="contatos-uteis.html"><i class="fa fa-phone"></i> Contato úteis</a></li>
+                    <li><a href="index.html#atas"><i class="fa fa-file-text"></i> Atas e Documentos</a></li>
+                    <li><a href="noticias.html#mural-noticias-completo"><i class="fa fa-bullhorn"></i> Notícias</a></li>
+                    <li><a href="faleconosco.html"><i class="fa fa-envelope"></i> Fale Conosco</a></li>
+                </ul>
+            </nav>
+            <nav class="menu-navegacao">
+                <a href="index.html" class="link-retorno-menu">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Início</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL DO MURAL -->
+    <main
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 20px; max-width: 1200px; margin: 0 auto 50px auto;">
+
+        <section class="secao revelar-ao-scroll visivel">
+            <header class="revelar-ao-scroll topo-areas-comuns"
+                style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px; background: var(--bg-card, #ffffff); margin-bottom: 30px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+
+                <span class="badge-categoria" style="margin-bottom: 10px; display: inline-block;">Kit de
+                    Boas-Vindas</span>
+
+                <h1
+                    style="font-size: 2.2rem; color: var(--text-color, #333); margin-bottom: 15px; font-weight: 700; width: 100%;">
+                    Nossas Áreas Comuns e Lazer
+                </h1>
+
+                <p
+                    style="max-width: 600px; margin: 0 auto; color: var(--text-muted, #666); line-height: 1.6; font-size: 1.1rem; width: 100%;">
+                    Descubra tudo o que o Condomínio Forte São Mateus oferece para o seu bem-estar, lazer e convivência
+                    em harmonia. Explore nossos espaços e consulte os horários de funcionamento.
+                </p>
+            </header>
+
+            <!-- Card Playground -->
+            <div class="card-texto-longo local card-area-comum"
+                style="display: flex; flex-direction: column; background: var(--bg-card, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 30px;">
+
+                <!-- Adicionamos a classe 'container-foto-comum' para controlarmos a altura no CSS -->
+                <div class="container-foto-comum">
+                    <img src="imagens/areas-comuns/Playground.jpg" alt="Playground"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                </div>
+
+                <div
+                    style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--verde-escuro, #1C3332);">Playground
+                        </h3>
+                        <p
+                            style="color: var(--text-muted, #666); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                            Área recreativa ao ar livre equipada com brinquedos e cercada de verde para a diversão das
+                            crianças.
+                        </p>
+                    </div>
+                    <span style="font-size: 0.9rem;"><strong>Horário:</strong> 09h às 20h</span>
+                </div>
+            </div>
+
+             <!-- Card Salão de Festas -->
+            <div class="card-texto-longo local card-area-comum"
+                style="display: flex; flex-direction: column; background: var(--bg-card, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 30px;">
+
+                <!-- Adicionamos a classe 'container-foto-comum' para controlarmos a altura no CSS -->
+                <div class="container-foto-comum">
+                    <img src="imagens/areas-comuns/Salao-de-Festas2.jpg" alt="Salão de Festas"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                </div>
+
+                <div
+                    style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--verde-escuro, #1C3332);">Salão de Festas
+                        </h3>
+                        <p
+                            style="color: var(--text-muted, #666); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                            Espaço amplo para comemorações, equipado com mesas, cadeiras e cozinha de apoio.
+                        </p>
+                    </div>
+                    <span style="font-size: 0.9rem;"><strong>Horário:</strong> 09h às 22h</span>
+                </div>
+            </div>
+            
+             <!-- Card Churrasqueira -->
+            <div class="card-texto-longo local card-area-comum"
+                style="display: flex; flex-direction: column; background: var(--bg-card, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 30px;">
+
+                <!-- Adicionamos a classe 'container-foto-comum' para controlarmos a altura no CSS -->
+                <div class="container-foto-comum">
+                    <img src="imagens/areas-comuns/churrasqueira.jpg" alt="Churrasqueira"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                </div>
+
+                <div
+                    style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--verde-escuro, #1C3332);">Churrasqueira
+                        </h3>
+                        <p
+                            style="color: var(--text-muted, #666); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                            Área gourmet reservável ideal para churrascos em família com total conforto.
+                        </p>
+                    </div>
+                    <span style="font-size: 0.9rem;"><strong>Horário:</strong> 09h às 22h</span>
+                </div>
+            </div>
+
+            <!-- Card Estacionamento -->
+            <div class="card-texto-longo local card-area-comum"
+                style="display: flex; flex-direction: column; background: var(--bg-card, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 30px;">
+
+                <!-- Adicionamos a classe 'container-foto-comum' para controlarmos a altura no CSS -->
+                <div class="container-foto-comum">
+                    <img src="imagens/areas-comuns/Estacionamento.jpg" alt="Estacionamento"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                </div>
+
+                <div
+                    style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--verde-escuro, #1C3332);">Estacionamento
+                        </h3>
+                        <p
+                            style="color: var(--text-muted, #666); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                            Espaço privativo planejado para garantir a segurança e a proteção do seu veículo. Com sistema rigoroso de controle de acesso automatizado, identificação por unidade e monitoramento, oferecemos um ambiente organizado e seguro para os moradores. Visando a harmonia de todos, a circulação interna exige velocidade reduzida (máx. 10 km/h) e o uso obrigatório de faróis acesos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Espaço Pet -->
+            <div class="card-texto-longo local">
+                <img src="imagens/areas-comuns/espaco-pet.jpg" alt="Espaço Pet"
+                    style="width:100%; border-radius:8px; object-fit:cover; height:200px;">
+                <h3>Espaço Pet</h3>
+                <p>Área ao ar livre dedicada para o lazer e exercícios do seu animal de estimação.</p>
+                <span><strong>Horário:</strong> 07h às 22h</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="container-rodape">
+
+            <!-- Coluna 1: Sobre e Créditos -->
+            <div class="bloco-rodape">
+                <h3>Forte São Mateus</h3>
+                <p>Seu espaço de paz, segurança e convivência em harmonia. Nosso portal oficial de comunicados e
+                    serviços ao condômino.</p>
+                <br>
+                <p><strong>Administração:</strong> Seg a Sex, das 08h às 17h</p>
+            </div>
+
+            <!-- Coluna 2: Links Rápidos -->
+            <div class="bloco-rodape">
+                <h3>Navegação</h3>
+                <ul class="links-rodape">
+                    <li><a href="#inicio"><i class="fa fa-chevron-right"></i> Início</a></li>
+                    <li><a href="#financeiro"><i class="fa fa-chevron-right"></i> Financeiro</a></li>
+                    <li><a href="#kit-boas-vindas"><i class="fa fa-chevron-right"></i> Kit Boas-Vindas</a></li>
+                    <li><a href="#contatos"><i class="fa fa-chevron-right"></i> Contatos Úteis</a></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3: Contatos e Endereço -->
+            <div class="bloco-rodape">
+                <h3>Contatos e Localização</h3>
+                <ul>
+                    <li><strong>Portaria:</strong> (11) 98438-2216</li>
+                    <li><strong>E-mail:</strong> sindicancia@condominiofortesaomateus.com.br</li>
+                    <li><strong>Endereço:</strong> Rua Forte da Ribeira, 250 - Parque São Lourenço</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Barra Inferior de Direitos Autorais e Sua Marca -->
+        <div class="direitos-autorais">
+            <p>© 2026 Condomínio Forte São Mateus. Todos os direitos reservados.</p>
+            <p class="creditos-assinatura">Desenvolvido com 💙 por <a>EFGet Soluções
+                    Digitais</a></p>
+        </div>
+    </footer>
+
+    <!-- Vincula o mesmo JavaScript que gerencia as animações de scroll -->
+    <script src="script.js"></script>
+
+    <!-- INTERFACE DO POP-UP DE VISUALIZAÇÃO (MODAL) -->
+    <div id="modal-imagem" class="modal-noticia-preview">
+        <span class="botao-fechar-modal">&times;</span>
+        <div class="modal-conteudo-wrapper">
+            <img class="modal-imagem-expandida" id="img-ampliada" alt="Visualização ampliada">
+        </div>
+        <div id="modal-legenda"></div>
+    </div>
+
+</body>
+
+<!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APLICATIVO (APENAS MOBILE) -->
+<div id="menus-mobile-injetados"></div>
+
+</html>

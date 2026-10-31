@@ -20,12 +20,6 @@
                     <div class="logo-titulo"><span>Condomínio Forte São Mateus</span></div>
                 </div>
             </a>
-            <!-- BOTÃO HAMBÚRGUER: Escondido no PC, aparece só no celular -->
-            <button id="burger-btn" class="burger-menu" aria-label="Abrir menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
 
             <!-- MENU MOBILE: Lista vertical flutuante, escondida por padrão no PC e celular -->
             <nav id="mobile-nav" class="hidden">
@@ -36,8 +30,8 @@
                         </button>
                     </div> -->
                     <button id="btn-dark-mobile" class="btn-toggle-dark" aria-label="Alternar Modo Escuro">
-                            <i class="fa fa-moon-o"></i> <span></span>
-                        </button>
+                        <i class="fa fa-moon-o"></i> <span></span>
+                    </button>
                     <li><a href="#inicio"><i class="fa fa-home"></i> Início</a></li>
                     <li><a href="#financeiro"><i class="fa fa-credit-card-alt"></i> Financeiro</a></li>
                     <li><a href="#boas-vindas"><i class="fa fa-handshake-o"></i> Kit Boas-Vindas</a></li>
@@ -263,23 +257,6 @@
 </body>
 
 <!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APLICATIVO (APENAS MOBILE) -->
-<div class="barra-inferior-app">
-    <a href="index.html" class="item-nav-app ativo">
-        <i class="fa fa-home"></i>
-        <span>Início</span>
-    </a>
-    <a href="index.html#financeiro" class="item-nav-app">
-        <i class="fa fa-dollar"></i>
-        <span>Boletos</span>
-    </a>
-    <a href="regras.html" class="item-nav-app">
-        <i class="fa fa-gavel"></i>
-        <span>Regras</span>
-    </a>
-    <a href="contatos-uteis.html" class="item-nav-app">
-        <i class="fa fa-phone"></i>
-        <span>Contatos</span>
-    </a>
-</div>
+<div id="menus-mobile-injetados"></div>
 
 </html>
