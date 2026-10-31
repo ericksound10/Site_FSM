@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Só mostra se o morador não tiver recusado o banner do Android e o app não estiver instalado
       if (localStorage.getItem('pwa-banner-recusado') !== 'sim' && !jaEstaInstalado) {
         if (bannerAndroid) bannerAndroid.style.display = 'flex';
+        configurarSwipeBannerAndroid();
       }
     });
 
@@ -93,6 +94,72 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('pwa-ios-recusado');
   });
 
+  /* FUNÇÃO PARA ARRASTAR O BANNER PARA O LADO (TEMPORÁRIO - SUPORTE MOUSE E TOQUE) */
+  function configurarSwipeBannerAndroid() {
+    const bannerAndroid = document.getElementById('pwa-install-banner');
+    if (!bannerAndroid) return;
+
+    let startX = 0;
+    let currentX = 0;
+    let movendo = false;
+
+    // Pointerdown registra tanto o clique do mouse no PC quanto o touch no celular
+    bannerAndroid.addEventListener('pointerdown', (e) => {
+      // Bloqueia o arrasto se o usuário clicar nos botões internos de instalar ou fechar
+      if (e.target.closest('button, a')) return;
+
+      startX = e.clientX;
+      currentX = startX;
+      bannerAndroid.style.transition = 'none'; // Desliga transições para evitar lag no movimento
+      movendo = true;
+
+      // Captura o ponteiro para continuar rastreando mesmo se o mouse sair de cima do banner ao mover rápido
+      bannerAndroid.setPointerCapture(e.pointerId);
+    });
+
+    bannerAndroid.addEventListener('pointermove', (e) => {
+      if (!movendo) return;
+      currentX = e.clientX;
+      const deslocamentoX = currentX - startX;
+
+      // Altera a opacidade de forma gradual conforme afasta do centro
+      const limiteOpacidade = Math.max(0, 1 - Math.abs(deslocamentoX) / 250);
+      bannerAndroid.style.transform = `translate(-50%, 0) translateX(${deslocamentoX}px)`;
+      bannerAndroid.style.opacity = limiteOpacidade;
+    });
+
+    bannerAndroid.addEventListener('pointerup', (e) => {
+      if (!movendo) return;
+      movendo = false;
+      bannerAndroid.releasePointerCapture(e.pointerId);
+
+      const deslocamentoFinalX = currentX - startX;
+      const limiteParaFechar = bannerAndroid.offsetWidth / 3; // Limite de 1/3 do tamanho do banner
+
+      bannerAndroid.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+      if (Math.abs(deslocamentoFinalX) > limiteParaFechar) {
+        // Arrastou o suficiente: Executa a animação jogando o elemento para fora da tela
+        const direcao = deslocamentoFinalX > 0 ? 1 : -1;
+        bannerAndroid.style.transform = `translate(-50%, 0) translateX(${direcao * window.innerWidth}px)`;
+        bannerAndroid.style.opacity = '0';
+
+        // Oculta o elemento após o fim da transição física
+        setTimeout(() => {
+          bannerAndroid.style.display = 'none';
+
+          // Reseta os estilos originais para quando ele reaparecer em outras páginas
+          bannerAndroid.style.transform = 'translate(-50%, 0)';
+          bannerAndroid.style.opacity = '1';
+        }, 300);
+      } else {
+        // Não arrastou o suficiente: Retorna de forma elástica ao centro original
+        bannerAndroid.style.transform = 'translate(-50%, 0)';
+        bannerAndroid.style.opacity = '1';
+      }
+    });
+  }
+
   /* 1. MENU HAMBÚRGUER (MOBILE) */
   const burgerBtn = document.getElementById('burger-btn');
   const mobileNav = document.getElementById('mobile-nav');
@@ -113,6 +180,91 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (event) => {
       if (!mobileNav.contains(event.target) && !burgerBtn.contains(event.target)) {
         mobileNav.classList.add('hidden');
+      }
+    });
+  }
+
+  /* INJEÇÃO AUTOMÁTICA DE MENUS */
+  const divCabecalho = document.getElementById('cabecalho-injetado');
+  const divMobile = document.getElementById('menus-mobile-injetados');
+
+  if (divCabecalho) {
+    divCabecalho.innerHTML = `
+      <header class="cabecalho">
+        <div class="container-header">
+          <div class="logo-container">
+            <img src="imagens/LogoForteSaoMateus.png" class="logo-img" alt="Logo">
+            <h1 class="logo-titulo">Forte <span>São Mateus</span></h1>
+          </div>
+          <!-- Menu Desktop -->
+          <nav class="menu-navegacao">
+            <a href="index.html"><i class="fa fa-home"></i>Início</a>
+            <a href="index.html#financeiro"><i class="fa fa-money"></i>Financeiro</a>
+            <a href="index.html##atas"><i class="fa fa-file-text"></i>Documentos</a>
+          </nav>
+        </div>
+      </header>
+    `;
+  }
+
+  if (divMobile) {
+    divMobile.innerHTML = `
+      <!-- Gaveta Lateral Mobile -->
+      <nav id="mobile-nav" class="hidden">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-home"></i>Início</a></li>
+          <li><a href="index.html#financeiro"><i class="fa fa-money"></i>Financeiro</a></li>
+          <li><a href="index.html##atas"><i class="fa fa-file-text"></i>Documentos</a></li>
+        </ul>
+      </nav>
+
+      <!-- Barra Inferior Mobile -->
+      <div class="barra-inferior-app">
+        <a href="index.html" class="item-nav-app"><i class="fa fa-home"></i>Início</a>
+        <a href="index.html#financeiro" class="item-nav-app"><i class="fa fa-dollar"></i>Boletos</a>
+        <a href="regras.html" class="item-nav-app"> <i class="fa fa-gavel"></i> <span>Regras</span> </a>
+        <a href="contatos-uteis.html" class="item-nav-app"> <i class="fa fa-phone"></i> <span>Contatos</span> </a>
+        <a href="javascript:void(0)" id="burger-btn" class="item-nav-app">
+          <i class="fa fa-bars"></i>Menu
+        </a>
+      </div>
+    `;
+
+    // Inicializa os escutadores de clique após os botões existirem no DOM
+    revincularMenuHamburguer();
+  }
+
+  /* 1. MENU HAMBÚRGUER (MOBILE NA BARRA INFERIOR) */
+  function revincularMenuHamburguer() {
+    const burgerBtn = document.getElementById('burger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (!burgerBtn || !mobileNav) return;
+
+    burgerBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const estaEscondido = mobileNav.classList.toggle('hidden');
+
+      // Destaca visualmente o botão "Menu" na barra inferior quando aberto
+      if (!estaEscondido) {
+        burgerBtn.classList.add('ativo');
+      } else {
+        burgerBtn.classList.remove('ativo');
+      }
+    });
+
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        burgerBtn.classList.remove('ativo');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileNav.contains(event.target) && !burgerBtn.contains(event.target)) {
+        mobileNav.classList.add('hidden');
+        burgerBtn.classList.remove('ativo');
       }
     });
   }
@@ -228,7 +380,9 @@ document.addEventListener('DOMContentLoaded', () => {
           novoSlide.addEventListener('click', (evento) => {
 
             // Não interfere no clique do botão interno
-            if (evento.target.closest('a, button')) return;
+            if (evento.target.closest('a, button, .btn-slide-noticia')) {
+              return;
+            }
 
             const destino = destinoOriginal
               .normalize('NFD')
@@ -282,8 +436,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const link = document.createElement('a');
           link.className = 'btn-slide-noticia';
-
-
+          link.href = destinoOriginal ? `noticias.html#${encodeURIComponent(destinoOriginal.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))}` : 'noticias.html';
+          link.addEventListener('click', (evento) => {
+            evento.stopPropagation(); // Impede o clique de "subir" para o slide pai
+          });
 
           link.textContent = (botaoTexto || 'Saiba Mais') + ' ';
 
@@ -373,10 +529,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fecha o modal
   function fecharOModal() {
     const modal = document.getElementById('modal-imagem');
+    const imgAmpliada = document.getElementById('img-ampliada');
 
     if (modal) {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
+
+      // Garante que a próxima imagem não comece já com zoom aplicado
+      if (imgAmpliada) {
+        imgAmpliada.classList.remove('imagem-com-zoom');
+        imgAmpliada.style.transform = 'none';
+        imgAmpliada.style.cursor = 'zoom-in';
+      }
     }
   }
 
@@ -415,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
         containerMuralCompleto.innerHTML = '';
       }
 
-      dados.forEach(item => {
+      dados.slice(0, 3).forEach(item => {
         const {
           data,
           categoria,
@@ -764,37 +928,166 @@ document.addEventListener('DOMContentLoaded', () => {
     observadorDeScroll.observe(elemento);
   });
 
-  /* 4. MODAL DE ZOOM PARA IMAGENS DAS NOTÍCIAS */
-  document.addEventListener('click', (evento) => {
+  /* 4. MODAL DE ZOOM PARA IMAGENS DAS NOTÍCIAS (COM DUPLO TOQUE, CLIQUE FORA E ARRASTO) */
+  let modalUltimoToque = 0;
+  let imgMovendo = false;
+  let imgStartX = 0, imgStartY = 0;
+  let imgPanX = 0, imgPanY = 0; // Guarda a posição atual do arrasto
 
-    // Clique no botão de fechar
+  document.addEventListener('click', (evento) => {
     if (evento.target.closest('.botao-fechar-modal')) {
       fecharOModal();
       return;
     }
 
-    // Verifica se clicou em uma imagem ampliável
-    const img = evento.target.closest(
+    const imgAmpliavel = evento.target.closest(
       '.texto-completo img, .slide[data-dinamico="true"] .slide-background img'
     );
 
-    if (img) {
+    if (imgAmpliavel) {
       evento.preventDefault();
       evento.stopPropagation();
-
-      abrirModalZoom(img);
+      abrirModalZoom(imgAmpliavel);
       return;
     }
 
-    // Fecha ao clicar no fundo escuro
     const modal = document.getElementById('modal-imagem');
+    if (modal && modal.style.display === 'block') {
+      const imgAmpliada = document.getElementById('img-ampliada');
+      const wrapperConteudo = modal.querySelector('.modal-conteudo-wrapper');
 
-    if (modal && evento.target === modal) {
-      fecharOModal();
+      // Se clicar no fundo escuro (fora da imagem) -> FECHA O MODAL
+      if (evento.target === modal || evento.target === wrapperConteudo) {
+        fecharOModal();
+        return;
+      }
+
+      // LÓGICA DE DUPLO CLIQUE / TOQUE PARA ATIVAR/DESATIVAR ZOOM
+      if (evento.target === imgAmpliada) {
+        const agora = Date.now();
+        const TEMPO_DUPLO_CLIQUE = 300;
+
+        if (agora - modalUltimoToque < TEMPO_DUPLO_CLIQUE) {
+          const temZoom = imgAmpliada.classList.toggle('imagem-com-zoom');
+
+          if (temZoom) {
+            // Aplica o zoom e altera o cursor
+            imgAmpliada.style.transform = 'scale(2)';
+            imgAmpliada.style.cursor = 'move';
+            // Configura os eventos de arrasto (PointerEvents trata mouse e touch juntos)
+            configurarArrastoImagem(imgAmpliada);
+          } else {
+            // Reseta a imagem para o centro
+            resetePosicaoImagem(imgAmpliada);
+          }
+        }
+        modalUltimoToque = agora;
+      }
     }
   });
 
-  // Fecha com a tecla ESC
+  function configurarArrastoImagem(img) {
+    // Evita duplicar os escutadores caso o usuário dê duplo clique várias vezes
+    if (img.dataset.arrastoConfigurado === 'true') return;
+    img.dataset.arrastoConfigurado = 'true';
+
+    img.addEventListener('pointerdown', (e) => {
+      if (!img.classList.contains('imagem-com-zoom')) return;
+      e.preventDefault();
+      imgMovendo = true;
+      imgStartX = e.clientX - imgPanX;
+      imgStartY = e.clientY - imgPanY;
+      img.style.transition = 'none'; // Desliga a transição para o arrasto não dar lag
+      img.setPointerCapture(e.pointerId);
+    });
+
+    img.addEventListener('pointermove', (e) => {
+      if (!imgMovendo) return;
+      imgPanX = e.clientX - imgStartX;
+      imgPanY = e.clientY - imgStartY;
+
+      // Mantém o zoom de 2x e move os eixos X e Y conforme o dedo/mouse se mexe
+      img.style.transform = `scale(2) translate(${imgPanX / 2}px, ${imgPanY / 2}px)`;
+    });
+
+    img.addEventListener('pointerup', (e) => {
+      if (!imgMovendo) return;
+      imgMovendo = false;
+      img.releasePointerCapture(e.pointerId);
+      img.style.transition = 'transform 0.25s ease'; // Devolve a suavidade
+    });
+
+    img.addEventListener('pointercancel', () => {
+      imgMovendo = false;
+    });
+  }
+
+  function resetePosicaoImagem(img) {
+    imgPanX = 0;
+    imgPanY = 0;
+    img.style.transition = 'transform 0.25s ease';
+    img.style.transform = 'none';
+    img.style.cursor = 'zoom-in';
+  }
+
+  // Atualize também a sua função fecharOModal para limpar as variáveis globais de arrasto
+  function fecharOModal() {
+    const modal = document.getElementById('modal-imagem');
+    const imgAmpliada = document.getElementById('img-ampliada');
+
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+
+      if (imgAmpliada) {
+        imgAmpliada.classList.remove('imagem-com-zoom');
+        resetePosicaoImagem(imgAmpliada);
+      }
+    }
+  }
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape') {
+      fecharOModal();
+    }
+
+    // 3. SE O MODAL ESTIVER ABERTO: Lógica de fechar ao clicar fora e duplo toque
+    const modal = document.getElementById('modal-imagem');
+    if (modal && modal.style.display === 'block') {
+      const imgAmpliada = document.getElementById('img-ampliada');
+      const wrapperConteudo = modal.querySelector('.modal-conteudo-wrapper');
+
+      // Se clicar no fundo escuro (fora da imagem real) -> FECHA O MODAL
+      if (evento.target === modal || evento.target === wrapperConteudo) {
+        fecharOModal();
+        return;
+      }
+
+      // Se clicar na própria imagem ampliada -> Lógica de Duplo Clique/Toque para Zoom
+      if (evento.target === imgAmpliada) {
+        const agora = Date.now();
+        const TEMPO_DUPLO_CLIQUE = 300; // milissegundos
+
+        if (agora - modalUltimoToque < TEMPO_DUPLO_CLIQUE) {
+          // Ativa ou desativa a classe de zoom ampliado na imagem
+          const temZoom = imgAmpliada.classList.toggle('imagem-com-zoom');
+
+          // Se deu zoom, centraliza a rolagem do modal na imagem
+          if (temZoom) {
+            imgAmpliada.style.transform = 'scale(2)';
+            imgAmpliada.style.cursor = 'zoom-out';
+            modal.style.overflow = 'auto'; // Permite rolar para ver o resto da foto em zoom
+          } else {
+            imgAmpliada.style.transform = 'none';
+            imgAmpliada.style.cursor = 'zoom-in';
+            modal.style.overflow = 'hidden';
+          }
+        }
+        modalUltimoToque = agora;
+      }
+    }
+  });
+
+  // Fecha o modal com a tecla ESC
   document.addEventListener('keydown', (evento) => {
     if (evento.key === 'Escape') {
       fecharOModal();
@@ -1352,4 +1645,4 @@ document.addEventListener('DOMContentLoaded', () => {
   carregarBannersDinamicos();
   carregarMuralNoticias();
 
-}); 
+});
